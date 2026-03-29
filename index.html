@@ -37,7 +37,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Stars background */
 body::before {
   content: '';
   position: fixed;
@@ -50,19 +49,14 @@ body::before {
     radial-gradient(1px 1px at 10% 80%, var(--star-glow) 0%, transparent 100%),
     radial-gradient(1px 1px at 70% 90%, var(--star-glow) 0%, transparent 100%),
     radial-gradient(2px 2px at 50% 10%, var(--star-glow) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 40%, var(--star-glow) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 55%, var(--star-glow) 0%, transparent 100%),
-    radial-gradient(2px 2px at 85% 15%, var(--star-glow) 0%, transparent 100%);
+    radial-gradient(1px 1px at 90% 40%, var(--star-glow) 0%, transparent 100%);
   opacity: 0.4;
   pointer-events: none;
   z-index: 0;
   animation: twinkle 4s ease-in-out infinite alternate;
 }
 
-@keyframes twinkle {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.6; }
-}
+@keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 0.6; } }
 
 .app-container {
   position: relative;
@@ -73,640 +67,146 @@ body::before {
   padding-bottom: 100px;
 }
 
-/* HEADER */
-.header {
-  text-align: center;
-  padding: 20px 0;
-  position: relative;
-}
+.header { text-align: center; padding: 20px 0; }
+.header-icon { font-size: 48px; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.header h1 { font-family: 'Amiri', serif; font-size: 28px; color: var(--gold); margin: 8px 0 4px; text-shadow: 0 0 20px rgba(245,176,65,0.3); }
+.header h2 { font-family: 'Fredoka', sans-serif; font-size: 15px; color: var(--sky); font-weight: 500; direction: ltr; }
 
-.header-icon {
-  font-size: 48px;
-  animation: bounce 2s ease-in-out infinite;
-}
+.progress-section { margin: 16px 0; background: var(--bg-card); border-radius: 16px; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.05); }
+.progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; color: var(--text-dim); }
+.progress-label .level { color: var(--gold); font-weight: 600; }
+.progress-bar-track { height: 12px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 10px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); position: relative; }
+.progress-bar-fill::after { content: ''; position: absolute; top:0; right:0; bottom:0; width: 30px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3)); border-radius: 10px; }
+.stars-earned { display: flex; gap: 4px; margin-top: 8px; justify-content: center; }
+.star { font-size: 20px; opacity: 0.2; transition: all 0.4s; }
+.star.earned { opacity: 1; animation: starPop 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); filter: drop-shadow(0 0 6px var(--star-glow)); }
+@keyframes starPop { 0% { transform: scale(0); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+.lang-toggle { display: flex; justify-content: center; gap: 8px; margin: 12px 0; }
+.lang-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-dim); font-family: 'Fredoka', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+.lang-btn.active { background: var(--teal); color: white; border-color: var(--teal); box-shadow: 0 4px 15px rgba(26,188,156,0.3); }
 
-.header h1 {
-  font-family: 'Amiri', serif;
-  font-size: 28px;
-  color: var(--gold);
-  margin: 8px 0 4px;
-  text-shadow: 0 0 20px rgba(245, 176, 65, 0.3);
-}
-
-.header h2 {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 15px;
-  color: var(--sky);
-  font-weight: 500;
-  direction: ltr;
-}
-
-/* PROGRESS BAR */
-.progress-section {
-  margin: 16px 0;
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 14px 18px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  font-size: 13px;
-  color: var(--text-dim);
-}
-
-.progress-label .level {
-  color: var(--gold);
-  font-weight: 600;
-}
-
-.progress-bar-track {
-  height: 12px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--teal), var(--gold));
-  border-radius: 10px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.progress-bar-fill::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 30px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
-  border-radius: 10px;
-}
-
-.stars-earned {
-  display: flex;
-  gap: 4px;
-  margin-top: 8px;
-  justify-content: center;
-}
-
-.star {
-  font-size: 20px;
-  opacity: 0.2;
-  transition: all 0.4s;
-}
-
-.star.earned {
-  opacity: 1;
-  animation: starPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  filter: drop-shadow(0 0 6px var(--star-glow));
-}
-
-@keyframes starPop {
-  0% { transform: scale(0); }
-  50% { transform: scale(1.4); }
-  100% { transform: scale(1); }
-}
-
-/* LANGUAGE TOGGLE */
-.lang-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 12px 0;
-}
-
-.lang-btn {
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 2px solid rgba(255,255,255,0.1);
-  background: transparent;
-  color: var(--text-dim);
-  font-family: 'Fredoka', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.lang-btn.active {
-  background: var(--teal);
-  color: white;
-  border-color: var(--teal);
-  box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
-}
-
-/* TABS */
-.tabs {
-  display: flex;
-  gap: 6px;
-  margin: 16px 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
+.tabs { display: flex; gap: 6px; margin: 16px 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .tabs::-webkit-scrollbar { display: none; }
-
-.tab-btn {
-  flex-shrink: 0;
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: none;
-  background: var(--bg-card);
-  color: var(--text-dim);
-  font-family: 'Fredoka', sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tab-btn.active {
-  background: var(--purple);
-  color: white;
-  box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
-}
-
+.tab-btn { flex-shrink: 0; padding: 10px 16px; border-radius: 12px; border: none; background: var(--bg-card); color: var(--text-dim); font-family: 'Fredoka', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.tab-btn.active { background: var(--purple); color: white; box-shadow: 0 4px 15px rgba(142,68,173,0.3); }
 .tab-btn .tab-icon { font-size: 16px; }
 
-/* CONTENT SECTIONS */
 .section { display: none; animation: fadeIn 0.4s ease; }
 .section.active { display: block; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* AYAH CARDS */
-.ayah-card {
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.ayah-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--teal);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.ayah-card:hover::before,
+.ayah-card { background: var(--bg-card); border-radius: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; position: relative; overflow: hidden; }
+.ayah-card::before { content: ''; position: absolute; top:0; left:0; width: 4px; height: 100%; background: var(--teal); opacity: 0; transition: opacity 0.3s; }
+.ayah-card.playing { border-color: var(--teal); box-shadow: 0 0 20px rgba(26,188,156,0.15); }
 .ayah-card.playing::before { opacity: 1; }
+.ayah-card.mastered { border-color: var(--green); }
+.ayah-card.mastered .master-badge { display: flex; }
+.master-badge { display: none; position: absolute; top: 10px; left: 10px; width: 24px; height: 24px; background: var(--green); color: white; border-radius: 50%; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; }
+.ayah-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: linear-gradient(135deg, var(--gold), var(--orange)); color: white; border-radius: 50%; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.ayah-arabic { font-family: 'Amiri', serif; font-size: 26px; line-height: 1.8; color: var(--gold-light); text-align: right; direction: rtl; margin-bottom: 10px; }
+.ayah-transliteration { font-size: 14px; color: var(--sky); margin-bottom: 6px; direction: ltr; text-align: left; font-style: italic; letter-spacing: 0.3px; }
+.ayah-translation { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+.ayah-translation.lang-es { direction: ltr; text-align: left; }
+.ayah-translation.lang-ar { direction: rtl; text-align: right; font-family: 'Baloo Bhaijaan 2', sans-serif; }
 
-.ayah-card.playing {
-  border-color: var(--teal);
-  box-shadow: 0 0 20px rgba(26, 188, 156, 0.15);
-}
-
-.ayah-card.mastered {
-  border-color: var(--green);
-}
-
-.ayah-card.mastered::after {
-  content: '✓';
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 24px;
-  height: 24px;
-  background: var(--green);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.ayah-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--gold), var(--orange));
-  color: white;
-  border-radius: 50%;
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.ayah-arabic {
-  font-family: 'Amiri', serif;
-  font-size: 26px;
-  line-height: 1.8;
-  color: var(--gold-light);
-  text-align: right;
-  direction: rtl;
-  margin-bottom: 10px;
-}
-
-.ayah-transliteration {
-  font-size: 14px;
-  color: var(--sky);
-  margin-bottom: 6px;
-  direction: ltr;
-  text-align: left;
-  font-style: italic;
-  letter-spacing: 0.3px;
-}
-
-.ayah-translation {
-  font-size: 14px;
-  color: var(--text-dim);
-  direction: ltr;
-  text-align: left;
-  line-height: 1.5;
-}
-
-.ayah-translation[data-lang="ar"] {
-  direction: rtl;
-  text-align: right;
-  font-family: 'Baloo Bhaijaan 2', sans-serif;
-}
-
-/* AUDIO CONTROLS */
-.ayah-controls {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.ctrl-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: none;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s;
-  color: white;
-}
-
+.ayah-controls { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.ctrl-btn { padding: 8px 14px; border-radius: 10px; border: none; font-family: 'Fredoka', sans-serif; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; color: white; }
 .ctrl-btn:active { transform: scale(0.95); }
-
+.ctrl-btn:disabled { opacity: 0.5; cursor: wait; }
 .btn-listen { background: var(--teal); }
 .btn-slow { background: var(--purple); }
 .btn-repeat { background: var(--orange); }
 .btn-master { background: var(--green); }
-.btn-master.done { background: var(--text-dim); }
+.btn-master.done { background: rgba(39,174,96,0.4); }
 
-/* METHODOLOGY SECTION */
-.method-card {
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
+/* AUDIO STATUS */
+.audio-status { display: none; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 12px; background: rgba(26,188,156,0.1); border-radius: 10px; font-size: 12px; color: var(--teal); }
+.audio-status.show { display: flex; }
+.audio-status .spinner { width: 16px; height: 16px; border: 2px solid var(--teal); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.method-step {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+/* UNDERSTAND / TAFSIR */
+.tafsir-card { background: var(--bg-card); border-radius: 16px; padding: 18px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.05); }
+.tafsir-card .tafsir-ayah { font-family: 'Amiri', serif; font-size: 22px; color: var(--gold-light); text-align: right; margin-bottom: 12px; line-height: 1.7; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.tafsir-explain { font-size: 14px; line-height: 1.7; color: var(--text-light); }
+.tafsir-explain.lang-es { direction: ltr; text-align: left; }
+.tafsir-explain.lang-ar { direction: rtl; text-align: right; font-family: 'Baloo Bhaijaan 2', sans-serif; }
+.tafsir-explain .emoji-big { font-size: 28px; display: block; text-align: center; margin: 8px 0; }
+.tafsir-explain .keyword { color: var(--gold); font-weight: 600; }
 
-.method-step:last-child { border-bottom: none; }
+/* AI EXPLAIN */
+.ai-ask-btn { display: flex; align-items: center; gap: 6px; margin-top: 12px; padding: 8px 14px; background: linear-gradient(135deg, var(--purple), #6C3483); border: none; border-radius: 10px; color: white; font-family: 'Fredoka', sans-serif; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ai-ask-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(142,68,173,0.4); }
+.ai-ask-btn:disabled { opacity: 0.5; cursor: wait; }
+.ai-response-box { margin-top: 12px; padding: 14px; background: rgba(142,68,173,0.1); border: 1px solid rgba(142,68,173,0.2); border-radius: 12px; font-size: 13px; line-height: 1.7; color: var(--text-light); display: none; }
+.ai-response-box.show { display: block; animation: fadeIn 0.4s; }
+.ai-input-row { display: flex; gap: 8px; margin-top: 10px; }
+.ai-input { flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-main); color: var(--text-light); font-family: 'Fredoka', sans-serif; font-size: 13px; outline: none; }
+.ai-input:focus { border-color: var(--purple); }
+.ai-send-btn { padding: 10px 16px; border-radius: 10px; border: none; background: var(--purple); color: white; font-size: 16px; cursor: pointer; }
 
-.step-num {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--purple), var(--teal));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.step-content h4 {
-  color: var(--gold);
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-.step-content p {
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* QUIZ SECTION */
-.quiz-container {
-  text-align: center;
-}
-
-.quiz-prompt {
-  font-family: 'Amiri', serif;
-  font-size: 28px;
-  color: var(--gold-light);
-  padding: 20px;
-  margin: 16px 0;
-  background: var(--bg-card);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.05);
-  min-height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.8;
-}
-
-.quiz-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 16px 0;
-}
-
-.quiz-option {
-  padding: 14px 18px;
-  background: var(--bg-card);
-  border: 2px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  color: var(--text-light);
-  font-family: 'Amiri', serif;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: right;
-  direction: rtl;
-  line-height: 1.6;
-}
-
-.quiz-option:hover {
-  border-color: var(--teal);
-  background: var(--bg-card-hover);
-}
-
-.quiz-option.correct {
-  border-color: var(--green);
-  background: rgba(39, 174, 96, 0.15);
-  animation: correctPulse 0.5s;
-}
-
-.quiz-option.wrong {
-  border-color: var(--red-soft);
-  background: rgba(231, 76, 60, 0.15);
-  animation: shake 0.4s;
-}
-
-@keyframes correctPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
-}
-
-.quiz-feedback {
-  padding: 16px;
-  border-radius: 14px;
-  margin: 12px 0;
-  font-size: 15px;
-  font-weight: 600;
-  display: none;
-}
-
+/* QUIZ */
+.quiz-container { text-align: center; }
+.quiz-header { color: var(--text-dim); font-size: 13px; margin-bottom: 12px; }
+.quiz-type-label { display: inline-block; padding: 4px 12px; border-radius: 8px; background: rgba(142,68,173,0.2); color: var(--purple-light); font-size: 12px; margin-bottom: 8px; }
+.quiz-prompt-text { color: var(--sky); font-size: 15px; margin-bottom: 4px; }
+.quiz-prompt { font-family: 'Amiri', serif; font-size: 26px; color: var(--gold-light); padding: 20px; margin: 12px 0; background: var(--bg-card); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.8; direction: rtl; text-align: center; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.quiz-option { padding: 14px 18px; background: var(--bg-card); border: 2px solid rgba(255,255,255,0.08); border-radius: 14px; color: var(--text-light); font-size: 16px; cursor: pointer; transition: all 0.3s; text-align: right; direction: rtl; line-height: 1.6; font-family: 'Amiri', serif; }
+.quiz-option.meaning-opt { font-family: 'Fredoka', sans-serif; font-size: 14px; }
+.quiz-option.meaning-opt.lang-es { direction: ltr; text-align: left; }
+.quiz-option:hover { border-color: var(--teal); background: var(--bg-card-hover); }
+.quiz-option.correct { border-color: var(--green) !important; background: rgba(39,174,96,0.15) !important; animation: correctPulse 0.5s; pointer-events: none; }
+.quiz-option.wrong { border-color: var(--red-soft) !important; background: rgba(231,76,60,0.15) !important; animation: shake 0.4s; pointer-events: none; }
+.quiz-option.disabled { pointer-events: none; opacity: 0.5; }
+@keyframes correctPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.quiz-feedback { padding: 14px; border-radius: 12px; margin: 12px 0; font-size: 14px; font-weight: 600; display: none; text-align: center; }
 .quiz-feedback.show { display: block; animation: fadeIn 0.3s; }
-.quiz-feedback.success { background: rgba(39, 174, 96, 0.15); color: var(--green); }
-.quiz-feedback.error { background: rgba(231, 76, 60, 0.15); color: var(--red-soft); }
+.quiz-feedback.success { background: rgba(39,174,96,0.12); color: var(--green); }
+.quiz-feedback.error { background: rgba(231,76,60,0.12); color: var(--red-soft); }
+.quiz-nav { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+.quiz-nav-btn { padding: 12px 28px; border-radius: 12px; border: none; background: var(--purple); color: white; font-family: 'Fredoka', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.quiz-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.quiz-score { margin: 16px 0; padding: 24px; background: var(--bg-card); border-radius: 16px; border: 2px solid var(--gold); }
+.quiz-score h3 { color: var(--gold); font-size: 20px; margin-bottom: 8px; }
+.quiz-score .big-num { font-size: 48px; font-weight: 800; color: var(--teal); }
+.quiz-score .score-msg { color: var(--text-dim); font-size: 14px; margin-top: 12px; line-height: 1.5; }
 
-.quiz-nav {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 16px;
-}
+/* METHOD */
+.method-card { background: var(--bg-card); border-radius: 16px; padding: 18px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+.method-step { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.method-step:last-child { border-bottom: none; }
+.step-num { flex-shrink: 0; width: 36px; height: 36px; background: linear-gradient(135deg, var(--purple), var(--teal)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+.step-content h4 { color: var(--gold); font-size: 15px; margin-bottom: 4px; }
+.step-content p { color: var(--text-dim); font-size: 13px; line-height: 1.5; }
 
-.quiz-nav-btn {
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  background: var(--purple);
-  color: white;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.quiz-nav-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.quiz-score {
-  margin: 16px 0;
-  padding: 20px;
-  background: var(--bg-card);
-  border-radius: 16px;
-  border: 2px solid var(--gold);
-}
-
-.quiz-score h3 {
-  color: var(--gold);
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.quiz-score .big-num {
-  font-size: 48px;
-  font-weight: 800;
-  color: var(--teal);
-}
-
-/* TAFSIR KIDS */
-.tafsir-card {
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 14px;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.tafsir-card .tafsir-ayah {
-  font-family: 'Amiri', serif;
-  font-size: 22px;
-  color: var(--gold-light);
-  text-align: right;
-  margin-bottom: 12px;
-  line-height: 1.7;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.tafsir-explain {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-light);
-  direction: ltr;
-  text-align: left;
-}
-
-.tafsir-explain[data-lang="ar"] {
-  direction: rtl;
-  text-align: right;
-  font-family: 'Baloo Bhaijaan 2', sans-serif;
-}
-
-.tafsir-explain .emoji-big {
-  font-size: 28px;
-  display: block;
-  text-align: center;
-  margin: 8px 0;
-}
-
-.tafsir-explain .keyword {
-  color: var(--gold);
-  font-weight: 600;
-}
+/* PLAY ALL BAR */
+.play-all-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(19,39,67,0.95); border-top: 1px solid rgba(255,255,255,0.08); padding: 12px 16px; display: flex; align-items: center; justify-content: center; gap: 12px; z-index: 50; backdrop-filter: blur(10px); }
+.play-all-btn { padding: 10px 24px; border-radius: 25px; border: none; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: white; font-family: 'Fredoka', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 0 4px 15px rgba(26,188,156,0.3); }
+.play-all-btn:active { transform: scale(0.95); }
+.play-all-btn.playing-all { background: linear-gradient(135deg, var(--red-soft), #C0392B); }
+.repeat-count { display: flex; align-items: center; gap: 6px; color: var(--text-dim); font-size: 13px; }
+.repeat-count button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-light); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
 /* CELEBRATION */
-.celebration {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(11, 25, 41, 0.95);
-  z-index: 100;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  animation: fadeIn 0.5s;
-}
-
+.celebration { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(11,25,41,0.95); z-index: 100; display: none; align-items: center; justify-content: center; flex-direction: column; }
 .celebration.show { display: flex; }
-
-.celebration-content {
-  text-align: center;
-  padding: 30px;
-}
-
+.celebration-content { text-align: center; padding: 30px; }
 .celebration-emoji { font-size: 72px; animation: bounce 1s infinite; }
 .celebration h2 { color: var(--gold); font-size: 28px; margin: 16px 0 8px; }
 .celebration p { color: var(--text-dim); font-size: 16px; margin-bottom: 20px; }
+.celebration-close { padding: 12px 30px; background: var(--teal); color: white; border: none; border-radius: 12px; font-family: 'Fredoka', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; }
 
-.celebration-close {
-  padding: 12px 30px;
-  background: var(--teal);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
+/* RECITER SELECT */
+.reciter-select { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; justify-content: center; }
+.reciter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-dim); font-family: 'Fredoka', sans-serif; font-size: 12px; cursor: pointer; transition: all 0.3s; }
+.reciter-btn.active { background: var(--gold); color: var(--bg-main); border-color: var(--gold); font-weight: 600; }
 
-/* SPEED SELECTOR */
-.speed-label {
-  font-size: 11px;
-  color: var(--text-dim);
-  text-align: center;
-  margin-top: 2px;
-}
-
-/* PLAY ALL BAR */
-.play-all-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--bg-card);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  z-index: 50;
-  backdrop-filter: blur(10px);
-}
-
-.play-all-btn {
-  padding: 10px 24px;
-  border-radius: 25px;
-  border: none;
-  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-  color: white;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-  box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
-}
-
-.play-all-btn:active { transform: scale(0.95); }
-
-.play-all-btn.playing-all { background: var(--red-soft); }
-
-.repeat-count {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-dim);
-  font-size: 13px;
-}
-
-.repeat-count button {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: transparent;
-  color: var(--text-light);
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Responsive */
 @media (max-width: 380px) {
   .ayah-arabic { font-size: 22px; }
   .header h1 { font-size: 24px; }
@@ -715,64 +215,51 @@ body::before {
 </style>
 </head>
 <body>
+
 <div class="app-container">
-  <!-- HEADER -->
   <div class="header">
     <div class="header-icon">🌙</div>
     <h1>سورة العاديات</h1>
     <h2>Aprende Sura Al-Adiyat</h2>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-section">
     <div class="progress-label">
       <span id="progressText">0 / 11 آيات</span>
       <span class="level" id="levelText">⭐ المبتدئ</span>
     </div>
     <div class="progress-bar-track">
-      <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
     </div>
     <div class="stars-earned" id="starsRow"></div>
   </div>
 
-  <!-- LANGUAGE TOGGLE -->
   <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('es')" id="langEs">Español</button>
-    <button class="lang-btn" onclick="setLang('ar')" id="langAr">العربية</button>
+    <button class="lang-btn active" id="langEs" onclick="setLang('es')">Español</button>
+    <button class="lang-btn" id="langAr" onclick="setLang('ar')">العربية</button>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showSection('listen')">
+  <div class="tabs" id="tabsRow">
+    <button class="tab-btn active" onclick="showSection('listen', this)">
       <span class="tab-icon">🎧</span> <span data-es="Escuchar" data-ar="استمع">Escuchar</span>
     </button>
-    <button class="tab-btn" onclick="showSection('understand')">
+    <button class="tab-btn" onclick="showSection('understand', this)">
       <span class="tab-icon">💡</span> <span data-es="Entender" data-ar="افهم">Entender</span>
     </button>
-    <button class="tab-btn" onclick="showSection('quiz')">
+    <button class="tab-btn" onclick="showSection('quiz', this)">
       <span class="tab-icon">🧩</span> <span data-es="Prueba" data-ar="اختبار">Prueba</span>
     </button>
-    <button class="tab-btn" onclick="showSection('method')">
+    <button class="tab-btn" onclick="showSection('method', this)">
       <span class="tab-icon">📖</span> <span data-es="Método" data-ar="المنهج">Método</span>
     </button>
   </div>
 
-  <!-- LISTEN SECTION -->
   <div class="section active" id="section-listen"></div>
-
-  <!-- UNDERSTAND SECTION (Tafsir for kids) -->
   <div class="section" id="section-understand"></div>
-
-  <!-- QUIZ SECTION -->
-  <div class="section" id="section-quiz">
-    <div class="quiz-container" id="quizContainer"></div>
-  </div>
-
-  <!-- METHOD SECTION -->
+  <div class="section" id="section-quiz"><div class="quiz-container" id="quizContainer"></div></div>
   <div class="section" id="section-method"></div>
 </div>
 
-<!-- PLAY ALL BAR -->
 <div class="play-all-bar" id="playAllBar">
   <div class="repeat-count">
     <button onclick="changeRepeat(-1)">−</button>
@@ -784,618 +271,473 @@ body::before {
   </button>
 </div>
 
-<!-- CELEBRATION OVERLAY -->
 <div class="celebration" id="celebration">
   <div class="celebration-content">
     <div class="celebration-emoji">🏆</div>
-    <h2 id="celebTitle">¡ما شاء الله!</h2>
-    <p id="celebText">¡Has memorizado toda la sura!</p>
+    <h2 id="celebTitle">ما شاء الله!</h2>
+    <p id="celebText"></p>
     <button class="celebration-close" onclick="closeCelebration()">
-      <span data-es="¡Seguir practicando!" data-ar="!واصل التدرب">¡Seguir practicando!</span>
+      <span data-es="¡Seguir practicando!" data-ar="واصل التدرب!">¡Seguir practicando!</span>
     </button>
   </div>
 </div>
 
 <script>
-// ===== SURAH DATA =====
+// ========== SURAH DATA ==========
 const AYAT = [
-  {
-    num: 1,
-    ar: "وَالْعَادِيَاتِ ضَبْحًا",
-    translit: "Wal-'aadiyaati dabha",
-    es: "¡Por los caballos que corren jadeando!",
-    arMeaning: "أُقسِمُ بالخيول التي تجري بسرعة وتتنفس بصوتٍ عالٍ",
-    tafsirEs: "Allah jura por los <span class='keyword'>caballos de guerra</span> que corren tan rápido que respiran con fuerza, como cuando tú corres muy rápido y te quedas sin aliento. <span class='emoji-big'>🐎💨</span> Imagina caballos fuertes corriendo en el desierto con todas sus fuerzas.",
-    tafsirAr: "الله يُقسِم بالخيول القوية التي تجري بسرعة كبيرة وتتنفس بصوت عالٍ من شدة الجري، مثلما يحصل لك عندما تركض بسرعة وتلهث. <span class='emoji-big'>🐎💨</span> تخيّل خيولاً قوية تركض في الصحراء بكل قوتها."
-  },
-  {
-    num: 2,
-    ar: "فَالْمُورِيَاتِ قَدْحًا",
-    translit: "Fal-mooriyaati qadha",
-    es: "¡Por las que hacen saltar chispas con sus cascos!",
-    arMeaning: "والخيول التي تُخرج شراراً من حوافرها عند اصطدامها بالحجارة",
-    tafsirEs: "Cuando los caballos corren sobre las rocas, sus <span class='keyword'>pezuñas hacen chispas de fuego</span>, como cuando golpeas dos piedras. <span class='emoji-big'>🔥✨</span> Es una imagen muy poderosa que muestra la fuerza de estos caballos.",
-    tafsirAr: "عندما تركض الخيول على الصخور، <span class='keyword'>حوافرها تُخرج شرارات نارية</span>، مثل ضرب حجرين ببعضهما. <span class='emoji-big'>🔥✨</span> هذه صورة قوية تُظهر قوة هذه الخيول."
-  },
-  {
-    num: 3,
-    ar: "فَالْمُغِيرَاتِ صُبْحًا",
-    translit: "Fal-mugheraati subha",
-    es: "¡Por las que atacan al amanecer!",
-    arMeaning: "والخيول التي تُغير على العدو وقت الصباح",
-    tafsirEs: "Los caballos de guerra <span class='keyword'>atacaban al enemigo temprano por la mañana</span>, cuando apenas sale el sol. <span class='emoji-big'>🌅⚔️</span> Los guerreros elegían este momento porque era cuando el enemigo dormía.",
-    tafsirAr: "خيول المعركة كانت <span class='keyword'>تهجم على العدو في الصباح الباكر</span>، عندما تطلع الشمس. <span class='emoji-big'>🌅⚔️</span> المحاربون كانوا يختارون هذا الوقت لأن العدو يكون نائماً."
-  },
-  {
-    num: 4,
-    ar: "فَأَثَرْنَ بِهِ نَقْعًا",
-    translit: "Fa-atharna bihi naq'a",
-    es: "¡Levantando con ello nubes de polvo!",
-    arMeaning: "فأثارت الخيول غباراً كثيفاً بسبب ركضها",
-    tafsirEs: "Los caballos corren tan fuerte que <span class='keyword'>levantan enormes nubes de polvo</span> detrás de ellos. <span class='emoji-big'>🐎💨🌫️</span> Como cuando ves un coche en un camino de tierra y deja una nube enorme.",
-    tafsirAr: "الخيول تركض بقوة شديدة حتى <span class='keyword'>تُثير سحباً كثيفة من الغبار</span> خلفها. <span class='emoji-big'>🐎💨🌫️</span> مثل سيارة تمشي على طريق ترابي وتترك سحابة غبار ضخمة."
-  },
-  {
-    num: 5,
-    ar: "فَوَسَطْنَ بِهِ جَمْعًا",
-    translit: "Fawasatna bihi jam'a",
-    es: "¡Penetrando así en medio de los enemigos!",
-    arMeaning: "فدخلت الخيول في وسط جمع الأعداء",
-    tafsirEs: "Los caballos con sus jinetes <span class='keyword'>entran en medio de los enemigos</span> sin miedo. <span class='emoji-big'>🐎⚡🛡️</span> Son valientes y fuertes, no tienen miedo de nada. Allah describe su valentía para enseñarnos algo importante después.",
-    tafsirAr: "الخيول مع فرسانها <span class='keyword'>تدخل في وسط الأعداء</span> بدون خوف. <span class='emoji-big'>🐎⚡🛡️</span> إنها شجاعة وقوية، لا تخاف من شيء. الله يصف شجاعتها ليُعلّمنا شيئاً مهماً بعدها."
-  },
-  {
-    num: 6,
-    ar: "إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ",
-    translit: "Innal-insaana lirabbihi lakanood",
-    es: "En verdad, el ser humano es ingrato con su Señor.",
-    arMeaning: "إن الإنسان شديد الجحود والنكران لنعم ربه",
-    tafsirEs: "Ahora viene la lección: <span class='keyword'>el ser humano muchas veces es desagradecido</span> con Allah. Esos caballos son fieles a sus dueños, pero <span class='keyword'>el humano olvida dar gracias a Allah</span> por todo lo que tiene. <span class='emoji-big'>😔🤲</span> ¿Tú das gracias a Allah por tu comida, tu familia y tu salud?",
-    tafsirAr: "الآن يأتي الدرس: <span class='keyword'>الإنسان كثيراً ما يكون جاحداً</span> لنعم الله. تلك الخيول وفية لأصحابها، لكن <span class='keyword'>الإنسان ينسى أن يشكر الله</span> على كل ما عنده. <span class='emoji-big'>😔🤲</span> هل تشكر الله على طعامك وأهلك وصحتك؟"
-  },
-  {
-    num: 7,
-    ar: "وَإِنَّهُ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ",
-    translit: "Wa innahu 'alaa dhaalika lashaheed",
-    es: "Y él mismo es testigo de eso.",
-    arMeaning: "والإنسان نفسه يشهد على جحوده وإنكاره",
-    tafsirEs: "El ser humano <span class='keyword'>sabe por dentro que es desagradecido</span>. Su propio corazón lo sabe, no puede esconderse de la verdad. <span class='emoji-big'>💭❤️</span> Cuando no dices 'Alhamdulillah', tú mismo sabes que deberías haberlo dicho.",
-    tafsirAr: "الإنسان <span class='keyword'>يعرف في داخله أنه جاحد</span>. قلبه يعرف ذلك، لا يستطيع أن يختبئ من الحقيقة. <span class='emoji-big'>💭❤️</span> عندما لا تقول 'الحمد لله'، أنت نفسك تعرف أنك كان يجب أن تقولها."
-  },
-  {
-    num: 8,
-    ar: "وَإِنَّهُ لِحُبِّ الْخَيْرِ لَشَدِيدٌ",
-    translit: "Wa innahu lihubbil-khayri lashadeed",
-    es: "Y en verdad, es intenso su amor por las riquezas.",
-    arMeaning: "وإن الإنسان شديد الحب للمال والثروة",
-    tafsirEs: "El ser humano <span class='keyword'>ama demasiado el dinero y las cosas materiales</span>. A veces se olvida de Allah porque solo piensa en tener más juguetes, más cosas, más dinero. <span class='emoji-big'>💰😮</span> Allah nos dice que lo más importante es ser agradecido, no tener más cosas.",
-    tafsirAr: "الإنسان <span class='keyword'>يحب المال والأشياء المادية حباً شديداً</span>. أحياناً ينسى الله لأنه يفكر فقط بالحصول على المزيد من الألعاب والأشياء والمال. <span class='emoji-big'>💰😮</span> الله يقول لنا أن الأهم هو الشكر، وليس الحصول على أشياء أكثر."
-  },
-  {
-    num: 9,
-    ar: "أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِي الْقُبُورِ",
-    translit: "Afalaa ya'lamu idhaa bu'thira maa fil-quboor",
-    es: "¿Acaso no sabe que cuando se abran las tumbas...",
-    arMeaning: "ألا يعلم هذا الإنسان ماذا سيحدث عندما يُبعث الموتى من قبورهم",
-    tafsirEs: "Allah nos pregunta: ¿no sabes que un día <span class='keyword'>todos saldrán de sus tumbas</span> para ser juzgados? <span class='emoji-big'>⏰🌍</span> Ese día es el Día del Juicio, cuando Allah verá todo lo que hicimos: lo bueno y lo malo.",
-    tafsirAr: "الله يسألنا: ألا تعلم أنه يوماً ما <span class='keyword'>سيخرج الجميع من قبورهم</span> ليُحاسَبوا؟ <span class='emoji-big'>⏰🌍</span> ذلك اليوم هو يوم القيامة، عندما يرى الله كل ما فعلناه: الخير والشر."
-  },
-  {
-    num: 10,
-    ar: "وَحُصِّلَ مَا فِي الصُّدُورِ",
-    translit: "Wa hussila maa fis-sudoor",
-    es: "...y se revele lo que guardan los corazones?",
-    arMeaning: "وأُظهِر ما في القلوب من نوايا وأسرار",
-    tafsirEs: "Ese día, <span class='keyword'>Allah mostrará todo lo que guardas en tu corazón</span>: tus secretos, tus intenciones, si fuiste sincero o mentiste. <span class='emoji-big'>❤️🔍</span> Por eso es importante tener un corazón limpio y buenas intenciones.",
-    tafsirAr: "في ذلك اليوم، <span class='keyword'>الله سيُظهر كل ما في قلبك</span>: أسرارك، نواياك، هل كنت صادقاً أم كذبت. <span class='emoji-big'>❤️🔍</span> لهذا من المهم أن يكون قلبك نظيفاً ونواياك طيبة."
-  },
-  {
-    num: 11,
-    ar: "إِنَّ رَبَّهُم بِهِمْ يَوْمَئِذٍ لَّخَبِيرٌ",
-    translit: "Inna rabbahum bihim yawma-idhin lakhabeer",
-    es: "En verdad, ese día su Señor estará perfectamente informado de ellos.",
-    arMeaning: "إن الله في ذلك اليوم عالمٌ بكل أعمالهم وأحوالهم",
-    tafsirEs: "La sura termina diciéndonos que <span class='keyword'>Allah sabe absolutamente TODO sobre nosotros</span>. No puedes esconder nada de Él. <span class='emoji-big'>🌟👁️</span> Pero esto no debe darte miedo, sino motivarte a hacer el bien, ser agradecido y tener un corazón limpio.",
-    tafsirAr: "السورة تنتهي بإخبارنا أن <span class='keyword'>الله يعلم كل شيء عنا</span>. لا يمكنك إخفاء أي شيء عنه. <span class='emoji-big'>🌟👁️</span> لكن هذا لا يجب أن يُخيفك، بل يجب أن يُحفّزك لفعل الخير، وشكر الله، وتنظيف قلبك."
-  }
+  { num:1, ar:"\u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u062F\u0650\u064A\u064E\u0627\u062A\u0650 \u0636\u064E\u0628\u0652\u062D\u064B\u0627", translit:"Wal-'aadiyaati dabha", es:"\u00A1Por los caballos que corren jadeando!", arMeaning:"\u0623\u064F\u0642\u0633\u0650\u0645\u064F \u0628\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A\u064D \u0639\u0627\u0644\u064D", tafsirEs:"Allah jura por los <span class='keyword'>caballos de guerra</span> que corren tan r\u00E1pido que respiran muy fuerte, como cuando t\u00FA corres muy r\u00E1pido y te quedas sin aliento. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8</span> Imagina caballos fuertes corriendo en el desierto con todas sus fuerzas.", tafsirAr:"\u0627\u0644\u0644\u0647 \u064A\u064F\u0642\u0633\u0650\u0645 \u0628\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u0642\u0648\u064A\u0629 \u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0628\u0633\u0631\u0639\u0629 \u0643\u0628\u064A\u0631\u0629 \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A \u0639\u0627\u0644\u064D \u0645\u0646 \u0634\u062F\u0629 \u0627\u0644\u062C\u0631\u064A\u060C \u0645\u062B\u0644\u0645\u0627 \u064A\u062D\u0635\u0644 \u0644\u0643 \u0639\u0646\u062F\u0645\u0627 \u062A\u0631\u0643\u0636 \u0628\u0633\u0631\u0639\u0629 \u0648\u062A\u0644\u0647\u062B. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8</span> \u062A\u062E\u064A\u0651\u0644 \u062E\u064A\u0648\u0644\u0627\u064B \u0642\u0648\u064A\u0629 \u062A\u0631\u0643\u0636 \u0641\u064A \u0627\u0644\u0635\u062D\u0631\u0627\u0621 \u0628\u0643\u0644 \u0642\u0648\u062A\u0647\u0627." },
+  { num:2, ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u0648\u0631\u0650\u064A\u064E\u0627\u062A\u0650 \u0642\u064E\u062F\u0652\u062D\u064B\u0627", translit:"Fal-mooriyaati qadha", es:"\u00A1Por las que hacen saltar chispas con sus cascos!", arMeaning:"\u0648\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u064B \u0645\u0646 \u062D\u0648\u0627\u0641\u0631\u0647\u0627 \u0639\u0646\u062F \u0627\u0635\u0637\u062F\u0627\u0645\u0647\u0627 \u0628\u0627\u0644\u062D\u062C\u0627\u0631\u0629", tafsirEs:"Cuando los caballos corren sobre las rocas, sus <span class='keyword'>pezu\u00F1as hacen chispas de fuego</span>, como cuando golpeas dos piedras. <span class='emoji-big'>\uD83D\uDD25\u2728</span> Muestra la fuerza incre\u00EDble de estos caballos.", tafsirAr:"\u0639\u0646\u062F\u0645\u0627 \u062A\u0631\u0643\u0636 \u0627\u0644\u062E\u064A\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0635\u062E\u0648\u0631\u060C <span class='keyword'>\u062D\u0648\u0627\u0641\u0631\u0647\u0627 \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u062A \u0646\u0627\u0631\u064A\u0629</span>\u060C \u0645\u062B\u0644 \u0636\u0631\u0628 \u062D\u062C\u0631\u064A\u0646 \u0628\u0628\u0639\u0636\u0647\u0645\u0627. <span class='emoji-big'>\uD83D\uDD25\u2728</span> \u0647\u0630\u0647 \u0635\u0648\u0631\u0629 \u0642\u0648\u064A\u0629 \u062A\u064F\u0638\u0647\u0631 \u0642\u0648\u0629 \u0647\u0630\u0647 \u0627\u0644\u062E\u064A\u0648\u0644." },
+  { num:3, ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u063A\u0650\u064A\u0631\u064E\u0627\u062A\u0650 \u0635\u064F\u0628\u0652\u062D\u064B\u0627", translit:"Fal-mugheraati subha", es:"\u00A1Por las que atacan al amanecer!", arMeaning:"\u0648\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u064F\u063A\u064A\u0631 \u0639\u0644\u0649 \u0627\u0644\u0639\u062F\u0648 \u0648\u0642\u062A \u0627\u0644\u0635\u0628\u0627\u062D", tafsirEs:"Los caballos de guerra <span class='keyword'>atacaban al enemigo temprano por la ma\u00F1ana</span>, cuando apenas sale el sol. <span class='emoji-big'>\uD83C\uDF05\u2694\uFE0F</span> Los guerreros eleg\u00EDan este momento porque el enemigo dorm\u00EDa.", tafsirAr:"\u062E\u064A\u0648\u0644 \u0627\u0644\u0645\u0639\u0631\u0643\u0629 \u0643\u0627\u0646\u062A <span class='keyword'>\u062A\u0647\u062C\u0645 \u0639\u0644\u0649 \u0627\u0644\u0639\u062F\u0648 \u0641\u064A \u0627\u0644\u0635\u0628\u0627\u062D \u0627\u0644\u0628\u0627\u0643\u0631</span>\u060C \u0639\u0646\u062F\u0645\u0627 \u062A\u0637\u0644\u0639 \u0627\u0644\u0634\u0645\u0633. <span class='emoji-big'>\uD83C\uDF05\u2694\uFE0F</span> \u0627\u0644\u0645\u062D\u0627\u0631\u0628\u0648\u0646 \u0643\u0627\u0646\u0648\u0627 \u064A\u062E\u062A\u0627\u0631\u0648\u0646 \u0647\u0630\u0627 \u0627\u0644\u0648\u0642\u062A \u0644\u0623\u0646 \u0627\u0644\u0639\u062F\u0648 \u064A\u0643\u0648\u0646 \u0646\u0627\u0626\u0645\u0627\u064B." },
+  { num:4, ar:"\u0641\u064E\u0623\u064E\u062B\u064E\u0631\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u0646\u064E\u0642\u0652\u0639\u064B\u0627", translit:"Fa-atharna bihi naq'a", es:"\u00A1Levantando con ello nubes de polvo!", arMeaning:"\u0641\u0623\u062B\u0627\u0631\u062A \u0627\u0644\u062E\u064A\u0648\u0644 \u063A\u0628\u0627\u0631\u0627\u064B \u0643\u062B\u064A\u0641\u0627\u064B \u0628\u0633\u0628\u0628 \u0631\u0643\u0636\u0647\u0627", tafsirEs:"Los caballos corren tan fuerte que <span class='keyword'>levantan enormes nubes de polvo</span>. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8\uD83C\uDF2B\uFE0F</span> Como cuando ves un coche en un camino de tierra y deja una nube enorme detr\u00E1s.", tafsirAr:"\u0627\u0644\u062E\u064A\u0648\u0644 \u062A\u0631\u0643\u0636 \u0628\u0642\u0648\u0629 \u0634\u062F\u064A\u062F\u0629 \u062D\u062A\u0649 <span class='keyword'>\u062A\u064F\u062B\u064A\u0631 \u0633\u062D\u0628\u0627\u064B \u0643\u062B\u064A\u0641\u0629 \u0645\u0646 \u0627\u0644\u063A\u0628\u0627\u0631</span> \u062E\u0644\u0641\u0647\u0627. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8\uD83C\uDF2B\uFE0F</span> \u0645\u062B\u0644 \u0633\u064A\u0627\u0631\u0629 \u062A\u0645\u0634\u064A \u0639\u0644\u0649 \u0637\u0631\u064A\u0642 \u062A\u0631\u0627\u0628\u064A \u0648\u062A\u062A\u0631\u0643 \u0633\u062D\u0627\u0628\u0629 \u063A\u0628\u0627\u0631 \u0636\u062E\u0645\u0629." },
+  { num:5, ar:"\u0641\u064E\u0648\u064E\u0633\u064E\u0637\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u062C\u064E\u0645\u0652\u0639\u064B\u0627", translit:"Fawasatna bihi jam'a", es:"\u00A1Penetrando as\u00ED en medio de los enemigos!", arMeaning:"\u0641\u062F\u062E\u0644\u062A \u0627\u0644\u062E\u064A\u0648\u0644 \u0641\u064A \u0648\u0633\u0637 \u062C\u0645\u0639 \u0627\u0644\u0623\u0639\u062F\u0627\u0621", tafsirEs:"Los caballos con sus jinetes <span class='keyword'>entran en medio de los enemigos</span> sin miedo. <span class='emoji-big'>\uD83D\uDC0E\u26A1\uD83D\uDEE1\uFE0F</span> Son valientes y fuertes. Allah describe su valent\u00EDa para ense\u00F1arnos algo importante despu\u00E9s.", tafsirAr:"\u0627\u0644\u062E\u064A\u0648\u0644 \u0645\u0639 \u0641\u0631\u0633\u0627\u0646\u0647\u0627 <span class='keyword'>\u062A\u062F\u062E\u0644 \u0641\u064A \u0648\u0633\u0637 \u0627\u0644\u0623\u0639\u062F\u0627\u0621</span> \u0628\u062F\u0648\u0646 \u062E\u0648\u0641. <span class='emoji-big'>\uD83D\uDC0E\u26A1\uD83D\uDEE1\uFE0F</span> \u0625\u0646\u0647\u0627 \u0634\u062C\u0627\u0639\u0629 \u0648\u0642\u0648\u064A\u0629. \u0627\u0644\u0644\u0647 \u064A\u0635\u0641 \u0634\u062C\u0627\u0639\u062A\u0647\u0627 \u0644\u064A\u064F\u0639\u0644\u0651\u0645\u0646\u0627 \u0634\u064A\u0626\u0627\u064B \u0645\u0647\u0645\u0627\u064B \u0628\u0639\u062F\u0647\u0627." },
+  { num:6, ar:"\u0625\u0650\u0646\u0651\u064E \u0627\u0644\u0652\u0625\u0650\u0646\u0633\u064E\u0627\u0646\u064E \u0644\u0650\u0631\u064E\u0628\u0651\u0650\u0647\u0650 \u0644\u064E\u0643\u064E\u0646\u064F\u0648\u062F\u064C", translit:"Innal-insaana lirabbihi lakanood", es:"En verdad, el ser humano es ingrato con su Se\u00F1or.", arMeaning:"\u0625\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0634\u062F\u064A\u062F \u0627\u0644\u062C\u062D\u0648\u062F \u0648\u0627\u0644\u0646\u0643\u0631\u0627\u0646 \u0644\u0646\u0639\u0645 \u0631\u0628\u0647", tafsirEs:"Ahora viene la lecci\u00F3n: <span class='keyword'>el ser humano muchas veces es desagradecido</span> con Allah. Esos caballos son fieles a sus due\u00F1os, pero el humano olvida dar gracias a Allah por todo lo que tiene. <span class='emoji-big'>\uD83D\uDE14\uD83E\uDD32</span>", tafsirAr:"\u0627\u0644\u0622\u0646 \u064A\u0623\u062A\u064A \u0627\u0644\u062F\u0631\u0633: <span class='keyword'>\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0643\u062B\u064A\u0631\u0627\u064B \u0645\u0627 \u064A\u0643\u0648\u0646 \u062C\u0627\u062D\u062F\u0627\u064B</span> \u0644\u0646\u0639\u0645 \u0627\u0644\u0644\u0647. \u062A\u0644\u0643 \u0627\u0644\u062E\u064A\u0648\u0644 \u0648\u0641\u064A\u0629 \u0644\u0623\u0635\u062D\u0627\u0628\u0647\u0627\u060C \u0644\u0643\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u064A\u0646\u0633\u0649 \u0623\u0646 \u064A\u0634\u0643\u0631 \u0627\u0644\u0644\u0647. <span class='emoji-big'>\uD83D\uDE14\uD83E\uDD32</span>" },
+  { num:7, ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0639\u064E\u0644\u064E\u0649\u0670 \u0630\u064E\u0670\u0644\u0650\u0643\u064E \u0644\u064E\u0634\u064E\u0647\u0650\u064A\u062F\u064C", translit:"Wa innahu 'alaa dhaalika lashaheed", es:"Y \u00E9l mismo es testigo de eso.", arMeaning:"\u0648\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0646\u0641\u0633\u0647 \u064A\u0634\u0647\u062F \u0639\u0644\u0649 \u062C\u062D\u0648\u062F\u0647 \u0648\u0625\u0646\u0643\u0627\u0631\u0647", tafsirEs:"El ser humano <span class='keyword'>sabe por dentro que es desagradecido</span>. Su propio coraz\u00F3n lo sabe. <span class='emoji-big'>\uD83D\uDCAD\u2764\uFE0F</span> Cuando no dices Alhamdulillah, t\u00FA mismo sabes que deber\u00EDas haberlo dicho.", tafsirAr:"\u0627\u0644\u0625\u0646\u0633\u0627\u0646 <span class='keyword'>\u064A\u0639\u0631\u0641 \u0641\u064A \u062F\u0627\u062E\u0644\u0647 \u0623\u0646\u0647 \u062C\u0627\u062D\u062F</span>. \u0642\u0644\u0628\u0647 \u064A\u0639\u0631\u0641 \u0630\u0644\u0643. <span class='emoji-big'>\uD83D\uDCAD\u2764\uFE0F</span> \u0639\u0646\u062F\u0645\u0627 \u0644\u0627 \u062A\u0642\u0648\u0644 \u0627\u0644\u062D\u0645\u062F \u0644\u0644\u0647\u060C \u0623\u0646\u062A \u0646\u0641\u0633\u0643 \u062A\u0639\u0631\u0641 \u0623\u0646\u0643 \u0643\u0627\u0646 \u064A\u062C\u0628 \u0623\u0646 \u062A\u0642\u0648\u0644\u0647\u0627." },
+  { num:8, ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0644\u0650\u062D\u064F\u0628\u0651\u0650 \u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u0650 \u0644\u064E\u0634\u064E\u062F\u0650\u064A\u062F\u064C", translit:"Wa innahu lihubbil-khayri lashadeed", es:"Y en verdad, es intenso su amor por las riquezas.", arMeaning:"\u0648\u0625\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0634\u062F\u064A\u062F \u0627\u0644\u062D\u0628 \u0644\u0644\u0645\u0627\u0644 \u0648\u0627\u0644\u062B\u0631\u0648\u0629", tafsirEs:"El ser humano <span class='keyword'>ama demasiado el dinero y las cosas materiales</span>. A veces se olvida de Allah porque solo piensa en tener m\u00E1s. <span class='emoji-big'>\uD83D\uDCB0\uD83D\uDE2E</span> Lo m\u00E1s importante es ser agradecido, no tener m\u00E1s cosas.", tafsirAr:"\u0627\u0644\u0625\u0646\u0633\u0627\u0646 <span class='keyword'>\u064A\u062D\u0628 \u0627\u0644\u0645\u0627\u0644 \u0648\u0627\u0644\u0623\u0634\u064A\u0627\u0621 \u0627\u0644\u0645\u0627\u062F\u064A\u0629 \u062D\u0628\u0627\u064B \u0634\u062F\u064A\u062F\u0627\u064B</span>. \u0623\u062D\u064A\u0627\u0646\u0627\u064B \u064A\u0646\u0633\u0649 \u0627\u0644\u0644\u0647 \u0644\u0623\u0646\u0647 \u064A\u0641\u0643\u0631 \u0641\u0642\u0637 \u0628\u0627\u0644\u062D\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0645\u0632\u064A\u062F. <span class='emoji-big'>\uD83D\uDCB0\uD83D\uDE2E</span> \u0627\u0644\u0623\u0647\u0645 \u0647\u0648 \u0627\u0644\u0634\u0643\u0631\u060C \u0648\u0644\u064A\u0633 \u0627\u0644\u062D\u0635\u0648\u0644 \u0639\u0644\u0649 \u0623\u0634\u064A\u0627\u0621 \u0623\u0643\u062B\u0631." },
+  { num:9, ar:"\u0623\u064E\u0641\u064E\u0644\u064E\u0627 \u064A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0625\u0650\u0630\u064E\u0627 \u0628\u064F\u0639\u0652\u062B\u0650\u0631\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0652\u0642\u064F\u0628\u064F\u0648\u0631\u0650", translit:"Afalaa ya'lamu idhaa bu'thira maa fil-quboor", es:"\u00BFAcaso no sabe que cuando se abran las tumbas...", arMeaning:"\u0623\u0644\u0627 \u064A\u0639\u0644\u0645 \u0647\u0630\u0627 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0645\u0627\u0630\u0627 \u0633\u064A\u062D\u062F\u062B \u0639\u0646\u062F\u0645\u0627 \u064A\u064F\u0628\u0639\u062B \u0627\u0644\u0645\u0648\u062A\u0649 \u0645\u0646 \u0642\u0628\u0648\u0631\u0647\u0645", tafsirEs:"Allah nos pregunta: \u00BFno sabes que un d\u00EDa <span class='keyword'>todos saldr\u00E1n de sus tumbas</span> para ser juzgados? <span class='emoji-big'>\u23F0\uD83C\uDF0D</span> Ese d\u00EDa es el D\u00EDa del Juicio, cuando Allah ver\u00E1 todo lo que hicimos.", tafsirAr:"\u0627\u0644\u0644\u0647 \u064A\u0633\u0623\u0644\u0646\u0627: \u0623\u0644\u0627 \u062A\u0639\u0644\u0645 \u0623\u0646\u0647 \u064A\u0648\u0645\u0627\u064B \u0645\u0627 <span class='keyword'>\u0633\u064A\u062E\u0631\u062C \u0627\u0644\u062C\u0645\u064A\u0639 \u0645\u0646 \u0642\u0628\u0648\u0631\u0647\u0645</span> \u0644\u064A\u064F\u062D\u0627\u0633\u064E\u0628\u0648\u0627\u061F <span class='emoji-big'>\u23F0\uD83C\uDF0D</span> \u0630\u0644\u0643 \u0627\u0644\u064A\u0648\u0645 \u0647\u0648 \u064A\u0648\u0645 \u0627\u0644\u0642\u064A\u0627\u0645\u0629." },
+  { num:10, ar:"\u0648\u064E\u062D\u064F\u0635\u0651\u0650\u0644\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0635\u0651\u064F\u062F\u064F\u0648\u0631\u0650", translit:"Wa hussila maa fis-sudoor", es:"...y se revele lo que guardan los corazones?", arMeaning:"\u0648\u0623\u064F\u0638\u0647\u0650\u0631 \u0645\u0627 \u0641\u064A \u0627\u0644\u0642\u0644\u0648\u0628 \u0645\u0646 \u0646\u0648\u0627\u064A\u0627 \u0648\u0623\u0633\u0631\u0627\u0631", tafsirEs:"Ese d\u00EDa, <span class='keyword'>Allah mostrar\u00E1 todo lo que guardas en tu coraz\u00F3n</span>: tus secretos y tus intenciones. <span class='emoji-big'>\u2764\uFE0F\uD83D\uDD0D</span> Por eso es importante tener un coraz\u00F3n limpio y buenas intenciones.", tafsirAr:"\u0641\u064A \u0630\u0644\u0643 \u0627\u0644\u064A\u0648\u0645\u060C <span class='keyword'>\u0627\u0644\u0644\u0647 \u0633\u064A\u064F\u0638\u0647\u0631 \u0643\u0644 \u0645\u0627 \u0641\u064A \u0642\u0644\u0628\u0643</span>: \u0623\u0633\u0631\u0627\u0631\u0643 \u0648\u0646\u0648\u0627\u064A\u0627\u0643. <span class='emoji-big'>\u2764\uFE0F\uD83D\uDD0D</span> \u0644\u0647\u0630\u0627 \u0645\u0646 \u0627\u0644\u0645\u0647\u0645 \u0623\u0646 \u064A\u0643\u0648\u0646 \u0642\u0644\u0628\u0643 \u0646\u0638\u064A\u0641\u0627\u064B \u0648\u0646\u0648\u0627\u064A\u0627\u0643 \u0637\u064A\u0628\u0629." },
+  { num:11, ar:"\u0625\u0650\u0646\u0651\u064E \u0631\u064E\u0628\u0651\u064E\u0647\u064F\u0645 \u0628\u0650\u0647\u0650\u0645\u0652 \u064A\u064E\u0648\u0652\u0645\u064E\u0626\u0650\u0630\u064D \u0644\u0651\u064E\u062E\u064E\u0628\u0650\u064A\u0631\u064C", translit:"Inna rabbahum bihim yawma-idhin lakhabeer", es:"En verdad, ese d\u00EDa su Se\u00F1or estar\u00E1 perfectamente informado de ellos.", arMeaning:"\u0625\u0646 \u0627\u0644\u0644\u0647 \u0641\u064A \u0630\u0644\u0643 \u0627\u0644\u064A\u0648\u0645 \u0639\u0627\u0644\u0645\u064C \u0628\u0643\u0644 \u0623\u0639\u0645\u0627\u0644\u0647\u0645 \u0648\u0623\u062D\u0648\u0627\u0644\u0647\u0645", tafsirEs:"La sura termina dici\u00E9ndonos que <span class='keyword'>Allah sabe absolutamente TODO sobre nosotros</span>. <span class='emoji-big'>\uD83C\uDF1F\uD83D\uDC41\uFE0F</span> Esto debe motivarte a hacer el bien, ser agradecido y tener un coraz\u00F3n limpio.", tafsirAr:"\u0627\u0644\u0633\u0648\u0631\u0629 \u062A\u0646\u062A\u0647\u064A \u0628\u0625\u062E\u0628\u0627\u0631\u0646\u0627 \u0623\u0646 <span class='keyword'>\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621 \u0639\u0646\u0627</span>. <span class='emoji-big'>\uD83C\uDF1F\uD83D\uDC41\uFE0F</span> \u0647\u0630\u0627 \u064A\u062C\u0628 \u0623\u0646 \u064A\u064F\u062D\u0641\u0651\u0632\u0643 \u0644\u0641\u0639\u0644 \u0627\u0644\u062E\u064A\u0631 \u0648\u0634\u0643\u0631 \u0627\u0644\u0644\u0647 \u0648\u062A\u0646\u0638\u064A\u0641 \u0642\u0644\u0628\u0643." }
 ];
 
-// ===== AUDIO: Al-Husary (Muallim - teacher recitation with repeat) =====
-// Using EveryAyah.com API - Sheikh Mahmoud Khalil Al-Husary (Muallim style)
-// Surah 100, ayat 1-11
-function getAudioUrl(ayahNum) {
-  const globalNum = getGlobalAyahNum(ayahNum);
-  const paddedNum = String(globalNum).padStart(3, '0');
-  // Al-Husary Muallim (teacher/repeat style - best for learners)
-  return `https://everyayah.com/data/Husary_Muallim_128kbps/${paddedNum}.mp3`;
-}
+// ========== RECITERS (cdn.islamic.network — reliable, CORS-friendly) ==========
+const RECITERS = {
+  husary: {
+    name: "Al-Husary (Maestro)",
+    nameAr: "\u0627\u0644\u062D\u0635\u0631\u064A (\u0645\u0639\u0644\u0645)",
+    getUrl: (num) => "https://cdn.islamic.network/quran/audio/128/ar.husary/" + (6146 + num) + ".mp3"
+  },
+  minshawi: {
+    name: "Al-Minshawi",
+    nameAr: "\u0627\u0644\u0645\u0646\u0634\u0627\u0648\u064A",
+    getUrl: (num) => "https://cdn.islamic.network/quran/audio/128/ar.minshawi/" + (6146 + num) + ".mp3"
+  },
+  alafasy: {
+    name: "Al-Afasy",
+    nameAr: "\u0627\u0644\u0639\u0641\u0627\u0633\u064A",
+    getUrl: (num) => "https://cdn.islamic.network/quran/audio/128/ar.alafasy/" + (6146 + num) + ".mp3"
+  }
+};
 
-function getGlobalAyahNum(localNum) {
-  // Surah Al-Adiyat is Surah 100
-  // Ayah 1 of Surah 100 = global ayah 6147
-  // Pre-calculated: sum of all ayat in surahs 1-99 = 6146
-  return 6146 + localNum;
-}
-
-// ===== STATE =====
+// ========== STATE ==========
 let currentLang = 'es';
+let currentReciter = 'husary';
 let mastered = new Set();
-let playingAyah = null;
 let currentAudio = null;
+let playingAyah = null;
 let isPlayingAll = false;
 let playAllIndex = 0;
 let repeatCount = 3;
 let currentRepeat = 0;
+let quizQuestions = [];
 let quizIndex = 0;
 let quizScore = 0;
 let quizAnswered = false;
 
-// Load saved state
 try {
-  const saved = localStorage.getItem('adiyat_mastered');
-  if (saved) mastered = new Set(JSON.parse(saved));
-  const savedLang = localStorage.getItem('adiyat_lang');
-  if (savedLang) { currentLang = savedLang; }
+  const s1 = localStorage.getItem('adiyat_mastered');
+  if (s1) mastered = new Set(JSON.parse(s1));
+  const s2 = localStorage.getItem('adiyat_lang');
+  if (s2) currentLang = s2;
+  const s3 = localStorage.getItem('adiyat_reciter');
+  if (s3 && RECITERS[s3]) currentReciter = s3;
 } catch(e) {}
 
-// ===== INIT =====
-function init() {
-  renderListenSection();
-  renderUnderstandSection();
-  renderMethodSection();
-  renderQuiz();
-  updateProgress();
-  updateLangUI();
-  updateAllText();
-}
+// ========== INIT ==========
+function init() { renderAll(); updateProgress(); updateLangUI(); updateAllText(); }
+function renderAll() { renderListenSection(); renderUnderstandSection(); renderMethodSection(); initQuiz(); }
+function T(es, ar) { return currentLang === 'es' ? es : ar; }
 
-// ===== LANGUAGE =====
 function setLang(lang) {
   currentLang = lang;
-  localStorage.setItem('adiyat_lang', lang);
-  updateLangUI();
-  updateAllText();
-  renderListenSection();
-  renderUnderstandSection();
-  renderMethodSection();
-  renderQuiz();
+  try { localStorage.setItem('adiyat_lang', lang); } catch(e) {}
+  updateLangUI(); updateAllText(); renderAll();
 }
-
 function updateLangUI() {
   document.getElementById('langEs').classList.toggle('active', currentLang === 'es');
   document.getElementById('langAr').classList.toggle('active', currentLang === 'ar');
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 }
-
 function updateAllText() {
   document.querySelectorAll('[data-es]').forEach(el => {
     el.textContent = currentLang === 'es' ? el.dataset.es : el.dataset.ar;
   });
 }
 
-// ===== RENDER LISTEN SECTION =====
+function setReciter(key) {
+  currentReciter = key;
+  try { localStorage.setItem('adiyat_reciter', key); } catch(e) {}
+  document.querySelectorAll('.reciter-btn').forEach(b => b.classList.toggle('active', b.dataset.reciter === key));
+  stopAudio();
+}
+function getAudioUrl(ayahNum) { return RECITERS[currentReciter].getUrl(ayahNum); }
+
+// ========== LISTEN SECTION ==========
 function renderListenSection() {
-  const container = document.getElementById('section-listen');
-  container.innerHTML = AYAT.map(a => `
-    <div class="ayah-card ${mastered.has(a.num) ? 'mastered' : ''}" id="ayah-${a.num}">
-      <div class="ayah-number">${a.num}</div>
-      <div class="ayah-arabic">${a.ar}</div>
-      <div class="ayah-transliteration">${a.translit}</div>
-      <div class="ayah-translation" ${currentLang === 'ar' ? 'data-lang="ar"' : ''}>
-        ${currentLang === 'es' ? a.es : a.arMeaning}
-      </div>
-      <div class="ayah-controls">
-        <button class="ctrl-btn btn-listen" onclick="playAyah(${a.num})">
-          ▶ ${currentLang === 'es' ? 'Escuchar' : 'استمع'}
-        </button>
-        <button class="ctrl-btn btn-slow" onclick="playAyah(${a.num}, 0.7)">
-          🐢 ${currentLang === 'es' ? 'Lento' : 'بطيء'}
-        </button>
-        <button class="ctrl-btn btn-repeat" onclick="playRepeat(${a.num})">
-          🔁 ${currentLang === 'es' ? 'Repetir 3x' : 'كرر ٣×'}
-        </button>
-        <button class="ctrl-btn btn-master ${mastered.has(a.num) ? 'done' : ''}" onclick="toggleMaster(${a.num})">
-          ${mastered.has(a.num) ? '✓' : '⭐'} ${mastered.has(a.num) ? (currentLang === 'es' ? 'Memorizada' : 'محفوظة') : (currentLang === 'es' ? 'Memoricé' : 'حفظتها')}
-        </button>
-      </div>
-    </div>
-  `).join('');
+  const c = document.getElementById('section-listen');
+  let html = '<div class="reciter-select">';
+  for (const [key, rec] of Object.entries(RECITERS)) {
+    html += '<button class="reciter-btn ' + (key === currentReciter ? 'active' : '') + '" data-reciter="' + key + '" onclick="setReciter(\'' + key + '\')">' + (currentLang === 'es' ? rec.name : rec.nameAr) + '</button>';
+  }
+  html += '</div>';
+  for (const a of AYAT) {
+    const isMastered = mastered.has(a.num);
+    html += '<div class="ayah-card ' + (isMastered ? 'mastered' : '') + '" id="ayah-' + a.num + '">'
+      + '<div class="master-badge">\u2713</div>'
+      + '<div class="ayah-number">' + a.num + '</div>'
+      + '<div class="ayah-arabic">' + a.ar + '</div>'
+      + '<div class="ayah-transliteration">' + a.translit + '</div>'
+      + '<div class="ayah-translation ' + (currentLang === 'es' ? 'lang-es' : 'lang-ar') + '">' + (currentLang === 'es' ? a.es : a.arMeaning) + '</div>'
+      + '<div class="ayah-controls">'
+      + '<button class="ctrl-btn btn-listen" onclick="playAyah(' + a.num + ')">\u25B6 ' + T('Escuchar','\u0627\u0633\u062A\u0645\u0639') + '</button>'
+      + '<button class="ctrl-btn btn-slow" onclick="playAyah(' + a.num + ', 0.65)">\uD83D\uDC22 ' + T('Lento','\u0628\u0637\u064A\u0621') + '</button>'
+      + '<button class="ctrl-btn btn-repeat" onclick="playRepeat(' + a.num + ')">\uD83D\uDD01 ' + T('Repetir 3x','\u0643\u0631\u0631 \u0663\xD7') + '</button>'
+      + '<button class="ctrl-btn btn-master ' + (isMastered ? 'done' : '') + '" onclick="toggleMaster(' + a.num + ')">'
+      + (isMastered ? '\u2713 ' + T('Memorizada','\u0645\u062D\u0641\u0648\u0638\u0629') : '\u2B50 ' + T('Memoric\u00E9','\u062D\u0641\u0638\u062A\u0647\u0627'))
+      + '</button></div>'
+      + '<div class="audio-status" id="status-' + a.num + '"><div class="spinner"></div><span>' + T('Cargando audio...','\u062C\u0627\u0631\u064A \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0635\u0648\u062A...') + '</span></div>'
+      + '</div>';
+  }
+  c.innerHTML = html;
 }
 
-// ===== RENDER UNDERSTAND SECTION =====
+// ========== UNDERSTAND SECTION ==========
 function renderUnderstandSection() {
-  const container = document.getElementById('section-understand');
-  container.innerHTML = `
-    <div class="method-card" style="margin-bottom: 16px; border-color: var(--gold); border-width: 1px;">
-      <h3 style="color: var(--gold); font-size: 16px; margin-bottom: 6px;">
-        ${currentLang === 'es' ? '💡 ¿De qué habla esta sura?' : '💡 عن ماذا تتحدث هذه السورة؟'}
-      </h3>
-      <p style="color: var(--text-light); font-size: 14px; line-height: 1.7; ${currentLang === 'ar' ? 'font-family: Baloo Bhaijaan 2, sans-serif;' : ''}">
-        ${currentLang === 'es' 
-          ? 'Allah empieza hablando de unos <strong style="color:var(--gold)">caballos de guerra increíblemente fuertes</strong> — corren tan rápido que jadean, hacen chispas con sus pezuñas y levantan nubes de polvo. ¿Por qué? Para decirnos algo importante: <strong style="color:var(--teal)">esos caballos son fieles y agradecidos con sus dueños</strong>, pero el ser humano muchas veces NO es agradecido con Allah. La sura nos enseña a <strong style="color:var(--green)">ser agradecidos y a recordar que Allah lo sabe todo</strong>.'
-          : 'الله يبدأ بالحديث عن <strong style="color:var(--gold)">خيول حرب قوية جداً</strong> — تركض بسرعة حتى تلهث، وحوافرها تُخرج شرارات، وتُثير سحب الغبار. لماذا؟ ليقول لنا شيئاً مهماً: <strong style="color:var(--teal)">تلك الخيول وفية وشاكرة لأصحابها</strong>، لكن الإنسان كثيراً ما لا يشكر الله. السورة تُعلّمنا أن <strong style="color:var(--green)">نكون شاكرين وأن نتذكر أن الله يعلم كل شيء</strong>.'
-        }
-      </p>
-    </div>
-    ${AYAT.map(a => `
-      <div class="tafsir-card">
-        <div class="tafsir-ayah">${a.ar}</div>
-        <div class="tafsir-explain" ${currentLang === 'ar' ? 'data-lang="ar"' : ''}>
-          ${currentLang === 'es' ? a.tafsirEs : a.tafsirAr}
-        </div>
-      </div>
-    `).join('')}
-  `;
+  const c = document.getElementById('section-understand');
+  let html = '<div class="method-card" style="border-color: var(--gold);">'
+    + '<h3 style="color: var(--gold); font-size: 16px; margin-bottom: 6px;">'
+    + T('\uD83D\uDCA1 \u00BFDe qu\u00E9 habla esta sura?','\uD83D\uDCA1 \u0639\u0646 \u0645\u0627\u0630\u0627 \u062A\u062A\u062D\u062F\u062B \u0647\u0630\u0647 \u0627\u0644\u0633\u0648\u0631\u0629\u061F')
+    + '</h3><p style="color: var(--text-light); font-size: 14px; line-height: 1.7;' + (currentLang === 'ar' ? ' font-family:Baloo Bhaijaan 2,sans-serif;' : '') + '">'
+    + T(
+      'Allah empieza hablando de unos <strong style="color:var(--gold)">caballos de guerra incre\u00EDblemente fuertes</strong> \u2014 corren tan r\u00E1pido que jadean, hacen chispas con sus pezu\u00F1as y levantan nubes de polvo. \u00BFPor qu\u00E9? Para decirnos algo importante: <strong style="color:var(--teal)">esos caballos son fieles y agradecidos con sus due\u00F1os</strong>, pero el ser humano muchas veces NO es agradecido con Allah. La sura nos ense\u00F1a a <strong style="color:var(--green)">ser agradecidos y a recordar que Allah lo sabe todo</strong>.',
+      '\u0627\u0644\u0644\u0647 \u064A\u0628\u062F\u0623 \u0628\u0627\u0644\u062D\u062F\u064A\u062B \u0639\u0646 <strong style="color:var(--gold)">\u062E\u064A\u0648\u0644 \u062D\u0631\u0628 \u0642\u0648\u064A\u0629 \u062C\u062F\u0627\u064B</strong> \u2014 \u062A\u0631\u0643\u0636 \u0628\u0633\u0631\u0639\u0629 \u062D\u062A\u0649 \u062A\u0644\u0647\u062B\u060C \u0648\u062D\u0648\u0627\u0641\u0631\u0647\u0627 \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u062A\u060C \u0648\u062A\u064F\u062B\u064A\u0631 \u0633\u062D\u0628 \u0627\u0644\u063A\u0628\u0627\u0631. \u0644\u0645\u0627\u0630\u0627\u061F \u0644\u064A\u0642\u0648\u0644 \u0644\u0646\u0627 \u0634\u064A\u0626\u0627\u064B \u0645\u0647\u0645\u0627\u064B: <strong style="color:var(--teal)">\u062A\u0644\u0643 \u0627\u0644\u062E\u064A\u0648\u0644 \u0648\u0641\u064A\u0629 \u0648\u0634\u0627\u0643\u0631\u0629 \u0644\u0623\u0635\u062D\u0627\u0628\u0647\u0627</strong>\u060C \u0644\u0643\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0643\u062B\u064A\u0631\u0627\u064B \u0645\u0627 \u0644\u0627 \u064A\u0634\u0643\u0631 \u0627\u0644\u0644\u0647. \u0627\u0644\u0633\u0648\u0631\u0629 \u062A\u064F\u0639\u0644\u0651\u0645\u0646\u0627 \u0623\u0646 <strong style="color:var(--green)">\u0646\u0643\u0648\u0646 \u0634\u0627\u0643\u0631\u064A\u0646 \u0648\u0623\u0646 \u0646\u062A\u0630\u0643\u0631 \u0623\u0646 \u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621</strong>.'
+    )
+    + '</p></div>';
+
+  for (const a of AYAT) {
+    html += '<div class="tafsir-card" id="tafsir-' + a.num + '">'
+      + '<div class="tafsir-ayah">' + a.ar + '</div>'
+      + '<div class="tafsir-explain ' + (currentLang === 'es' ? 'lang-es' : 'lang-ar') + '">'
+      + (currentLang === 'es' ? a.tafsirEs : a.tafsirAr)
+      + '</div>'
+      + '<button class="ai-ask-btn" onclick="toggleAiBox(' + a.num + ')">\uD83E\uDD16 ' + T('Preg\u00FAntale a la IA sobre esta ayah','\u0627\u0633\u0623\u0644 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A \u0639\u0646 \u0647\u0630\u0647 \u0627\u0644\u0622\u064A\u0629') + '</button>'
+      + '<div id="ai-box-' + a.num + '" style="display:none;">'
+      + '<div class="ai-input-row">'
+      + '<input class="ai-input" id="ai-input-' + a.num + '" placeholder="' + T('Ej: \u00BFPor qu\u00E9 Allah jura por caballos?','\u0645\u062B\u0627\u0644: \u0644\u0645\u0627\u0630\u0627 \u064A\u0642\u0633\u0645 \u0627\u0644\u0644\u0647 \u0628\u0627\u0644\u062E\u064A\u0648\u0644\u061F') + '" onkeydown="if(event.key===\'Enter\')askAI(' + a.num + ')">'
+      + '<button class="ai-send-btn" onclick="askAI(' + a.num + ')">\u27A4</button>'
+      + '</div>'
+      + '<div class="ai-response-box" id="ai-resp-' + a.num + '"></div>'
+      + '</div></div>';
+  }
+  c.innerHTML = html;
 }
 
-// ===== RENDER METHOD SECTION =====
+function toggleAiBox(num) {
+  const box = document.getElementById('ai-box-' + num);
+  const isHidden = box.style.display === 'none';
+  box.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) document.getElementById('ai-input-' + num).focus();
+}
+
+async function askAI(num) {
+  const input = document.getElementById('ai-input-' + num);
+  const respBox = document.getElementById('ai-resp-' + num);
+  const question = input.value.trim();
+  if (!question) return;
+
+  const ayah = AYAT.find(a => a.num === num);
+  respBox.className = 'ai-response-box show';
+  respBox.innerHTML = '<div style="display:flex;align-items:center;gap:8px;"><div class="spinner"></div> ' + T('Pensando...','\u062C\u0627\u0631\u064D \u0627\u0644\u062A\u0641\u0643\u064A\u0631...') + '</div>';
+
+  try {
+    const sysPrompt = currentLang === 'es'
+      ? 'Eres un maestro de Quran que explica a ni\u00F1os de 8 a\u00F1os. Responde en espa\u00F1ol de forma simple, con ejemplos que un ni\u00F1o entienda. Usa emojis. M\u00E1ximo 4 frases. La ayah es: "' + ayah.ar + '" que significa "' + ayah.es + '". Contexto: Sura Al-Adiyat (sura 100).'
+      : '\u0623\u0646\u062A \u0645\u0639\u0644\u0645 \u0642\u0631\u0622\u0646 \u062A\u0634\u0631\u062D \u0644\u0623\u0637\u0641\u0627\u0644 \u0639\u0645\u0631\u0647\u0645 \u0668 \u0633\u0646\u0648\u0627\u062A. \u0623\u062C\u0628 \u0628\u0627\u0644\u0639\u0631\u0628\u064A\u0629 \u0628\u0634\u0643\u0644 \u0628\u0633\u064A\u0637 \u0645\u0639 \u0623\u0645\u062B\u0644\u0629 \u064A\u0641\u0647\u0645\u0647\u0627 \u0627\u0644\u0637\u0641\u0644. \u0627\u0633\u062A\u062E\u062F\u0645 \u0625\u064A\u0645\u0648\u062C\u064A. \u0623\u0642\u0635\u0649 \u0664 \u062C\u0645\u0644. \u0627\u0644\u0622\u064A\u0629 \u0647\u064A: "' + ayah.ar + '" \u0648\u0645\u0639\u0646\u0627\u0647\u0627 "' + ayah.arMeaning + '". \u0627\u0644\u0633\u064A\u0627\u0642: \u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A (\u0633\u0648\u0631\u0629 \u0661\u0660\u0660).';
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: sysPrompt,
+        messages: [{ role: 'user', content: question }]
+      })
+    });
+    const data = await response.json();
+    const text = (data.content || []).map(function(c) { return c.text || ''; }).join('') || T('No se pudo obtener respuesta.','\u0644\u0645 \u064A\u062A\u0645 \u0627\u0644\u062D\u0635\u0648\u0644 \u0639\u0644\u0649 \u0625\u062C\u0627\u0628\u0629.');
+    respBox.innerHTML = text;
+  } catch(err) {
+    respBox.innerHTML = T('\u26A0\uFE0F No se pudo conectar con la IA. Comprueba tu conexi\u00F3n.','\u26A0\uFE0F \u0644\u0645 \u064A\u062A\u0645 \u0627\u0644\u0627\u062A\u0635\u0627\u0644 \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A.');
+  }
+}
+
+// ========== METHOD ==========
 function renderMethodSection() {
-  const container = document.getElementById('section-method');
   const steps = currentLang === 'es' ? [
-    { icon: '🎧', title: 'Paso 1: Escucha atenta (5 min)', desc: 'Escucha TODA la sura 3 veces seguidas sin intentar repetir. Solo escucha con atención. Tu cerebro está absorbiendo los sonidos y el ritmo.' },
-    { icon: '🔁', title: 'Paso 2: Ayah por ayah (15 min)', desc: 'Ahora ve ayah por ayah. Escucha cada una 5 veces y luego intenta repetirla tú. Usa el botón "Lento" si necesitas ir más despacio.' },
-    { icon: '💡', title: 'Paso 3: Entiende el significado', desc: 'Ve a la pestaña "Entender" y lee la explicación de cada ayah. Cuando entiendes lo que dices, ¡la memorización es 3 veces más rápida!' },
-    { icon: '🧩', title: 'Paso 4: Prueba tu memoria', desc: 'Haz el quiz para comprobar cuánto recuerdas. Si fallas, no pasa nada: ¡vuelve a escuchar esa ayah!' },
-    { icon: '⭐', title: 'Paso 5: Marca las dominadas', desc: 'Cuando puedas recitar una ayah de memoria sin ayuda, pulsa "Memoricé" para marcarla. Tu objetivo: ¡las 11 estrellas!' },
-    { icon: '📅', title: 'Paso 6: Repasa cada día', desc: 'Método probado: repasa la sura completa 1 vez al día durante 7 días. Después, 1 vez por semana durante 1 mes. ¡Así nunca la olvidarás!' }
+    { icon:'\uD83C\uDFA7', title:'Paso 1: Escucha atenta (5 min)', desc:'Escucha TODA la sura 3 veces seguidas sin intentar repetir. Solo escucha. Tu cerebro absorbe los sonidos y el ritmo.' },
+    { icon:'\uD83D\uDD01', title:'Paso 2: Ayah por ayah (15 min)', desc:'Ve ayah por ayah. Escucha cada una 5 veces y luego intenta repetirla. Usa el bot\u00F3n "Lento" si necesitas.' },
+    { icon:'\uD83D\uDCA1', title:'Paso 3: Entiende el significado', desc:'Ve a "Entender" y lee cada ayah. Cuando entiendes lo que dices, la memorizaci\u00F3n es 3 veces m\u00E1s r\u00E1pida.' },
+    { icon:'\uD83E\uDDE9', title:'Paso 4: Prueba tu memoria', desc:'Haz el quiz para comprobar cu\u00E1nto recuerdas. Si fallas, vuelve a escuchar esa ayah.' },
+    { icon:'\u2B50', title:'Paso 5: Marca las dominadas', desc:'Cuando recites una ayah de memoria sin ayuda, pulsa "Memoric\u00E9". Tu objetivo: \u00A1las 11 estrellas!' },
+    { icon:'\uD83D\uDCC5', title:'Paso 6: Repasa cada d\u00EDa', desc:'Repasa la sura 1 vez al d\u00EDa durante 7 d\u00EDas. Despu\u00E9s, 1 vez por semana durante 1 mes. As\u00ED nunca la olvidar\u00E1s.' }
   ] : [
-    { icon: '🎧', title: 'الخطوة ١: الاستماع بانتباه (٥ دقائق)', desc: 'استمع لكل السورة ٣ مرات متتالية بدون محاولة التكرار. فقط استمع بانتباه. عقلك يمتص الأصوات والإيقاع.' },
-    { icon: '🔁', title: 'الخطوة ٢: آية بآية (١٥ دقيقة)', desc: 'الآن اذهب آية بآية. استمع لكل واحدة ٥ مرات ثم حاول تكرارها. استخدم زر "بطيء" إذا احتجت أن تبطئ.' },
-    { icon: '💡', title: 'الخطوة ٣: افهم المعنى', desc: 'اذهب إلى تبويب "افهم" واقرأ شرح كل آية. عندما تفهم ما تقول، الحفظ يصبح أسرع ٣ مرات!' },
-    { icon: '🧩', title: 'الخطوة ٤: اختبر ذاكرتك', desc: 'قم بحل الاختبار لمعرفة كم تتذكر. إذا أخطأت، لا بأس: ارجع واستمع لتلك الآية مرة أخرى!' },
-    { icon: '⭐', title: 'الخطوة ٥: علّم على المحفوظة', desc: 'عندما تستطيع تلاوة آية من الذاكرة بدون مساعدة، اضغط "حفظتها" لتعليمها. هدفك: كل النجوم الـ ١١!' },
-    { icon: '📅', title: 'الخطوة ٦: راجع كل يوم', desc: 'طريقة مُجرّبة: راجع السورة كاملة مرة في اليوم لمدة ٧ أيام. ثم مرة في الأسبوع لمدة شهر. هكذا لن تنساها أبداً!' }
+    { icon:'\uD83C\uDFA7', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0661: \u0627\u0644\u0627\u0633\u062A\u0645\u0627\u0639 \u0628\u0627\u0646\u062A\u0628\u0627\u0647 (\u0665 \u062F\u0642\u0627\u0626\u0642)', desc:'\u0627\u0633\u062A\u0645\u0639 \u0644\u0643\u0644 \u0627\u0644\u0633\u0648\u0631\u0629 \u0663 \u0645\u0631\u0627\u062A \u0645\u062A\u062A\u0627\u0644\u064A\u0629 \u0628\u062F\u0648\u0646 \u0645\u062D\u0627\u0648\u0644\u0629 \u0627\u0644\u062A\u0643\u0631\u0627\u0631. \u0641\u0642\u0637 \u0627\u0633\u062A\u0645\u0639. \u0639\u0642\u0644\u0643 \u064A\u0645\u062A\u0635 \u0627\u0644\u0623\u0635\u0648\u0627\u062A \u0648\u0627\u0644\u0625\u064A\u0642\u0627\u0639.' },
+    { icon:'\uD83D\uDD01', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0662: \u0622\u064A\u0629 \u0628\u0622\u064A\u0629 (\u0661\u0665 \u062F\u0642\u064A\u0642\u0629)', desc:'\u0627\u0630\u0647\u0628 \u0622\u064A\u0629 \u0628\u0622\u064A\u0629. \u0627\u0633\u062A\u0645\u0639 \u0644\u0643\u0644 \u0648\u0627\u062D\u062F\u0629 \u0665 \u0645\u0631\u0627\u062A \u062B\u0645 \u062D\u0627\u0648\u0644 \u062A\u0643\u0631\u0627\u0631\u0647\u0627. \u0627\u0633\u062A\u062E\u062F\u0645 \u0632\u0631 "\u0628\u0637\u064A\u0621" \u0625\u0630\u0627 \u0627\u062D\u062A\u062C\u062A.' },
+    { icon:'\uD83D\uDCA1', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0663: \u0627\u0641\u0647\u0645 \u0627\u0644\u0645\u0639\u0646\u0649', desc:'\u0627\u0630\u0647\u0628 \u0625\u0644\u0649 \u062A\u0628\u0648\u064A\u0628 "\u0627\u0641\u0647\u0645" \u0648\u0627\u0642\u0631\u0623 \u0634\u0631\u062D \u0643\u0644 \u0622\u064A\u0629. \u0639\u0646\u062F\u0645\u0627 \u062A\u0641\u0647\u0645 \u0645\u0627 \u062A\u0642\u0648\u0644\u060C \u0627\u0644\u062D\u0641\u0638 \u064A\u0635\u0628\u062D \u0623\u0633\u0631\u0639 \u0663 \u0645\u0631\u0627\u062A.' },
+    { icon:'\uD83E\uDDE9', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0664: \u0627\u062E\u062A\u0628\u0631 \u0630\u0627\u0643\u0631\u062A\u0643', desc:'\u062D\u0644 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u0644\u0645\u0639\u0631\u0641\u0629 \u0643\u0645 \u062A\u062A\u0630\u0643\u0631. \u0625\u0630\u0627 \u0623\u062E\u0637\u0623\u062A\u060C \u0627\u0631\u062C\u0639 \u0648\u0627\u0633\u062A\u0645\u0639 \u0644\u062A\u0644\u0643 \u0627\u0644\u0622\u064A\u0629 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649.' },
+    { icon:'\u2B50', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0665: \u0639\u0644\u0651\u0645 \u0639\u0644\u0649 \u0627\u0644\u0645\u062D\u0641\u0648\u0638\u0629', desc:'\u0639\u0646\u062F\u0645\u0627 \u062A\u0633\u062A\u0637\u064A\u0639 \u062A\u0644\u0627\u0648\u0629 \u0622\u064A\u0629 \u0645\u0646 \u0627\u0644\u0630\u0627\u0643\u0631\u0629 \u0628\u062F\u0648\u0646 \u0645\u0633\u0627\u0639\u062F\u0629\u060C \u0627\u0636\u063A\u0637 "\u062D\u0641\u0638\u062A\u0647\u0627". \u0647\u062F\u0641\u0643: \u0643\u0644 \u0627\u0644\u0646\u062C\u0648\u0645 \u0627\u0644\u0640 \u0661\u0661!' },
+    { icon:'\uD83D\uDCC5', title:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0666: \u0631\u0627\u062C\u0639 \u0643\u0644 \u064A\u0648\u0645', desc:'\u0631\u0627\u062C\u0639 \u0627\u0644\u0633\u0648\u0631\u0629 \u0645\u0631\u0629 \u0641\u064A \u0627\u0644\u064A\u0648\u0645 \u0644\u0645\u062F\u0629 \u0667 \u0623\u064A\u0627\u0645. \u062B\u0645 \u0645\u0631\u0629 \u0641\u064A \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0644\u0645\u062F\u0629 \u0634\u0647\u0631. \u0647\u0643\u0630\u0627 \u0644\u0646 \u062A\u0646\u0633\u0627\u0647\u0627 \u0623\u0628\u062F\u0627\u064B.' }
   ];
 
-  container.innerHTML = `
-    <div class="method-card">
-      <h3 style="color: var(--gold); font-size: 17px; margin-bottom: 14px; text-align: center;">
-        ${currentLang === 'es' ? '📖 Método de Memorización (Hifz)' : '📖 منهج الحفظ'}
-      </h3>
-      ${steps.map((s, i) => `
-        <div class="method-step">
-          <div class="step-num">${s.icon}</div>
-          <div class="step-content">
-            <h4>${s.title}</h4>
-            <p>${s.desc}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-    <div class="method-card" style="border-color: var(--teal); text-align: center;">
-      <p style="color: var(--teal); font-size: 14px; line-height: 1.6;">
-        ${currentLang === 'es' 
-          ? '💡 <strong>Consejo para padres:</strong> Practiquen juntos 10-15 minutos al día. La repetición con amor y paciencia es la clave del Hifz.'
-          : '💡 <strong>نصيحة للوالدين:</strong> تدربوا معاً ١٠-١٥ دقيقة يومياً. التكرار بحب وصبر هو مفتاح الحفظ.'}
-      </p>
-    </div>
-  `;
+  document.getElementById('section-method').innerHTML = '<div class="method-card">'
+    + '<h3 style="color:var(--gold);font-size:17px;margin-bottom:14px;text-align:center;">' + T('\uD83D\uDCD6 M\u00E9todo de Memorizaci\u00F3n (Hifz)','\uD83D\uDCD6 \u0645\u0646\u0647\u062C \u0627\u0644\u062D\u0641\u0638') + '</h3>'
+    + steps.map(function(s) {
+      return '<div class="method-step"><div class="step-num">' + s.icon + '</div><div class="step-content"><h4>' + s.title + '</h4><p>' + s.desc + '</p></div></div>';
+    }).join('')
+    + '</div>'
+    + '<div class="method-card" style="border-color:var(--teal);text-align:center;"><p style="color:var(--teal);font-size:14px;line-height:1.6;">'
+    + T('\uD83D\uDCA1 <strong>Consejo para padres:</strong> Practiquen juntos 10-15 minutos al d\u00EDa. La repetici\u00F3n con amor y paciencia es la clave del Hifz.',
+       '\uD83D\uDCA1 <strong>\u0646\u0635\u064A\u062D\u0629 \u0644\u0644\u0648\u0627\u0644\u062F\u064A\u0646:</strong> \u062A\u062F\u0631\u0628\u0648\u0627 \u0645\u0639\u0627\u064B \u0661\u0660-\u0661\u0665 \u062F\u0642\u064A\u0642\u0629 \u064A\u0648\u0645\u064A\u0627\u064B. \u0627\u0644\u062A\u0643\u0631\u0627\u0631 \u0628\u062D\u0628 \u0648\u0635\u0628\u0631 \u0647\u0648 \u0645\u0641\u062A\u0627\u062D \u0627\u0644\u062D\u0641\u0638.')
+    + '</p></div>';
 }
 
-// ===== AUDIO PLAYBACK =====
-function playAyah(num, rate = 1.0) {
+// ========== AUDIO ==========
+function playAyah(num, rate) {
+  if (rate === undefined) rate = 1.0;
   stopAudio();
-  const url = getAudioUrl(num);
+  var url = getAudioUrl(num);
   currentAudio = new Audio(url);
-  currentAudio.playbackRate = rate;
   playingAyah = num;
-  
-  // Highlight card
-  document.querySelectorAll('.ayah-card').forEach(c => c.classList.remove('playing'));
-  const card = document.getElementById(`ayah-${num}`);
+
+  var statusEl = document.getElementById('status-' + num);
+  if (statusEl) { statusEl.classList.add('show'); statusEl.innerHTML = '<div class="spinner"></div><span>' + T('Cargando audio...','\u062C\u0627\u0631\u064A \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0635\u0648\u062A...') + '</span>'; }
+
+  document.querySelectorAll('.ayah-card').forEach(function(c) { c.classList.remove('playing'); });
+  var card = document.getElementById('ayah-' + num);
   if (card) card.classList.add('playing');
-  
-  currentAudio.play().catch(e => console.log('Audio error:', e));
-  currentAudio.onended = () => {
+
+  currentAudio.playbackRate = rate;
+
+  currentAudio.oncanplaythrough = function() {
+    if (statusEl) statusEl.classList.remove('show');
+  };
+
+  currentAudio.onerror = function() {
+    if (statusEl) {
+      statusEl.innerHTML = '<span style="color:var(--red-soft);">\u26A0\uFE0F ' + T('Error. Probando otro recitador...','\u062E\u0637\u0623. \u062C\u0627\u0631\u064A \u062A\u062C\u0631\u0628\u0629 \u0642\u0627\u0631\u0626 \u0622\u062E\u0631...') + '</span>';
+    }
+    tryFallbackAudio(num, rate, card, statusEl);
+  };
+
+  currentAudio.onended = function() {
     playingAyah = null;
     if (card) card.classList.remove('playing');
+    if (statusEl) statusEl.classList.remove('show');
   };
+
+  currentAudio.load();
+  currentAudio.play().catch(function() {});
+}
+
+function tryFallbackAudio(num, rate, card, statusEl) {
+  var keys = Object.keys(RECITERS).filter(function(k) { return k !== currentReciter; });
+  var idx = 0;
+
+  function tryNext() {
+    if (idx >= keys.length) {
+      if (statusEl) { statusEl.innerHTML = '<span style="color:var(--red-soft);">\u26A0\uFE0F ' + T('No se pudo cargar el audio.','\u0644\u0645 \u064A\u062A\u0645 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0635\u0648\u062A.') + '</span>'; setTimeout(function() { if(statusEl) statusEl.classList.remove('show'); }, 3000); }
+      return;
+    }
+    var key = keys[idx++];
+    var url = RECITERS[key].getUrl(num);
+    if (currentAudio) { currentAudio.pause(); try { currentAudio.src = ''; } catch(e) {} }
+    currentAudio = new Audio(url);
+    currentAudio.playbackRate = rate;
+    currentAudio.oncanplaythrough = function() { if (statusEl) statusEl.classList.remove('show'); };
+    currentAudio.onerror = tryNext;
+    currentAudio.onended = function() { playingAyah = null; if (card) card.classList.remove('playing'); };
+    currentAudio.load();
+    currentAudio.play().catch(tryNext);
+  }
+  tryNext();
 }
 
 function playRepeat(num) {
-  let count = 0;
-  const maxRepeats = 3;
-  
-  function playOnce() {
-    if (count >= maxRepeats) return;
+  var count = 0;
+  var maxR = 3;
+  function once() {
+    if (count >= maxR) return;
     stopAudio();
-    const url = getAudioUrl(num);
-    currentAudio = new Audio(url);
-    currentAudio.playbackRate = 0.85; // Slightly slow for learning
+    currentAudio = new Audio(getAudioUrl(num));
+    currentAudio.playbackRate = 0.85;
     playingAyah = num;
-    
-    const card = document.getElementById(`ayah-${num}`);
+    var card = document.getElementById('ayah-' + num);
     if (card) card.classList.add('playing');
-    
-    currentAudio.play().catch(e => console.log('Audio error:', e));
-    currentAudio.onended = () => {
-      count++;
-      if (count < maxRepeats) {
-        setTimeout(playOnce, 1200); // Pause between repeats
-      } else {
-        playingAyah = null;
-        if (card) card.classList.remove('playing');
-      }
-    };
+    currentAudio.onended = function() { count++; if (count < maxR) { setTimeout(once, 1200); } else { playingAyah = null; if (card) card.classList.remove('playing'); } };
+    currentAudio.load();
+    currentAudio.play().catch(function() {});
   }
-  
-  playOnce();
+  once();
 }
 
 function stopAudio() {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
-  }
-  document.querySelectorAll('.ayah-card').forEach(c => c.classList.remove('playing'));
+  if (currentAudio) { currentAudio.pause(); try { currentAudio.src = ''; } catch(e) {} currentAudio = null; }
+  document.querySelectorAll('.ayah-card').forEach(function(c) { c.classList.remove('playing'); });
+  document.querySelectorAll('.audio-status').forEach(function(s) { s.classList.remove('show'); });
   playingAyah = null;
 }
 
-// ===== PLAY ALL =====
-function togglePlayAll() {
-  if (isPlayingAll) {
-    stopPlayAll();
-  } else {
-    startPlayAll();
-  }
-}
-
+// ========== PLAY ALL ==========
+function togglePlayAll() { if (isPlayingAll) stopPlayAll(); else startPlayAll(); }
 function startPlayAll() {
-  isPlayingAll = true;
-  playAllIndex = 0;
-  currentRepeat = 0;
-  document.getElementById('playAllBtn').classList.add('playing-all');
-  document.getElementById('playAllBtn').innerHTML = `⏹ ${currentLang === 'es' ? 'Detener' : 'إيقاف'}`;
+  isPlayingAll = true; playAllIndex = 0; currentRepeat = 0;
+  var btn = document.getElementById('playAllBtn');
+  btn.classList.add('playing-all');
+  btn.innerHTML = '\u23F9 ' + T('Detener','\u0625\u064A\u0642\u0627\u0641');
   playNextInSequence();
 }
-
 function stopPlayAll() {
-  isPlayingAll = false;
-  stopAudio();
-  document.getElementById('playAllBtn').classList.remove('playing-all');
-  document.getElementById('playAllBtn').innerHTML = `▶ ${currentLang === 'es' ? 'Escuchar todo' : 'استمع الكل'}`;
+  isPlayingAll = false; stopAudio();
+  var btn = document.getElementById('playAllBtn');
+  btn.classList.remove('playing-all');
+  btn.innerHTML = '\u25B6 ' + T('Escuchar todo','\u0627\u0633\u062A\u0645\u0639 \u0627\u0644\u0643\u0644');
 }
-
 function playNextInSequence() {
   if (!isPlayingAll) return;
-  if (playAllIndex >= AYAT.length) {
-    currentRepeat++;
-    if (currentRepeat < repeatCount) {
-      playAllIndex = 0;
-      setTimeout(playNextInSequence, 1500);
-      return;
-    }
-    stopPlayAll();
-    return;
-  }
-  
-  const ayah = AYAT[playAllIndex];
-  const url = getAudioUrl(ayah.num);
+  if (playAllIndex >= AYAT.length) { currentRepeat++; if (currentRepeat < repeatCount) { playAllIndex = 0; setTimeout(playNextInSequence, 1500); return; } stopPlayAll(); return; }
+  var ayah = AYAT[playAllIndex];
   stopAudio();
-  currentAudio = new Audio(url);
+  currentAudio = new Audio(getAudioUrl(ayah.num));
   playingAyah = ayah.num;
-  
-  document.querySelectorAll('.ayah-card').forEach(c => c.classList.remove('playing'));
-  const card = document.getElementById(`ayah-${ayah.num}`);
-  if (card) {
-    card.classList.add('playing');
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  
-  currentAudio.play().catch(e => console.log('Audio error:', e));
-  currentAudio.onended = () => {
-    if (card) card.classList.remove('playing');
-    playAllIndex++;
-    setTimeout(playNextInSequence, 800);
-  };
+  document.querySelectorAll('.ayah-card').forEach(function(c) { c.classList.remove('playing'); });
+  var card = document.getElementById('ayah-' + ayah.num);
+  if (card) { card.classList.add('playing'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  currentAudio.onended = function() { if (card) card.classList.remove('playing'); playAllIndex++; if (isPlayingAll) setTimeout(playNextInSequence, 800); };
+  currentAudio.load();
+  currentAudio.play().catch(function() {});
 }
+function changeRepeat(delta) { repeatCount = Math.max(1, Math.min(10, repeatCount + delta)); document.getElementById('repeatNum').textContent = repeatCount; }
 
-function changeRepeat(delta) {
-  repeatCount = Math.max(1, Math.min(10, repeatCount + delta));
-  document.getElementById('repeatNum').textContent = repeatCount;
-}
-
-// ===== MASTERY =====
+// ========== MASTERY ==========
 function toggleMaster(num) {
-  if (mastered.has(num)) {
-    mastered.delete(num);
-  } else {
-    mastered.add(num);
-  }
-  localStorage.setItem('adiyat_mastered', JSON.stringify([...mastered]));
-  renderListenSection();
-  updateProgress();
-  
-  if (mastered.size === 11) {
-    showCelebration();
-  }
+  if (mastered.has(num)) mastered.delete(num); else mastered.add(num);
+  try { localStorage.setItem('adiyat_mastered', JSON.stringify(Array.from(mastered))); } catch(e) {}
+  renderListenSection(); updateProgress();
+  if (mastered.size === 11) showCelebration();
 }
-
 function updateProgress() {
-  const pct = (mastered.size / 11) * 100;
+  var pct = (mastered.size / 11) * 100;
   document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = 
-    currentLang === 'es' ? `${mastered.size} / 11 aleyas` : `${mastered.size} / 11 آيات`;
-  
-  let level = '';
-  if (mastered.size === 0) level = currentLang === 'es' ? '⭐ Principiante' : '⭐ المبتدئ';
-  else if (mastered.size <= 3) level = currentLang === 'es' ? '🌟 Aprendiz' : '🌟 المتعلم';
-  else if (mastered.size <= 7) level = currentLang === 'es' ? '✨ Avanzado' : '✨ المتقدم';
-  else if (mastered.size <= 10) level = currentLang === 'es' ? '🌙 Casi Hafiz' : '🌙 قريب من الحفظ';
-  else level = currentLang === 'es' ? '🏆 ¡Hafiz!' : '🏆 حافظ!';
-  
+  document.getElementById('progressText').textContent = T(mastered.size + ' / 11 aleyas', mastered.size + ' / 11 \u0622\u064A\u0627\u062A');
+  var level;
+  if (mastered.size === 0) level = T('\u2B50 Principiante','\u2B50 \u0627\u0644\u0645\u0628\u062A\u062F\u0626');
+  else if (mastered.size <= 3) level = T('\uD83C\uDF1F Aprendiz','\uD83C\uDF1F \u0627\u0644\u0645\u062A\u0639\u0644\u0645');
+  else if (mastered.size <= 7) level = T('\u2728 Avanzado','\u2728 \u0627\u0644\u0645\u062A\u0642\u062F\u0645');
+  else if (mastered.size <= 10) level = T('\uD83C\uDF19 Casi Hafiz','\uD83C\uDF19 \u0642\u0631\u064A\u0628 \u0645\u0646 \u0627\u0644\u062D\u0641\u0638');
+  else level = T('\uD83C\uDFC6 \u00A1Hafiz!','\uD83C\uDFC6 \u062D\u0627\u0641\u0638!');
   document.getElementById('levelText').textContent = level;
-  
-  // Stars
-  const starsRow = document.getElementById('starsRow');
-  starsRow.innerHTML = AYAT.map(a => 
-    `<span class="star ${mastered.has(a.num) ? 'earned' : ''}">⭐</span>`
-  ).join('');
+  document.getElementById('starsRow').innerHTML = AYAT.map(function(a) { return '<span class="star ' + (mastered.has(a.num) ? 'earned' : '') + '">\u2B50</span>'; }).join('');
 }
 
-// ===== QUIZ =====
-function renderQuiz() {
-  const container = document.getElementById('quizContainer');
-  
-  // Generate quiz questions
-  const questions = generateQuizQuestions();
-  
-  if (questions.length === 0) {
-    container.innerHTML = `<p style="color: var(--text-dim); padding: 40px 20px;">
-      ${currentLang === 'es' ? 'Primero escucha las ayat para poder hacer el quiz.' : 'أولاً استمع للآيات لتتمكن من حل الاختبار.'}
-    </p>`;
-    return;
-  }
-  
-  quizIndex = 0;
-  quizScore = 0;
-  quizAnswered = false;
-  showQuizQuestion(questions);
-}
+// ========== QUIZ ==========
+function shuffleArray(arr) { var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 
 function generateQuizQuestions() {
-  const questions = [];
-  
-  // Type 1: Complete the next ayah
-  for (let i = 0; i < AYAT.length - 1; i++) {
-    const wrongOptions = AYAT.filter((_, idx) => idx !== i + 1)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 2);
-    
-    questions.push({
-      type: 'next',
-      prompt: currentLang === 'es' ? `¿Cuál es la ayah que viene después de...?` : `ما الآية التي تأتي بعد...؟`,
-      promptAyah: AYAT[i].ar,
-      correct: AYAT[i + 1].ar,
-      options: [AYAT[i + 1], ...wrongOptions.map(a => a)].sort(() => Math.random() - 0.5)
-    });
+  var qs = [];
+  for (var i = 0; i < AYAT.length - 1; i++) {
+    var correct = AYAT[i + 1];
+    var wrongs = shuffleArray(AYAT.filter(function(_, idx) { return idx !== i + 1; })).slice(0, 2);
+    var options = shuffleArray([correct].concat(wrongs));
+    qs.push({ type: 'next', promptLabel: T('\u00BFCu\u00E1l es la siguiente ayah?','\u0645\u0627 \u0627\u0644\u0622\u064A\u0629 \u0627\u0644\u062A\u0627\u0644\u064A\u0629\u061F'), promptAyah: AYAT[i].ar, correctNum: correct.num, options: options.map(function(o) { return { text: o.ar, num: o.num }; }) });
   }
-  
-  // Type 2: Match meaning
-  for (let i = 0; i < AYAT.length; i++) {
-    const wrongOptions = AYAT.filter((_, idx) => idx !== i)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 2);
-    
-    questions.push({
-      type: 'meaning',
-      prompt: currentLang === 'es' ? `¿Qué significa esta ayah?` : `ما معنى هذه الآية؟`,
-      promptAyah: AYAT[i].ar,
-      correct: currentLang === 'es' ? AYAT[i].es : AYAT[i].arMeaning,
-      options: [AYAT[i], ...wrongOptions].sort(() => Math.random() - 0.5)
-    });
+  for (var i = 0; i < AYAT.length; i++) {
+    var correct = AYAT[i];
+    var wrongs = shuffleArray(AYAT.filter(function(_, idx) { return idx !== i; })).slice(0, 2);
+    var options = shuffleArray([correct].concat(wrongs));
+    qs.push({ type: 'meaning', promptLabel: T('\u00BFQu\u00E9 significa esta ayah?','\u0645\u0627 \u0645\u0639\u0646\u0649 \u0647\u0630\u0647 \u0627\u0644\u0622\u064A\u0629\u061F'), promptAyah: AYAT[i].ar, correctNum: correct.num, options: options.map(function(o) { return { text: currentLang === 'es' ? o.es : o.arMeaning, num: o.num }; }) });
   }
-  
-  return questions.sort(() => Math.random() - 0.5).slice(0, 8);
+  return shuffleArray(qs).slice(0, 8);
 }
 
-function showQuizQuestion(questions) {
-  const container = document.getElementById('quizContainer');
-  
-  if (quizIndex >= questions.length) {
-    // Show results
-    const pct = Math.round((quizScore / questions.length) * 100);
-    container.innerHTML = `
-      <div class="quiz-score">
-        <h3>${currentLang === 'es' ? '¡Resultado del Quiz!' : '!نتيجة الاختبار'}</h3>
-        <div class="big-num">${pct}%</div>
-        <p style="color: var(--text-dim); margin-top: 8px;">
-          ${quizScore}/${questions.length} ${currentLang === 'es' ? 'correctas' : 'صحيحة'}
-        </p>
-        <p style="color: var(--text-dim); margin-top: 12px; font-size: 14px;">
-          ${pct >= 80 
-            ? (currentLang === 'es' ? '¡ما شاء الله! ¡Excelente trabajo!' : '!ما شاء الله! عمل ممتاز')
-            : pct >= 50 
-              ? (currentLang === 'es' ? '¡Buen trabajo! Sigue practicando.' : '!عمل جيد! واصل التدرب')
-              : (currentLang === 'es' ? '¡No te rindas! Escucha más y vuelve a intentar.' : '!لا تستسلم! استمع أكثر وحاول مرة أخرى')}
-        </p>
-      </div>
-      <div class="quiz-nav">
-        <button class="quiz-nav-btn" onclick="renderQuiz()">
-          ${currentLang === 'es' ? '🔁 Intentar de nuevo' : '🔁 حاول مرة أخرى'}
-        </button>
-      </div>
-    `;
+function initQuiz() {
+  quizQuestions = generateQuizQuestions();
+  quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  var c = document.getElementById('quizContainer');
+  if (quizIndex >= quizQuestions.length) {
+    var pct = Math.round((quizScore / quizQuestions.length) * 100);
+    var msg;
+    if (pct >= 80) msg = T('\u00A1\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647! \u00A1Excelente trabajo!','!\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647! \u0639\u0645\u0644 \u0645\u0645\u062A\u0627\u0632');
+    else if (pct >= 50) msg = T('\u00A1Buen trabajo! Sigue practicando.','!\u0639\u0645\u0644 \u062C\u064A\u062F! \u0648\u0627\u0635\u0644 \u0627\u0644\u062A\u062F\u0631\u0628');
+    else msg = T('\u00A1No te rindas! Escucha m\u00E1s y vuelve a intentar.','!\u0644\u0627 \u062A\u0633\u062A\u0633\u0644\u0645! \u0627\u0633\u062A\u0645\u0639 \u0623\u0643\u062B\u0631 \u0648\u062D\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649');
+    c.innerHTML = '<div class="quiz-score"><h3>' + T('\u00A1Resultado del Quiz!','!\u0646\u062A\u064A\u062C\u0629 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631') + '</h3><div class="big-num">' + pct + '%</div><p style="color:var(--text-dim);margin-top:8px;">' + quizScore + '/' + quizQuestions.length + ' ' + T('correctas','\u0635\u062D\u064A\u062D\u0629') + '</p><p class="score-msg">' + msg + '</p></div><div class="quiz-nav"><button class="quiz-nav-btn" onclick="initQuiz()">\uD83D\uDD01 ' + T('Intentar de nuevo','\u062D\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649') + '</button></div>';
     return;
   }
-  
-  const q = questions[quizIndex];
+
+  var q = quizQuestions[quizIndex];
   quizAnswered = false;
-  
-  container.innerHTML = `
-    <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 8px;">
-      ${currentLang === 'es' ? 'Pregunta' : 'سؤال'} ${quizIndex + 1}/${questions.length}
-    </p>
-    <p style="color: var(--sky); font-size: 15px; margin-bottom: 4px;">${q.prompt}</p>
-    <div class="quiz-prompt">${q.promptAyah}</div>
-    <div class="quiz-options">
-      ${q.options.map((opt, i) => {
-        const text = q.type === 'next' ? opt.ar : (currentLang === 'es' ? opt.es : opt.arMeaning);
-        const isCorrect = q.type === 'next' ? opt.ar === q.correct : (currentLang === 'es' ? opt.es === q.correct : opt.arMeaning === q.correct);
-        return `<button class="quiz-option" data-correct="${isCorrect}" onclick="answerQuiz(this, ${isCorrect}, ${JSON.stringify(questions).split("'").join("\\'")})">${text}</button>`;
-      }).join('')}
-    </div>
-    <div class="quiz-feedback" id="quizFeedback"></div>
-    <div class="quiz-nav">
-      <button class="quiz-nav-btn" id="quizNextBtn" disabled onclick='showQuizQuestion(${JSON.stringify(questions)})'>
-        ${currentLang === 'es' ? 'Siguiente →' : '← التالي'}
-      </button>
-    </div>
-  `;
+  var isMeaning = q.type === 'meaning';
+
+  var optHtml = '';
+  for (var i = 0; i < q.options.length; i++) {
+    var opt = q.options[i];
+    var cls = 'quiz-option' + (isMeaning ? ' meaning-opt' : '') + (isMeaning && currentLang === 'es' ? ' lang-es' : '');
+    optHtml += '<button class="' + cls + '" id="qopt-' + i + '" onclick="handleQuizAnswer(' + i + ',' + q.options.map(function(o){return o.num;}).indexOf(q.correctNum) + ')">' + opt.text + '</button>';
+  }
+
+  c.innerHTML = '<div class="quiz-header">' + T('Pregunta','\u0633\u0624\u0627\u0644') + ' ' + (quizIndex + 1) + ' / ' + quizQuestions.length + '</div>'
+    + '<div class="quiz-type-label">' + (q.type === 'next' ? T('Completa la secuencia','\u0623\u0643\u0645\u0644 \u0627\u0644\u062A\u0633\u0644\u0633\u0644') : T('Conoce el significado','\u0627\u0639\u0631\u0641 \u0627\u0644\u0645\u0639\u0646\u0649')) + '</div>'
+    + '<p class="quiz-prompt-text">' + q.promptLabel + '</p>'
+    + '<div class="quiz-prompt">' + q.promptAyah + '</div>'
+    + '<div class="quiz-options">' + optHtml + '</div>'
+    + '<div class="quiz-feedback" id="quizFeedback"></div>'
+    + '<div class="quiz-nav"><button class="quiz-nav-btn" id="quizNextBtn" disabled onclick="quizNext()">' + T('Siguiente \u2192','\u2190 \u0627\u0644\u062A\u0627\u0644\u064A') + '</button></div>';
 }
 
-function answerQuiz(btn, isCorrect, questions) {
+function handleQuizAnswer(selected, correct) {
   if (quizAnswered) return;
   quizAnswered = true;
-  
-  const feedback = document.getElementById('quizFeedback');
-  
-  if (isCorrect) {
-    btn.classList.add('correct');
+  var feedback = document.getElementById('quizFeedback');
+  var selectedBtn = document.getElementById('qopt-' + selected);
+  var correctBtn = document.getElementById('qopt-' + correct);
+  document.querySelectorAll('.quiz-option').forEach(function(o) { o.classList.add('disabled'); });
+  if (selected === correct) {
+    selectedBtn.classList.add('correct');
     quizScore++;
     feedback.className = 'quiz-feedback show success';
-    feedback.textContent = currentLang === 'es' ? '✅ ¡Correcto! ما شاء الله' : '✅ !صحيح! ما شاء الله';
+    feedback.textContent = T('\u2705 \u00A1Correcto! \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647','\u2705 !\u0635\u062D\u064A\u062D! \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647');
   } else {
-    btn.classList.add('wrong');
-    // Show correct answer
-    document.querySelectorAll('.quiz-option').forEach(o => {
-      if (o.dataset.correct === 'true') o.classList.add('correct');
-    });
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('correct');
     feedback.className = 'quiz-feedback show error';
-    feedback.textContent = currentLang === 'es' ? '❌ No es correcto. ¡Mira la respuesta correcta!' : '❌ غير صحيح. انظر الإجابة الصحيحة!';
+    feedback.textContent = T('\u274C Incorrecto. Mira la respuesta correcta.','\u274C \u063A\u064A\u0631 \u0635\u062D\u064A\u062D. \u0627\u0646\u0638\u0631 \u0627\u0644\u0625\u062C\u0627\u0628\u0629 \u0627\u0644\u0635\u062D\u064A\u062D\u0629.');
   }
-  
-  quizIndex++;
   document.getElementById('quizNextBtn').disabled = false;
 }
 
-// ===== SECTIONS =====
-function showSection(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-  document.getElementById(`section-${name}`).classList.add('active');
-  event.currentTarget.classList.add('active');
-  
-  // Show/hide play bar
+function quizNext() { quizIndex++; renderQuizQuestion(); }
+
+// ========== SECTIONS ==========
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('section-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
   document.getElementById('playAllBar').style.display = name === 'listen' ? 'flex' : 'none';
-  
-  if (name === 'quiz') renderQuiz();
+  if (name === 'quiz') initQuiz();
 }
 
-// ===== CELEBRATION =====
+// ========== CELEBRATION ==========
 function showCelebration() {
-  const cel = document.getElementById('celebration');
-  cel.classList.add('show');
-  document.getElementById('celebTitle').textContent = currentLang === 'es' ? '🏆 ¡ما شاء الله!' : '🏆 !ما شاء الله';
-  document.getElementById('celebText').textContent = currentLang === 'es' ? '¡Has memorizado toda Surat Al-Adiyat!' : '!لقد حفظت سورة العاديات كاملة';
+  document.getElementById('celebration').classList.add('show');
+  document.getElementById('celebTitle').textContent = T('\uD83C\uDFC6 \u00A1\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\uD83C\uDFC6 !\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647');
+  document.getElementById('celebText').textContent = T('\u00A1Has memorizado toda Surat Al-Adiyat!','!\u0644\u0642\u062F \u062D\u0641\u0638\u062A \u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A \u0643\u0627\u0645\u0644\u0629');
 }
+function closeCelebration() { document.getElementById('celebration').classList.remove('show'); }
 
-function closeCelebration() {
-  document.getElementById('celebration').classList.remove('show');
-}
-
-// ===== BOOT =====
+// ========== BOOT ==========
 init();
 </script>
 </body>
