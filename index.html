@@ -3,905 +3,627 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>🐎 مغامرة العاديات | Aventura Al-Adiyat</title>
+<title>مغامرة العاديات</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Baloo+Bhaijaan+2:wght@400;600;800&family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #FFD700;
-  --gold-dark: #DAA520;
-  --gold-light: #FFF3CD;
-  --teal: #00D9A6;
-  --teal-dark: #00B88C;
-  --sky: #64CFFF;
-  --purple: #A855F7;
-  --purple-dark: #7C3AED;
-  --green: #34D399;
-  --red: #F87171;
-  --orange: #FB923C;
-  --pink: #F472B6;
-  --bg: #0A0E27;
-  --bg2: #111640;
-  --bg3: #1A1F52;
-  --card: #161B4A;
-  --card2: #1E2460;
-  --text: #E8EAFF;
-  --dim: #7B83B5;
-  --xp-bar: linear-gradient(90deg, #A855F7, #EC4899, #F59E0B);
+:root{
+--gold:#FFD700;--goldd:#DAA520;--goldl:#FFF8DC;
+--teal:#00D9A6;--teald:#00B88C;--sky:#64CFFF;
+--purple:#A855F7;--purpled:#7C3AED;--green:#34D399;
+--red:#F87171;--orange:#FB923C;--pink:#F472B6;
+--bg:#0A0E27;--bg2:#111640;--card:#161B4A;--card2:#1E2460;
+--text:#E8EAFF;--dim:#7B83B5;
 }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Fredoka','Baloo Bhaijaan 2',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;user-select:none}
+.skybg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#0A0E27,#1A1040 40%,#2D1B69 70%,#1A1040)}
+.skybg .st{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 10% 15%,#fff 0%,transparent 100%),radial-gradient(2px 2px at 25% 35%,#FFD700 0%,transparent 100%),radial-gradient(1px 1px at 40% 10%,#fff 0%,transparent 100%),radial-gradient(2px 2px at 55% 45%,#fff 0%,transparent 100%),radial-gradient(1px 1px at 70% 20%,#FFD700 0%,transparent 100%),radial-gradient(2px 2px at 85% 30%,#fff 0%,transparent 100%),radial-gradient(1px 1px at 15% 60%,#fff 0%,transparent 100%),radial-gradient(2px 2px at 60% 55%,#FFD700 0%,transparent 100%);animation:tw 3s ease-in-out infinite alternate}
+@keyframes tw{0%{opacity:.4}100%{opacity:.8}}
+#ptc{position:fixed;inset:0;z-index:1;pointer-events:none}
+.app{position:relative;z-index:2;max-width:480px;margin:0 auto;padding:12px;padding-bottom:110px}
 
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+/* STAR MASCOT */
+.mascot{text-align:center;padding:6px 0}
+.sbox{display:inline-block;position:relative;animation:sf 3s ease-in-out infinite}
+@keyframes sf{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.sico{font-size:52px;transition:all .5s;filter:drop-shadow(0 0 14px rgba(255,215,0,.4))}
+.sbox.gl .sico{animation:sg .3s ease 3}
+@keyframes sg{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.15) rotate(12deg)}}
+.slv{position:absolute;bottom:-5px;right:-8px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:7px}
+.snm{font-family:'Lilita One';font-size:15px;color:var(--gold);margin-top:2px;text-shadow:0 0 10px rgba(255,215,0,.3)}
+.smd{font-size:10px;color:var(--dim)}
 
-body {
-  font-family: 'Fredoka', 'Baloo Bhaijaan 2', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  user-select: none;
-}
+/* XP */
+.xps{background:var(--card);border-radius:14px;padding:10px 14px;margin:6px 0;border:1px solid rgba(255,255,255,.04)}
+.xpt{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.xlv{font-family:'Lilita One';font-size:12px;color:var(--purple)}
+.xco{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--gold);font-weight:600;cursor:pointer}
+.xtr{height:8px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+.xfl{height:100%;background:linear-gradient(90deg,#A855F7,#EC4899,#F59E0B);border-radius:6px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.xtx{font-size:9px;color:var(--dim);margin-top:2px;text-align:center}
 
-/* === ANIMATED DESERT SKY BACKGROUND === */
-.sky-bg {
-  position: fixed; top:0; left:0; right:0; bottom:0; z-index:0; pointer-events:none;
-  background: linear-gradient(180deg, #0A0E27 0%, #1A1040 40%, #2D1B69 70%, #1A1040 100%);
-}
-.sky-bg .stars {
-  position:absolute; top:0; left:0; right:0; bottom:0;
-  background-image:
-    radial-gradient(2px 2px at 10% 15%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 25% 35%, #FFD700 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 10%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 55% 45%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 20%, #FFD700 0%, transparent 100%),
-    radial-gradient(2px 2px at 85% 30%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 15% 60%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 60% 55%, #FFD700 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 10%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 35% 70%, #fff 0%, transparent 100%),
-    radial-gradient(2px 2px at 80% 65%, #fff 0%, transparent 100%),
-    radial-gradient(1px 1px at 50% 80%, #FFD700 0%, transparent 100%);
-  animation: twinkle 3s ease-in-out infinite alternate;
-}
-@keyframes twinkle { 0%{opacity:.4} 100%{opacity:.8} }
+/* POWERUPS INVENTORY */
+.powers-bar{display:flex;gap:4px;justify-content:center;margin:4px 0;flex-wrap:wrap}
+.pw-badge{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:8px;background:var(--card);border:1px solid rgba(255,255,255,.06);font-size:10px;color:var(--goldl)}
+.pw-badge .pw-ct{color:var(--gold);font-weight:700}
 
-/* === PARTICLES CANVAS === */
-#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+.cpop{position:fixed;z-index:200;pointer-events:none;font-size:15px;font-weight:700;color:var(--gold);text-shadow:0 0 8px rgba(255,215,0,.5);animation:cu 1.2s ease-out forwards}
+@keyframes cu{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.3)}}
 
-/* === MAIN APP === */
-.app { position:relative; z-index:2; max-width:480px; margin:0 auto; padding:12px; padding-bottom:110px; }
+.lr{display:flex;justify-content:center;gap:5px;margin:6px 0}
+.lb{padding:5px 16px;border-radius:14px;border:2px solid rgba(255,255,255,.06);background:transparent;color:var(--dim);font-family:'Fredoka';font-size:12px;cursor:pointer;transition:all .3s}
+.lb.a{background:var(--teal);color:#fff;border-color:var(--teal)}
 
-/* === HORSE MASCOT === */
-.mascot-area {
-  text-align:center; padding:8px 0; position:relative;
-}
-.horse-container {
-  position:relative; display:inline-block;
-  animation: horseFloat 3s ease-in-out infinite;
-}
-@keyframes horseFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-.horse-emoji {
-  font-size: 64px;
-  filter: drop-shadow(0 0 20px rgba(255,215,0,0.4));
-  transition: all 0.5s;
-}
-.horse-container.gallop .horse-emoji { animation: gallop 0.3s ease-in-out 3; }
-@keyframes gallop { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-10deg) scale(1.1)} }
-.horse-level-badge {
-  position:absolute; bottom:-4px; right:-8px;
-  background: var(--xp-bar); color:#fff;
-  font-size:11px; font-weight:700;
-  padding:2px 8px; border-radius:10px;
-  box-shadow: 0 2px 8px rgba(168,85,247,0.5);
-}
-.horse-name {
-  font-family:'Lilita One',sans-serif;
-  font-size:18px; color:var(--gold);
-  margin-top:4px; letter-spacing:0.5px;
-  text-shadow: 0 0 15px rgba(255,215,0,0.3);
-}
-.horse-mood {
-  font-size:12px; color:var(--dim);
-  margin-top:2px;
-}
-.horse-accessories {
-  position:absolute; top:0; left:0; right:0; bottom:0;
-  pointer-events:none; font-size:20px;
-}
-.accessory { position:absolute; transition:all 0.5s; }
+.tabs{display:flex;gap:4px;margin:8px 0;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;padding:8px 11px;border-radius:10px;border:none;background:var(--card);color:var(--dim);font-family:'Fredoka';font-size:11px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.tb.a{background:var(--purple);color:#fff;box-shadow:0 3px 12px rgba(168,85,247,.3)}
+.sec{display:none;animation:fs .4s ease}.sec.a{display:block}
+@keyframes fs{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* === XP / LEVEL BAR === */
-.xp-section {
-  background: var(--card); border-radius:16px;
-  padding:12px 16px; margin:8px 0;
-  border:1px solid rgba(255,255,255,0.05);
-}
-.xp-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.xp-level { font-family:'Lilita One',sans-serif; font-size:14px; color:var(--purple); }
-.xp-coins { display:flex; align-items:center; gap:4px; font-size:13px; color:var(--gold); font-weight:600; }
-.xp-track { height:10px; background:rgba(255,255,255,0.08); border-radius:8px; overflow:hidden; position:relative; }
-.xp-fill { height:100%; background:var(--xp-bar); border-radius:8px; transition:width 0.8s cubic-bezier(.4,0,.2,1); position:relative; }
-.xp-fill::after { content:''; position:absolute; top:0;right:0;bottom:0;width:40px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4)); border-radius:8px; animation:xpShine 2s infinite; }
-@keyframes xpShine { 0%{opacity:0} 50%{opacity:1} 100%{opacity:0} }
-.xp-text { font-size:11px; color:var(--dim); margin-top:4px; text-align:center; }
-.streak-badge { display:inline-flex; align-items:center; gap:4px; background:linear-gradient(135deg,#F59E0B,#EF4444); padding:3px 10px; border-radius:10px; font-size:12px; font-weight:700; color:#fff; }
+/* AYAH CARDS */
+.ac{background:var(--card);border-radius:14px;padding:14px;margin-bottom:8px;border:2px solid transparent;transition:all .3s;position:relative;overflow:hidden}
+.ac.pl{border-color:var(--teal);box-shadow:0 0 18px rgba(0,217,166,.1)}
+.ac.ma{border-color:var(--green)}
+.ac.ma::after{content:'\2713';position:absolute;top:6px;left:6px;width:18px;height:18px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.an{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-radius:50%;font-weight:700;font-size:11px;margin-bottom:5px}
+.aar{font-family:'Amiri',serif;font-size:24px;line-height:1.9;color:var(--goldl);text-align:right;direction:rtl;margin-bottom:5px}
+.aar .w{display:inline;transition:color .15s,text-shadow .15s;padding:0 1px}
+.aar .w.hi{color:var(--gold)!important;text-shadow:0 0 12px rgba(255,215,0,.5),0 0 25px rgba(255,215,0,.2)}
+.aar .w.dn{color:var(--goldl)}
+.atr{font-size:11px;color:var(--sky);margin-bottom:3px;direction:ltr;text-align:left;font-style:italic}
+.amn{font-size:11px;color:var(--dim);line-height:1.4}
+.amn.es{direction:ltr;text-align:left}.amn.ar{direction:rtl;text-align:right;font-family:'Baloo Bhaijaan 2'}
+.abs{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap}
+.ab{padding:5px 9px;border-radius:7px;border:none;font-family:'Fredoka';font-size:10px;cursor:pointer;display:flex;align-items:center;gap:3px;color:#fff;transition:all .2s}
+.ab:active{transform:scale(.92)}
+.ab1{background:var(--teal)}.ab2{background:linear-gradient(135deg,var(--purple),var(--pink))}.ab3{background:var(--purpled)}.ab4{background:var(--orange)}.ab5{background:var(--green)}.ab5.d{background:rgba(52,211,153,.3)}
+.rr{display:flex;gap:4px;margin-bottom:8px;justify-content:center;flex-wrap:wrap}
+.rb{padding:3px 9px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:var(--dim);font-family:'Fredoka';font-size:10px;cursor:pointer;transition:all .3s}
+.rb.a{background:var(--goldd);color:#fff;border-color:var(--goldd)}
 
-/* === COIN POPUP === */
-.coin-popup {
-  position:fixed; z-index:200; pointer-events:none;
-  font-size:18px; font-weight:700; color:var(--gold);
-  text-shadow:0 0 10px rgba(255,215,0,0.5);
-  animation: coinUp 1.2s ease-out forwards;
-}
-@keyframes coinUp { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-80px) scale(1.5)} }
+/* ADVENTURE */
+.adv-story{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,215,0,.12);position:relative;overflow:hidden}
+.adv-story::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--orange),var(--purple))}
+.adv-nar{font-size:12px;line-height:1.7;color:var(--text)}
+.adv-nar.ar{direction:rtl;text-align:right;font-family:'Baloo Bhaijaan 2'}
+.adv-nar .hl{color:var(--gold);font-weight:600}
+.adv-ch{font-family:'Lilita One';font-size:16px;color:var(--gold);text-align:center;margin-bottom:4px}
 
-/* === TABS === */
-.lang-row { display:flex; justify-content:center; gap:6px; margin:8px 0; }
-.lang-btn { padding:6px 18px; border-radius:16px; border:2px solid rgba(255,255,255,0.08); background:transparent; color:var(--dim); font-family:'Fredoka'; font-size:13px; cursor:pointer; transition:all .3s; }
-.lang-btn.active { background:var(--teal); color:#fff; border-color:var(--teal); }
+.advn{background:var(--card2);border-radius:12px;padding:12px;margin-bottom:6px;border:2px solid rgba(255,255,255,.04);cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:10px}
+.advn:hover{border-color:var(--teal)}
+.advn.lk{opacity:.3;cursor:not-allowed;filter:grayscale(.7)}
+.advn.cu{border-color:var(--gold);box-shadow:0 0 14px rgba(255,215,0,.18);animation:np 2s infinite}
+@keyframes np{0%,100%{box-shadow:0 0 14px rgba(255,215,0,.18)}50%{box-shadow:0 0 22px rgba(255,215,0,.35)}}
+.advn.dn{border-color:var(--green);opacity:.8}
+.advn-ic{font-size:24px;flex-shrink:0;width:40px;height:40px;background:var(--bg2);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.advn-info{flex:1}
+.advn-t{font-family:'Lilita One';font-size:12px;color:var(--goldl)}
+.advn.dn .advn-t{color:var(--green)}
+.advn-s{font-size:9px;color:var(--dim);margin-top:1px}
+.advn-stars{display:flex;gap:2px}.advn-stars span{font-size:10px;opacity:.2}.advn-stars span.on{opacity:1}
 
-.tabs { display:flex; gap:5px; margin:10px 0; overflow-x:auto; scrollbar-width:none; }
-.tabs::-webkit-scrollbar{display:none}
-.tab-btn { flex-shrink:0; padding:9px 14px; border-radius:12px; border:none; background:var(--card); color:var(--dim); font-family:'Fredoka'; font-size:12px; cursor:pointer; transition:all .3s; display:flex; align-items:center; gap:5px; white-space:nowrap; }
-.tab-btn.active { background:var(--purple); color:#fff; box-shadow:0 4px 15px rgba(168,85,247,.3); }
+/* MODAL */
+.mdl{display:none;position:fixed;inset:0;background:rgba(10,14,39,.96);z-index:100;align-items:center;justify-content:center;padding:12px}
+.mdl.sh{display:flex}
+.mdl-b{background:var(--card);border-radius:16px;padding:18px;max-width:440px;width:100%;border:2px solid var(--goldd);position:relative;max-height:92vh;overflow-y:auto}
+.mdl-x{position:absolute;top:6px;right:10px;background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer;z-index:5}
+.mdl-t{font-family:'Lilita One';font-size:16px;color:var(--gold);text-align:center;margin-bottom:2px}
+.mdl-st{font-size:11px;color:var(--dim);text-align:center;margin-bottom:8px}
+.mdl-ar{font-family:'Amiri',serif;font-size:24px;color:var(--goldl);text-align:center;direction:rtl;line-height:1.8;margin-bottom:8px;padding:10px;background:var(--bg2);border-radius:10px}
+.msn{display:flex;align-items:center;gap:8px;padding:9px;background:var(--bg2);border-radius:9px;border:2px solid transparent;cursor:pointer;transition:all .3s;margin-bottom:5px}
+.msn.d{border-color:var(--green);opacity:.6}
+.msn-ic{font-size:20px;flex-shrink:0}
+.msn-tx{font-size:11px;color:var(--text);line-height:1.3}
+.msn-rw{font-size:9px;color:var(--gold);margin-top:1px}
+.mdl-area{margin-top:8px}
+/* mini quiz */
+.mq-os{display:flex;flex-direction:column;gap:5px;margin:8px 0}
+.mq-o{padding:9px 12px;background:var(--card2);border:2px solid rgba(255,255,255,.04);border-radius:9px;color:var(--text);font-size:13px;cursor:pointer;transition:all .3s;text-align:right;direction:rtl;font-family:'Amiri',serif;line-height:1.4}
+.mq-o.mn{font-family:'Fredoka';font-size:11px}.mq-o.mn.es{direction:ltr;text-align:left}
+.mq-o.ok{border-color:var(--green)!important;background:rgba(52,211,153,.08)!important}
+.mq-o.no{border-color:var(--red)!important;background:rgba(248,113,113,.08)!important;animation:shake .4s}
+.mq-o.off{pointer-events:none;opacity:.35}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.mq-fb{padding:8px;border-radius:7px;margin:6px 0;font-size:11px;font-weight:600;text-align:center;display:none}
+.mq-fb.sh{display:block}.mq-fb.g{background:rgba(52,211,153,.08);color:var(--green)}.mq-fb.b{background:rgba(248,113,113,.08);color:var(--red)}
 
-.section { display:none; animation:fadeSlide .4s ease; }
-.section.active { display:block; }
-@keyframes fadeSlide { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+/* SHOP */
+.shop-intro{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;text-align:center;border:1px solid rgba(255,215,0,.1)}
+.shop-intro h3{font-family:'Lilita One';font-size:16px;color:var(--gold);margin-bottom:4px}
+.shop-intro p{font-size:11px;color:var(--dim);line-height:1.5}
+.shop-cat{font-family:'Lilita One';font-size:13px;color:var(--purple);margin:10px 0 6px;display:flex;align-items:center;gap:5px}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.si{background:var(--card);border-radius:12px;padding:12px;text-align:center;border:2px solid rgba(255,255,255,.03);cursor:pointer;transition:all .3s;position:relative}
+.si:hover{border-color:var(--gold)}
+.si.got{border-color:var(--green);opacity:.7}.si.got::after{content:'\2713';position:absolute;top:5px;right:5px;background:var(--green);color:#fff;width:16px;height:16px;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center}
+.si.cant{opacity:.35}
+.si-ic{font-size:28px;margin-bottom:4px}
+.si-nm{font-size:11px;color:var(--goldl);font-weight:600;margin-bottom:2px;min-height:26px;line-height:1.2}
+.si-desc{font-size:9px;color:var(--dim);margin-bottom:4px;min-height:22px;line-height:1.3}
+.si-pr{font-size:11px;color:var(--gold);font-weight:700}
+.si.got .si-pr{color:var(--green)}
+.si-qty{font-size:9px;color:var(--teal);margin-top:2px}
 
-/* === AYAH CARDS === */
-.ayah-card {
-  background:var(--card); border-radius:18px; padding:16px; margin-bottom:10px;
-  border:2px solid transparent; transition:all .3s; position:relative; overflow:hidden;
-}
-.ayah-card.playing { border-color:var(--teal); box-shadow:0 0 25px rgba(0,217,166,.15); }
-.ayah-card.mastered { border-color:var(--green); }
-.ayah-card.mastered::after { content:'\u2713'; position:absolute; top:8px; left:8px; width:22px; height:22px; background:var(--green); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
-.ayah-num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; background:linear-gradient(135deg,var(--gold),var(--orange)); color:#fff; border-radius:50%; font-weight:700; font-size:13px; margin-bottom:8px; }
+/* TREASURE POPUP */
+.tpop{display:none;position:fixed;inset:0;background:rgba(10,14,39,.97);z-index:150;align-items:center;justify-content:center;padding:14px}
+.tpop.sh{display:flex}
+.tpop-b{background:var(--card);border-radius:18px;padding:22px;max-width:380px;width:100%;border:2px solid var(--gold);text-align:center}
+.tpop-ic{font-size:52px;margin-bottom:8px;animation:bounce 1s infinite}
+.tpop-t{font-family:'Lilita One';font-size:18px;color:var(--gold);margin-bottom:4px}
+.tpop-desc{font-size:12px;color:var(--text);line-height:1.6;margin-bottom:6px}
+.tpop-desc.ar{direction:rtl;font-family:'Baloo Bhaijaan 2'}
+.tpop-eff{font-size:10px;color:var(--teal);margin-bottom:12px;padding:6px;background:rgba(0,217,166,.08);border-radius:8px}
+.tpop-btn{padding:9px 22px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-family:'Fredoka';font-size:13px;font-weight:600;cursor:pointer}
 
-/* KARAOKE TEXT */
-.ayah-arabic {
-  font-family:'Amiri',serif; font-size:26px; line-height:2;
-  color:rgba(255,243,205,.6); text-align:right; direction:rtl; margin-bottom:8px;
-  transition:color .3s;
-}
-.ayah-arabic .word {
-  display:inline; transition: color 0.2s, text-shadow 0.2s;
-  cursor:pointer; padding:0 2px;
-}
-.ayah-arabic .word.active {
-  color:var(--gold) !important;
-  text-shadow: 0 0 15px rgba(255,215,0,0.6), 0 0 30px rgba(255,215,0,0.3);
-}
-.ayah-arabic .word.done { color:var(--gold-light); }
-.ayah-translit { font-size:13px; color:var(--sky); margin-bottom:4px; direction:ltr; text-align:left; font-style:italic; }
-.ayah-meaning { font-size:13px; color:var(--dim); line-height:1.5; }
-.ayah-meaning.lang-es { direction:ltr; text-align:left; }
-.ayah-meaning.lang-ar { direction:rtl; text-align:right; font-family:'Baloo Bhaijaan 2'; }
+/* TAFSIR */
+.tc{background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.03)}
+.ta{font-family:'Amiri',serif;font-size:20px;color:var(--goldl);text-align:right;margin-bottom:6px;line-height:1.7;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.03)}
+.tt{font-size:11px;line-height:1.6;color:var(--text)}
+.tt.es{direction:ltr;text-align:left}.tt.ar{direction:rtl;text-align:right;font-family:'Baloo Bhaijaan 2'}
+.tt .kw{color:var(--gold);font-weight:600}
+.tt .eb{font-size:22px;display:block;text-align:center;margin:3px 0}
+.aib{display:inline-flex;align-items:center;gap:3px;margin-top:6px;padding:5px 9px;background:linear-gradient(135deg,var(--purple),#6C3AED);border:none;border-radius:7px;color:#fff;font-family:'Fredoka';font-size:9px;cursor:pointer}
+.aibx{display:none;margin-top:6px}.aibx.sh{display:block;animation:fs .3s}
+.airow{display:flex;gap:4px}
+.aiin{flex:1;padding:7px 9px;border-radius:7px;border:1px solid rgba(255,255,255,.06);background:var(--bg);color:var(--text);font-family:'Fredoka';font-size:10px;outline:none}
+.aigo{padding:7px 10px;border-radius:7px;border:none;background:var(--purple);color:#fff;font-size:12px;cursor:pointer}
+.aiout{margin-top:5px;padding:8px;background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.1);border-radius:7px;font-size:10px;line-height:1.5;display:none}
+.aiout.sh{display:block;animation:fs .3s}
+.sp{width:11px;height:11px;border:2px solid var(--teal);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.ayah-btns { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
-.abtn { padding:7px 12px; border-radius:10px; border:none; font-family:'Fredoka'; font-size:11px; cursor:pointer; display:flex; align-items:center; gap:4px; color:#fff; transition:all .2s; }
-.abtn:active { transform:scale(.93); }
-.abtn-play { background:var(--teal); }
-.abtn-karaoke { background:linear-gradient(135deg,var(--purple),var(--pink)); }
-.abtn-slow { background:var(--purple-dark); }
-.abtn-repeat { background:var(--orange); }
-.abtn-master { background:var(--green); }
-.abtn-master.done { background:rgba(52,211,153,.3); }
+/* QUIZ */
+.qbox{text-align:center}
+.qi{font-size:10px;color:var(--dim);margin-bottom:5px}
+.qtp{display:inline-block;padding:2px 7px;border-radius:5px;background:rgba(168,85,247,.12);color:var(--purple);font-size:9px;margin-bottom:3px;font-weight:600}
+.qq{color:var(--sky);font-size:12px;margin-bottom:2px}
+.qpr{font-family:'Amiri',serif;font-size:21px;color:var(--goldl);padding:12px;margin:5px 0;background:var(--card);border-radius:10px;direction:rtl;min-height:40px;display:flex;align-items:center;justify-content:center;line-height:1.6}
+.qos{display:flex;flex-direction:column;gap:5px;margin:8px 0}
+.qo{padding:9px 12px;background:var(--card);border:2px solid rgba(255,255,255,.04);border-radius:9px;color:var(--text);font-size:13px;cursor:pointer;transition:all .3s;text-align:right;direction:rtl;font-family:'Amiri',serif;line-height:1.3}
+.qo.mn{font-family:'Fredoka';font-size:11px}.qo.mn.es{direction:ltr;text-align:left}
+.qo.ok{border-color:var(--green)!important;background:rgba(52,211,153,.08)!important}
+.qo.no{border-color:var(--red)!important;background:rgba(248,113,113,.08)!important;animation:shake .4s}
+.qo.off{pointer-events:none;opacity:.35}
+.qfb{padding:8px;border-radius:7px;margin:6px 0;font-size:11px;font-weight:600;text-align:center;display:none}
+.qfb.sh{display:block}.qfb.g{background:rgba(52,211,153,.06);color:var(--green)}.qfb.b{background:rgba(248,113,113,.06);color:var(--red)}
+.qnx{padding:7px 18px;border-radius:7px;border:none;background:var(--purple);color:#fff;font-family:'Fredoka';font-size:11px;font-weight:600;cursor:pointer}.qnx:disabled{opacity:.25}
+.qr{padding:16px;background:var(--card);border-radius:12px;border:2px solid var(--gold);margin:8px 0}.qr h3{color:var(--gold);font-size:14px}.qr .big{font-size:36px;font-weight:800;color:var(--teal);margin:4px 0}
 
-/* === RECITER === */
-.reciter-row { display:flex; gap:5px; margin-bottom:10px; justify-content:center; flex-wrap:wrap; }
-.rec-btn { padding:5px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:transparent; color:var(--dim); font-family:'Fredoka'; font-size:11px; cursor:pointer; transition:all .3s; }
-.rec-btn.active { background:var(--gold-dark); color:#fff; border-color:var(--gold-dark); }
+/* METHOD */
+.mcd{background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px}
+.mst{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.02)}.mst:last-child{border:none}
+.mic{flex-shrink:0;width:28px;height:28px;background:linear-gradient(135deg,var(--purple),var(--teal));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.mbd h4{color:var(--gold);font-size:12px;margin-bottom:1px}.mbd p{color:var(--dim);font-size:10px;line-height:1.4}
 
-/* === ADVENTURE MODE === */
-.adventure-map {
-  position:relative; padding:20px 0; overflow:hidden;
-}
-.desert-path {
-  display:flex; flex-direction:column; align-items:center; gap:0;
-  position:relative;
-}
-.path-segment {
-  display:flex; align-items:center; gap:12px;
-  position:relative; z-index:2;
-}
-.path-segment:nth-child(odd) { flex-direction:row; }
-.path-segment:nth-child(even) { flex-direction:row-reverse; }
-.path-line {
-  width:3px; height:40px; background:rgba(255,255,255,.08);
-  margin:0 auto; position:relative; z-index:1;
-}
-.path-line.completed { background:linear-gradient(180deg,var(--gold),var(--teal)); box-shadow:0 0 8px rgba(255,215,0,.3); }
+/* PLAY BAR */
+.pbar{position:fixed;bottom:0;left:0;right:0;background:rgba(22,27,74,.95);border-top:1px solid rgba(255,255,255,.04);padding:7px 10px;display:flex;align-items:center;justify-content:center;gap:7px;z-index:50;backdrop-filter:blur(8px)}
+.pbtn{padding:7px 16px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--teal),var(--teald));color:#fff;font-family:'Fredoka';font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,217,166,.2)}
+.pbtn:active{transform:scale(.95)}.pbtn.stp{background:linear-gradient(135deg,var(--red),#DC2626)}
+.rpc{display:flex;align-items:center;gap:3px;color:var(--dim);font-size:10px}
+.rpc button{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.08);background:transparent;color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-.adventure-stop {
-  width:64px; height:64px; border-radius:50%;
-  background:var(--card2); border:3px solid rgba(255,255,255,.1);
-  display:flex; align-items:center; justify-content:center;
-  font-size:28px; cursor:pointer; transition:all .3s;
-  position:relative;
-}
-.adventure-stop.locked { opacity:.4; cursor:not-allowed; filter:grayscale(1); }
-.adventure-stop.current { border-color:var(--gold); box-shadow:0 0 20px rgba(255,215,0,.3); animation:stopPulse 2s infinite; }
-@keyframes stopPulse { 0%,100%{box-shadow:0 0 20px rgba(255,215,0,.3)} 50%{box-shadow:0 0 35px rgba(255,215,0,.5)} }
-.adventure-stop.completed { border-color:var(--green); background:rgba(52,211,153,.15); }
-.adventure-stop-label {
-  font-size:11px; color:var(--dim); text-align:center;
-  max-width:80px; margin-top:4px;
-}
-.adventure-stop.current .adventure-stop-label { color:var(--gold); font-weight:600; }
-.adventure-stop.completed .adventure-stop-label { color:var(--green); }
-
-.stop-stars { display:flex; gap:2px; justify-content:center; margin-top:2px; }
-.stop-star { font-size:10px; opacity:.3; }
-.stop-star.earned { opacity:1; }
-
-/* Adventure detail modal */
-.adv-modal {
-  display:none; position:fixed; top:0;left:0;right:0;bottom:0;
-  background:rgba(10,14,39,.95); z-index:100;
-  align-items:center; justify-content:center; padding:16px;
-}
-.adv-modal.show { display:flex; }
-.adv-modal-content {
-  background:var(--card); border-radius:20px; padding:24px; max-width:420px; width:100%;
-  border:2px solid var(--gold-dark); position:relative; max-height:90vh; overflow-y:auto;
-}
-.adv-close { position:absolute; top:10px; right:14px; background:none; border:none; color:var(--dim); font-size:24px; cursor:pointer; }
-.adv-modal-title { font-family:'Lilita One'; font-size:20px; color:var(--gold); text-align:center; margin-bottom:4px; }
-.adv-modal-sub { font-size:13px; color:var(--dim); text-align:center; margin-bottom:16px; }
-.adv-arabic { font-family:'Amiri',serif; font-size:28px; color:var(--gold-light); text-align:center; direction:rtl; line-height:1.8; margin-bottom:12px; }
-.adv-steps { display:flex; flex-direction:column; gap:8px; margin:16px 0; }
-.adv-step {
-  display:flex; align-items:center; gap:10px;
-  padding:12px; background:var(--bg2); border-radius:12px;
-  border:2px solid transparent; cursor:pointer; transition:all .3s;
-}
-.adv-step.active { border-color:var(--teal); }
-.adv-step.done { border-color:var(--green); opacity:.7; }
-.adv-step-icon { font-size:24px; flex-shrink:0; }
-.adv-step-text { font-size:13px; color:var(--text); line-height:1.4; }
-.adv-step-reward { font-size:11px; color:var(--gold); margin-top:2px; }
-.adv-complete-btn {
-  display:block; width:100%; padding:14px; margin-top:12px;
-  background:linear-gradient(135deg,var(--green),var(--teal));
-  border:none; border-radius:14px; color:#fff;
-  font-family:'Lilita One'; font-size:16px; cursor:pointer;
-  transition:all .2s; box-shadow:0 4px 15px rgba(52,211,153,.3);
-}
-.adv-complete-btn:disabled { opacity:.3; cursor:not-allowed; }
-.adv-complete-btn:active { transform:scale(.95); }
-
-/* === UNDERSTAND === */
-.tafsir-card { background:var(--card); border-radius:16px; padding:16px; margin-bottom:12px; border:1px solid rgba(255,255,255,.05); }
-.tafsir-ayah { font-family:'Amiri',serif; font-size:22px; color:var(--gold-light); text-align:right; margin-bottom:10px; line-height:1.7; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.05); }
-.tafsir-text { font-size:13px; line-height:1.7; color:var(--text); }
-.tafsir-text.lang-es { direction:ltr; text-align:left; }
-.tafsir-text.lang-ar { direction:rtl; text-align:right; font-family:'Baloo Bhaijaan 2'; }
-.tafsir-text .keyword { color:var(--gold); font-weight:600; }
-.tafsir-text .emoji-big { font-size:28px; display:block; text-align:center; margin:6px 0; }
-.ai-btn { display:flex; align-items:center; gap:5px; margin-top:10px; padding:7px 12px; background:linear-gradient(135deg,var(--purple),#6C3AED); border:none; border-radius:10px; color:#fff; font-family:'Fredoka'; font-size:11px; cursor:pointer; }
-.ai-box { display:none; margin-top:10px; }
-.ai-box.show { display:block; animation:fadeSlide .3s; }
-.ai-row { display:flex; gap:6px; }
-.ai-input { flex:1; padding:9px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:var(--bg); color:var(--text); font-family:'Fredoka'; font-size:12px; outline:none; }
-.ai-send { padding:9px 14px; border-radius:10px; border:none; background:var(--purple); color:#fff; font-size:14px; cursor:pointer; }
-.ai-resp { margin-top:8px; padding:12px; background:rgba(168,85,247,.1); border:1px solid rgba(168,85,247,.2); border-radius:10px; font-size:12px; line-height:1.6; display:none; }
-.ai-resp.show { display:block; animation:fadeSlide .3s; }
-.spinner { width:14px; height:14px; border:2px solid var(--teal); border-top-color:transparent; border-radius:50%; animation:spin .7s linear infinite; flex-shrink:0; }
-@keyframes spin { to{transform:rotate(360deg)} }
-
-/* === QUIZ === */
-.quiz-box { text-align:center; }
-.quiz-info { font-size:12px; color:var(--dim); margin-bottom:8px; }
-.quiz-type { display:inline-block; padding:3px 10px; border-radius:8px; background:rgba(168,85,247,.2); color:var(--purple); font-size:11px; margin-bottom:6px; font-weight:600; }
-.quiz-q { color:var(--sky); font-size:14px; margin-bottom:4px; }
-.quiz-prompt { font-family:'Amiri',serif; font-size:24px; color:var(--gold-light); padding:16px; margin:8px 0; background:var(--card); border-radius:14px; direction:rtl; min-height:60px; display:flex; align-items:center; justify-content:center; line-height:1.7; }
-.quiz-opts { display:flex; flex-direction:column; gap:8px; margin:12px 0; }
-.quiz-opt { padding:12px 16px; background:var(--card); border:2px solid rgba(255,255,255,.06); border-radius:12px; color:var(--text); font-size:15px; cursor:pointer; transition:all .3s; text-align:right; direction:rtl; font-family:'Amiri',serif; line-height:1.5; }
-.quiz-opt.mean { font-family:'Fredoka'; font-size:13px; }
-.quiz-opt.mean.lang-es { direction:ltr; text-align:left; }
-.quiz-opt:hover { border-color:var(--teal); }
-.quiz-opt.correct { border-color:var(--green)!important; background:rgba(52,211,153,.12)!important; }
-.quiz-opt.wrong { border-color:var(--red)!important; background:rgba(248,113,113,.12)!important; animation:shake .4s; }
-.quiz-opt.off { pointer-events:none; opacity:.5; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-.quiz-fb { padding:12px; border-radius:10px; margin:10px 0; font-size:13px; font-weight:600; display:none; text-align:center; }
-.quiz-fb.show { display:block; }
-.quiz-fb.ok { background:rgba(52,211,153,.1); color:var(--green); }
-.quiz-fb.no { background:rgba(248,113,113,.1); color:var(--red); }
-.quiz-next { padding:10px 24px; border-radius:10px; border:none; background:var(--purple); color:#fff; font-family:'Fredoka'; font-size:13px; font-weight:600; cursor:pointer; }
-.quiz-next:disabled { opacity:.3; }
-.quiz-result { padding:20px; background:var(--card); border-radius:16px; border:2px solid var(--gold); margin:12px 0; }
-.quiz-result h3 { color:var(--gold); font-size:18px; }
-.quiz-result .big { font-size:44px; font-weight:800; color:var(--teal); margin:8px 0; }
-
-/* === METHOD === */
-.meth-card { background:var(--card); border-radius:16px; padding:16px; margin-bottom:10px; }
-.meth-step { display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.04); }
-.meth-step:last-child { border:none; }
-.meth-icon { flex-shrink:0; width:34px; height:34px; background:linear-gradient(135deg,var(--purple),var(--teal)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; }
-.meth-body h4 { color:var(--gold); font-size:14px; margin-bottom:3px; }
-.meth-body p { color:var(--dim); font-size:12px; line-height:1.5; }
-
-/* === PLAY ALL BAR === */
-.play-bar { position:fixed; bottom:0; left:0; right:0; background:rgba(22,27,74,.95); border-top:1px solid rgba(255,255,255,.06); padding:10px 14px; display:flex; align-items:center; justify-content:center; gap:10px; z-index:50; backdrop-filter:blur(10px); }
-.play-bar-btn { padding:9px 20px; border-radius:20px; border:none; background:linear-gradient(135deg,var(--teal),var(--teal-dark)); color:#fff; font-family:'Fredoka'; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(0,217,166,.3); }
-.play-bar-btn:active{transform:scale(.95)}
-.play-bar-btn.stop { background:linear-gradient(135deg,var(--red),#DC2626); }
-.rep-ctrl { display:flex; align-items:center; gap:5px; color:var(--dim); font-size:12px; }
-.rep-ctrl button { width:26px; height:26px; border-radius:50%; border:1px solid rgba(255,255,255,.12); background:transparent; color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-
-/* === CELEBRATION === */
-.celeb { position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(10,14,39,.96); z-index:200; display:none; align-items:center; justify-content:center; }
-.celeb.show { display:flex; }
-.celeb-inner { text-align:center; padding:24px; }
-.celeb-icon { font-size:64px; animation:bounce 1s infinite; }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-.celeb h2 { font-family:'Lilita One'; font-size:26px; color:var(--gold); margin:12px 0 6px; }
-.celeb p { color:var(--dim); font-size:14px; margin-bottom:16px; }
-.celeb-close { padding:10px 24px; background:var(--teal); color:#fff; border:none; border-radius:12px; font-family:'Fredoka'; font-size:14px; font-weight:600; cursor:pointer; }
-
-@media(max-width:380px){
-  .ayah-arabic{font-size:22px} .horse-emoji{font-size:52px}
-  .tab-btn{padding:7px 10px;font-size:11px}
-}
+.clb{position:fixed;inset:0;background:rgba(10,14,39,.96);z-index:200;display:none;align-items:center;justify-content:center}
+.clb.sh{display:flex}
+.clbi{text-align:center;padding:18px}
+.clbic{font-size:50px;animation:bounce 1s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.clb h2{font-family:'Lilita One';font-size:20px;color:var(--gold);margin:8px 0 3px}
+.clb p{color:var(--dim);font-size:12px;margin-bottom:12px}
+.clbbtn{padding:8px 20px;background:var(--teal);color:#fff;border:none;border-radius:9px;font-family:'Fredoka';font-size:12px;font-weight:600;cursor:pointer}
+@media(max-width:380px){.aar{font-size:20px}.sico{font-size:42px}.tb{padding:5px 7px;font-size:9px}}
 </style>
 </head>
 <body>
-
-<div class="sky-bg"><div class="stars"></div></div>
-<canvas id="particles"></canvas>
-
+<div class="skybg"><div class="st"></div></div>
+<canvas id="ptc"></canvas>
 <div class="app">
-  <!-- MASCOT -->
-  <div class="mascot-area">
-    <div class="horse-container" id="horseBox">
-      <div class="horse-emoji" id="horseEmoji">🐴</div>
-      <div class="horse-level-badge" id="horseLvl">Nv.1</div>
-    </div>
-    <div class="horse-name" id="horseName">Buraq</div>
-    <div class="horse-mood" id="horseMood">🌟 ¡Listo para aprender!</div>
+  <div class="mascot">
+    <div class="sbox" id="sbox"><div class="sico" id="sico">⭐</div><div class="slv" id="slv">Nv.1</div></div>
+    <div class="snm" id="snm">Nur</div>
+    <div class="smd" id="smd"></div>
   </div>
-
-  <!-- XP BAR -->
-  <div class="xp-section">
-    <div class="xp-top">
-      <div class="xp-level" id="xpLevel">Nivel 1</div>
-      <div class="xp-coins">🪙 <span id="coinCount">0</span></div>
-    </div>
-    <div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
-    <div class="xp-text" id="xpText">0 / 100 XP</div>
+  <div class="xps">
+    <div class="xpt"><div class="xlv" id="xlv">Nivel 1</div><div class="xco" onclick="goTab('shop')">🪙 <span id="coN">0</span></div></div>
+    <div class="xtr"><div class="xfl" id="xfl" style="width:0%"></div></div>
+    <div class="xtx" id="xtx">0 / 100 XP</div>
   </div>
-
-  <!-- LANG -->
-  <div class="lang-row">
-    <button class="lang-btn active" id="lEs" onclick="setLang('es')">Español</button>
-    <button class="lang-btn" id="lAr" onclick="setLang('ar')">العربية</button>
+  <div class="powers-bar" id="pwBar"></div>
+  <div class="lr">
+    <button class="lb a" id="lE" onclick="setL('es')">Español</button>
+    <button class="lb" id="lA" onclick="setL('ar')">العربية</button>
   </div>
-
-  <!-- TABS -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="goTab('adventure',this)">🗺️ <span data-es="Aventura" data-ar="مغامرة">Aventura</span></button>
-    <button class="tab-btn" onclick="goTab('listen',this)">🎧 <span data-es="Escuchar" data-ar="استمع">Escuchar</span></button>
-    <button class="tab-btn" onclick="goTab('understand',this)">💡 <span data-es="Entender" data-ar="افهم">Entender</span></button>
-    <button class="tab-btn" onclick="goTab('quiz',this)">🧩 <span data-es="Prueba" data-ar="اختبار">Prueba</span></button>
-    <button class="tab-btn" onclick="goTab('method',this)">📖 <span data-es="Método" data-ar="المنهج">Método</span></button>
+    <button class="tb a" onclick="goTab('adventure',this)">🗺️ <span data-es="Aventura" data-ar="مغامرة">Aventura</span></button>
+    <button class="tb" onclick="goTab('listen',this)">🎧 <span data-es="Escuchar" data-ar="استمع">Escuchar</span></button>
+    <button class="tb" onclick="goTab('understand',this)">💡 <span data-es="Entender" data-ar="افهم">Entender</span></button>
+    <button class="tb" onclick="goTab('quiz',this)">🧩 <span data-es="Prueba" data-ar="اختبار">Prueba</span></button>
+    <button class="tb" onclick="goTab('shop',this)">🏪 <span data-es="Tesoros" data-ar="كنوز">Tesoros</span></button>
+    <button class="tb" onclick="goTab('method',this)">📖 <span data-es="Método" data-ar="المنهج">Método</span></button>
   </div>
-
-  <div class="section active" id="sec-adventure"></div>
-  <div class="section" id="sec-listen"></div>
-  <div class="section" id="sec-understand"></div>
-  <div class="section" id="sec-quiz"><div class="quiz-box" id="quizBox"></div></div>
-  <div class="section" id="sec-method"></div>
+  <div class="sec a" id="sec-adventure"></div>
+  <div class="sec" id="sec-listen"></div>
+  <div class="sec" id="sec-understand"></div>
+  <div class="sec" id="sec-quiz"><div class="qbox" id="qbox"></div></div>
+  <div class="sec" id="sec-shop"></div>
+  <div class="sec" id="sec-method"></div>
 </div>
-
-<!-- PLAY BAR -->
-<div class="play-bar" id="playBar" style="display:none">
-  <div class="rep-ctrl"><button onclick="chgRep(-1)">−</button><span id="repN">3</span>×<button onclick="chgRep(1)">+</button></div>
-  <button class="play-bar-btn" id="playAllBtn" onclick="togglePlayAll()">▶ <span data-es="Escuchar todo" data-ar="استمع الكل">Escuchar todo</span></button>
+<div class="pbar" id="pbar" style="display:none">
+  <div class="rpc"><button onclick="chgR(-1)">−</button><span id="rN">3</span>×<button onclick="chgR(1)">+</button></div>
+  <button class="pbtn" id="paB" onclick="tPA()">▶ <span data-es="Todo" data-ar="الكل">Todo</span></button>
 </div>
-
-<!-- ADVENTURE MODAL -->
-<div class="adv-modal" id="advModal">
-  <div class="adv-modal-content" id="advModalContent"></div>
-</div>
-
-<!-- CELEBRATION -->
-<div class="celeb" id="celeb">
-  <div class="celeb-inner">
-    <div class="celeb-icon" id="celebIcon">🏆</div>
-    <h2 id="celebTitle"></h2>
-    <p id="celebText"></p>
-    <button class="celeb-close" onclick="closeCeleb()">✨ <span data-es="¡Seguir!" data-ar="!واصل">¡Seguir!</span></button>
-  </div>
-</div>
+<div class="mdl" id="advM"><div class="mdl-b" id="advB"></div></div>
+<div class="tpop" id="tpop"><div class="tpop-b" id="tpopB"></div></div>
+<div class="clb" id="clb"><div class="clbi" id="clbi"></div></div>
 
 <script>
-// =========== DATA ===========
-var AYAT=[
-{num:1,ar:"\u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u062F\u0650\u064A\u064E\u0627\u062A\u0650 \u0636\u064E\u0628\u0652\u062D\u064B\u0627",words:["\u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u062F\u0650\u064A\u064E\u0627\u062A\u0650","\u0636\u064E\u0628\u0652\u062D\u064B\u0627"],translit:"Wal-'aadiyaati dabha",es:"\u00A1Por los caballos que corren jadeando!",arM:"\u0623\u064F\u0642\u0633\u0650\u0645\u064F \u0628\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A\u064D \u0639\u0627\u0644\u064D",tEs:"Allah jura por los <span class='keyword'>caballos de guerra</span> que corren tan r\u00E1pido que respiran muy fuerte, como cuando t\u00FA corres y te quedas sin aliento. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8</span>",tAr:"\u0627\u0644\u0644\u0647 \u064A\u064F\u0642\u0633\u0650\u0645 \u0628\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u0642\u0648\u064A\u0629 \u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0628\u0633\u0631\u0639\u0629 \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A \u0639\u0627\u0644\u064D\u060C \u0645\u062B\u0644\u0645\u0627 \u064A\u062D\u0635\u0644 \u0644\u0643 \u0639\u0646\u062F\u0645\u0627 \u062A\u0631\u0643\u0636 \u0648\u062A\u0644\u0647\u062B. <span class='emoji-big'>\uD83D\uDC0E\uD83D\uDCA8</span>",icon:"\uD83D\uDC0E",scene:"El Galope"},
-{num:2,ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u0648\u0631\u0650\u064A\u064E\u0627\u062A\u0650 \u0642\u064E\u062F\u0652\u062D\u064B\u0627",words:["\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u0648\u0631\u0650\u064A\u064E\u0627\u062A\u0650","\u0642\u064E\u062F\u0652\u062D\u064B\u0627"],translit:"Fal-mooriyaati qadha",es:"\u00A1Hacen saltar chispas con sus cascos!",arM:"\u0648\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u064B \u0645\u0646 \u062D\u0648\u0627\u0641\u0631\u0647\u0627",tEs:"Cuando los caballos corren sobre rocas, sus <span class='keyword'>pezu\u00F1as hacen chispas de fuego</span>. <span class='emoji-big'>\uD83D\uDD25\u2728</span>",tAr:"\u0639\u0646\u062F\u0645\u0627 \u062A\u0631\u0643\u0636 \u0627\u0644\u062E\u064A\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0635\u062E\u0648\u0631\u060C <span class='keyword'>\u062D\u0648\u0627\u0641\u0631\u0647\u0627 \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u062A \u0646\u0627\u0631\u064A\u0629</span>. <span class='emoji-big'>\uD83D\uDD25\u2728</span>",icon:"\uD83D\uDD25",scene:"Las Chispas"},
-{num:3,ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u063A\u0650\u064A\u0631\u064E\u0627\u062A\u0650 \u0635\u064F\u0628\u0652\u062D\u064B\u0627",words:["\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u063A\u0650\u064A\u0631\u064E\u0627\u062A\u0650","\u0635\u064F\u0628\u0652\u062D\u064B\u0627"],translit:"Fal-mugheraati subha",es:"\u00A1Atacan al amanecer!",arM:"\u0648\u0627\u0644\u062E\u064A\u0648\u0644 \u0627\u0644\u062A\u064A \u062A\u064F\u063A\u064A\u0631 \u0639\u0644\u0649 \u0627\u0644\u0639\u062F\u0648 \u0648\u0642\u062A \u0627\u0644\u0635\u0628\u0627\u062D",tEs:"Los caballos <span class='keyword'>atacaban al amanecer</span> cuando el enemigo dorm\u00EDa. <span class='emoji-big'>\uD83C\uDF05\u2694\uFE0F</span>",tAr:"\u062E\u064A\u0648\u0644 \u0627\u0644\u0645\u0639\u0631\u0643\u0629 <span class='keyword'>\u062A\u0647\u062C\u0645 \u0641\u064A \u0627\u0644\u0635\u0628\u0627\u062D \u0627\u0644\u0628\u0627\u0643\u0631</span>. <span class='emoji-big'>\uD83C\uDF05\u2694\uFE0F</span>",icon:"\uD83C\uDF05",scene:"El Amanecer"},
-{num:4,ar:"\u0641\u064E\u0623\u064E\u062B\u064E\u0631\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u0646\u064E\u0642\u0652\u0639\u064B\u0627",words:["\u0641\u064E\u0623\u064E\u062B\u064E\u0631\u0652\u0646\u064E","\u0628\u0650\u0647\u0650","\u0646\u064E\u0642\u0652\u0639\u064B\u0627"],translit:"Fa-atharna bihi naq'a",es:"\u00A1Levantan nubes de polvo!",arM:"\u0641\u0623\u062B\u0627\u0631\u062A \u0627\u0644\u062E\u064A\u0648\u0644 \u063A\u0628\u0627\u0631\u0627\u064B \u0643\u062B\u064A\u0641\u0627\u064B",tEs:"Corren tan fuerte que <span class='keyword'>levantan enormes nubes de polvo</span>. <span class='emoji-big'>\uD83C\uDF2B\uFE0F\uD83D\uDCA8</span>",tAr:"\u0627\u0644\u062E\u064A\u0648\u0644 \u062A\u0631\u0643\u0636 \u0628\u0642\u0648\u0629 \u062D\u062A\u0649 <span class='keyword'>\u062A\u064F\u062B\u064A\u0631 \u0633\u062D\u0628\u0627\u064B \u0645\u0646 \u0627\u0644\u063A\u0628\u0627\u0631</span>. <span class='emoji-big'>\uD83C\uDF2B\uFE0F\uD83D\uDCA8</span>",icon:"\uD83C\uDF2B\uFE0F",scene:"La Tormenta"},
-{num:5,ar:"\u0641\u064E\u0648\u064E\u0633\u064E\u0637\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u062C\u064E\u0645\u0652\u0639\u064B\u0627",words:["\u0641\u064E\u0648\u064E\u0633\u064E\u0637\u0652\u0646\u064E","\u0628\u0650\u0647\u0650","\u062C\u064E\u0645\u0652\u0639\u064B\u0627"],translit:"Fawasatna bihi jam'a",es:"\u00A1Penetran entre los enemigos!",arM:"\u0641\u062F\u062E\u0644\u062A \u0627\u0644\u062E\u064A\u0648\u0644 \u0641\u064A \u0648\u0633\u0637 \u0627\u0644\u0623\u0639\u062F\u0627\u0621",tEs:"Los caballos <span class='keyword'>entran en medio de los enemigos</span> sin miedo. <span class='emoji-big'>\u26A1\uD83D\uDEE1\uFE0F</span>",tAr:"\u0627\u0644\u062E\u064A\u0648\u0644 <span class='keyword'>\u062A\u062F\u062E\u0644 \u0641\u064A \u0648\u0633\u0637 \u0627\u0644\u0623\u0639\u062F\u0627\u0621</span> \u0628\u062F\u0648\u0646 \u062E\u0648\u0641. <span class='emoji-big'>\u26A1\uD83D\uDEE1\uFE0F</span>",icon:"\u2694\uFE0F",scene:"La Batalla"},
-{num:6,ar:"\u0625\u0650\u0646\u0651\u064E \u0627\u0644\u0652\u0625\u0650\u0646\u0633\u064E\u0627\u0646\u064E \u0644\u0650\u0631\u064E\u0628\u0651\u0650\u0647\u0650 \u0644\u064E\u0643\u064E\u0646\u064F\u0648\u062F\u064C",words:["\u0625\u0650\u0646\u0651\u064E","\u0627\u0644\u0652\u0625\u0650\u0646\u0633\u064E\u0627\u0646\u064E","\u0644\u0650\u0631\u064E\u0628\u0651\u0650\u0647\u0650","\u0644\u064E\u0643\u064E\u0646\u064F\u0648\u062F\u064C"],translit:"Innal-insaana lirabbihi lakanood",es:"El ser humano es ingrato con su Se\u00F1or.",arM:"\u0625\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0634\u062F\u064A\u062F \u0627\u0644\u062C\u062D\u0648\u062F \u0644\u0646\u0639\u0645 \u0631\u0628\u0647",tEs:"La lecci\u00F3n: <span class='keyword'>el humano es desagradecido</span> con Allah. Los caballos son fieles, pero nosotros olvidamos dar gracias. <span class='emoji-big'>\uD83D\uDE14\uD83E\uDD32</span>",tAr:"\u0627\u0644\u062F\u0631\u0633: <span class='keyword'>\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u062C\u0627\u062D\u062F</span> \u0644\u0646\u0639\u0645 \u0627\u0644\u0644\u0647. \u0627\u0644\u062E\u064A\u0648\u0644 \u0648\u0641\u064A\u0629\u060C \u0644\u0643\u0646\u0646\u0627 \u0646\u0646\u0633\u0649 \u0627\u0644\u0634\u0643\u0631. <span class='emoji-big'>\uD83D\uDE14\uD83E\uDD32</span>",icon:"\uD83D\uDE14",scene:"La Lecci\u00F3n"},
-{num:7,ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0639\u064E\u0644\u064E\u0649\u0670 \u0630\u064E\u0670\u0644\u0650\u0643\u064E \u0644\u064E\u0634\u064E\u0647\u0650\u064A\u062F\u064C",words:["\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F","\u0639\u064E\u0644\u064E\u0649\u0670","\u0630\u064E\u0670\u0644\u0650\u0643\u064E","\u0644\u064E\u0634\u064E\u0647\u0650\u064A\u062F\u064C"],translit:"Wa innahu 'alaa dhaalika lashaheed",es:"\u00C9l mismo es testigo de eso.",arM:"\u0648\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0646\u0641\u0633\u0647 \u064A\u0634\u0647\u062F \u0639\u0644\u0649 \u062C\u062D\u0648\u062F\u0647",tEs:"T\u00FA <span class='keyword'>sabes por dentro que eres desagradecido</span>. Tu coraz\u00F3n lo sabe. <span class='emoji-big'>\uD83D\uDCAD\u2764\uFE0F</span>",tAr:"\u0623\u0646\u062A <span class='keyword'>\u062A\u0639\u0631\u0641 \u0641\u064A \u062F\u0627\u062E\u0644\u0643 \u0623\u0646\u0643 \u062C\u0627\u062D\u062F</span>. \u0642\u0644\u0628\u0643 \u064A\u0639\u0631\u0641. <span class='emoji-big'>\uD83D\uDCAD\u2764\uFE0F</span>",icon:"\uD83D\uDCAD",scene:"El Testigo"},
-{num:8,ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0644\u0650\u062D\u064F\u0628\u0651\u0650 \u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u0650 \u0644\u064E\u0634\u064E\u062F\u0650\u064A\u062F\u064C",words:["\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F","\u0644\u0650\u062D\u064F\u0628\u0651\u0650","\u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u0650","\u0644\u064E\u0634\u064E\u062F\u0650\u064A\u062F\u064C"],translit:"Wa innahu lihubbil-khayri lashadeed",es:"Ama intensamente las riquezas.",arM:"\u0648\u0625\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0634\u062F\u064A\u062F \u0627\u0644\u062D\u0628 \u0644\u0644\u0645\u0627\u0644",tEs:"El humano <span class='keyword'>ama demasiado el dinero</span>. Lo m\u00E1s importante es ser agradecido. <span class='emoji-big'>\uD83D\uDCB0\uD83D\uDE2E</span>",tAr:"\u0627\u0644\u0625\u0646\u0633\u0627\u0646 <span class='keyword'>\u064A\u062D\u0628 \u0627\u0644\u0645\u0627\u0644 \u062D\u0628\u0627\u064B \u0634\u062F\u064A\u062F\u0627\u064B</span>. \u0627\u0644\u0623\u0647\u0645 \u0647\u0648 \u0627\u0644\u0634\u0643\u0631. <span class='emoji-big'>\uD83D\uDCB0\uD83D\uDE2E</span>",icon:"\uD83D\uDCB0",scene:"La Ambici\u00F3n"},
-{num:9,ar:"\u0623\u064E\u0641\u064E\u0644\u064E\u0627 \u064A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0625\u0650\u0630\u064E\u0627 \u0628\u064F\u0639\u0652\u062B\u0650\u0631\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0652\u0642\u064F\u0628\u064F\u0648\u0631\u0650",words:["\u0623\u064E\u0641\u064E\u0644\u064E\u0627","\u064A\u064E\u0639\u0652\u0644\u064E\u0645\u064F","\u0625\u0650\u0630\u064E\u0627","\u0628\u064F\u0639\u0652\u062B\u0650\u0631\u064E","\u0645\u064E\u0627","\u0641\u0650\u064A","\u0627\u0644\u0652\u0642\u064F\u0628\u064F\u0648\u0631\u0650"],translit:"Afalaa ya'lamu idhaa bu'thira maa fil-quboor",es:"Cuando se abran las tumbas...",arM:"\u0623\u0644\u0627 \u064A\u0639\u0644\u0645 \u0645\u0627\u0630\u0627 \u0633\u064A\u062D\u062F\u062B \u0639\u0646\u062F\u0645\u0627 \u064A\u064F\u0628\u0639\u062B \u0627\u0644\u0645\u0648\u062A\u0649",tEs:"\u00BFNo sabes que <span class='keyword'>todos saldr\u00E1n de sus tumbas</span> para ser juzgados? <span class='emoji-big'>\u23F0\uD83C\uDF0D</span>",tAr:"\u0623\u0644\u0627 \u062A\u0639\u0644\u0645 \u0623\u0646 <span class='keyword'>\u0627\u0644\u062C\u0645\u064A\u0639 \u0633\u064A\u062E\u0631\u062C\u0648\u0646 \u0645\u0646 \u0642\u0628\u0648\u0631\u0647\u0645</span>\u061F <span class='emoji-big'>\u23F0\uD83C\uDF0D</span>",icon:"\u23F0",scene:"El Despertar"},
-{num:10,ar:"\u0648\u064E\u062D\u064F\u0635\u0651\u0650\u0644\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0635\u0651\u064F\u062F\u064F\u0648\u0631\u0650",words:["\u0648\u064E\u062D\u064F\u0635\u0651\u0650\u0644\u064E","\u0645\u064E\u0627","\u0641\u0650\u064A","\u0627\u0644\u0635\u0651\u064F\u062F\u064F\u0648\u0631\u0650"],translit:"Wa hussila maa fis-sudoor",es:"Se revele lo de los corazones.",arM:"\u0648\u0623\u064F\u0638\u0647\u0650\u0631 \u0645\u0627 \u0641\u064A \u0627\u0644\u0642\u0644\u0648\u0628 \u0645\u0646 \u0646\u0648\u0627\u064A\u0627",tEs:"Allah <span class='keyword'>mostrar\u00E1 todo lo de tu coraz\u00F3n</span>: secretos e intenciones. <span class='emoji-big'>\u2764\uFE0F\uD83D\uDD0D</span>",tAr:"\u0627\u0644\u0644\u0647 <span class='keyword'>\u0633\u064A\u064F\u0638\u0647\u0631 \u0643\u0644 \u0645\u0627 \u0641\u064A \u0642\u0644\u0628\u0643</span>. <span class='emoji-big'>\u2764\uFE0F\uD83D\uDD0D</span>",icon:"\u2764\uFE0F",scene:"Los Secretos"},
-{num:11,ar:"\u0625\u0650\u0646\u0651\u064E \u0631\u064E\u0628\u0651\u064E\u0647\u064F\u0645 \u0628\u0650\u0647\u0650\u0645\u0652 \u064A\u064E\u0648\u0652\u0645\u064E\u0626\u0650\u0630\u064D \u0644\u0651\u064E\u062E\u064E\u0628\u0650\u064A\u0631\u064C",words:["\u0625\u0650\u0646\u0651\u064E","\u0631\u064E\u0628\u0651\u064E\u0647\u064F\u0645","\u0628\u0650\u0647\u0650\u0645\u0652","\u064A\u064E\u0648\u0652\u0645\u064E\u0626\u0650\u0630\u064D","\u0644\u0651\u064E\u062E\u064E\u0628\u0650\u064A\u0631\u064C"],translit:"Inna rabbahum bihim yawma-idhin lakhabeer",es:"Su Se\u00F1or sabe todo de ellos.",arM:"\u0625\u0646 \u0627\u0644\u0644\u0647 \u0639\u0627\u0644\u0645\u064C \u0628\u0643\u0644 \u0623\u0639\u0645\u0627\u0644\u0647\u0645",tEs:"<span class='keyword'>Allah sabe TODO sobre nosotros</span>. Haz el bien y ten un coraz\u00F3n limpio. <span class='emoji-big'>\uD83C\uDF1F\uD83D\uDC41\uFE0F</span>",tAr:"<span class='keyword'>\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621 \u0639\u0646\u0627</span>. \u0627\u0641\u0639\u0644 \u0627\u0644\u062E\u064A\u0631 \u0648\u0646\u0638\u0651\u0641 \u0642\u0644\u0628\u0643. <span class='emoji-big'>\uD83C\uDF1F\uD83D\uDC41\uFE0F</span>",icon:"\uD83C\uDF1F",scene:"El Final"}
+var A=[
+{n:1,ar:"\u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u062F\u0650\u064A\u064E\u0627\u062A\u0650 \u0636\u064E\u0628\u0652\u062D\u064B\u0627",w:["\u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u062F\u0650\u064A\u064E\u0627\u062A\u0650","\u0636\u064E\u0628\u0652\u062D\u064B\u0627"],tr:"Wal-'aadiyaati dabha",es:"\u00A1Por los que corren jadeando!",am:"\u0623\u064F\u0642\u0633\u0650\u0645\u064F \u0628\u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A",tE:"Allah jura por los <span class='kw'>guerreros que corren</span> tan r\u00E1pido que respiran fuerte, como cuando t\u00FA corres y te cansas. <span class='eb'>\uD83D\uDCA8</span>",tA:"\u0627\u0644\u0644\u0647 \u064A\u064F\u0642\u0633\u0650\u0645 \u0628\u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A \u0627\u0644\u062A\u064A \u062A\u062C\u0631\u064A \u0628\u0633\u0631\u0639\u0629 \u0648\u062A\u062A\u0646\u0641\u0633 \u0628\u0635\u0648\u062A \u0639\u0627\u0644\u064D. <span class='eb'>\uD83D\uDCA8</span>",ic:"\uD83C\uDF05",sc:"El Inicio",stE:"Estamos en el desierto al amanecer. El aire es fresco y el cielo se llena de estrellas que se apagan. <span class='hl'>De repente, se escucha un sonido fuerte</span>: algo corre con toda su fuerza por la arena, respirando tan r\u00E1pido que su aliento suena como truenos lejanos...",stA:"\u0646\u062D\u0646 \u0641\u064A \u0627\u0644\u0635\u062D\u0631\u0627\u0621 \u0639\u0646\u062F \u0627\u0644\u0641\u062C\u0631. \u0627\u0644\u0647\u0648\u0627\u0621 \u0628\u0627\u0631\u062F \u0648\u0627\u0644\u0646\u062C\u0648\u0645 \u062A\u062E\u062A\u0641\u064A. <span class='hl'>\u0641\u062C\u0623\u0629\u060C \u0646\u0633\u0645\u0639 \u0635\u0648\u062A\u0627\u064B \u0642\u0648\u064A\u0627\u064B</span>: \u0634\u064A\u0621 \u064A\u0631\u0643\u0636 \u0628\u0643\u0644 \u0642\u0648\u062A\u0647 \u0639\u0644\u0649 \u0627\u0644\u0631\u0645\u0627\u0644..."},
+{n:2,ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u0648\u0631\u0650\u064A\u064E\u0627\u062A\u0650 \u0642\u064E\u062F\u0652\u062D\u064B\u0627",w:["\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u0648\u0631\u0650\u064A\u064E\u0627\u062A\u0650","\u0642\u064E\u062F\u0652\u062D\u064B\u0627"],tr:"Fal-mooriyaati qadha",es:"\u00A1Hacen saltar chispas!",am:"\u0627\u0644\u062A\u064A \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u064B \u0645\u0646 \u062D\u0648\u0627\u0641\u0631\u0647\u0627",tE:"Al golpear las rocas, <span class='kw'>saltan chispas de fuego</span>. <span class='eb'>\uD83D\uDD25\u2728</span>",tA:"<span class='kw'>\u062D\u0648\u0627\u0641\u0631\u0647\u0627 \u062A\u064F\u062E\u0631\u062C \u0634\u0631\u0627\u0631\u0627\u062A \u0646\u0627\u0631\u064A\u0629</span> \u0639\u0646\u062F \u0627\u0644\u0627\u0635\u0637\u062F\u0627\u0645 \u0628\u0627\u0644\u0635\u062E\u0648\u0631. <span class='eb'>\uD83D\uDD25\u2728</span>",ic:"\uD83D\uDD25",sc:"Las Chispas",stE:"Mientras corren sobre las piedras, <span class='hl'>chispas de fuego saltan en la oscuridad</span> como peque\u00F1as estrellas fugaces. El desierto se ilumina por un instante con cada paso. \u00BFQu\u00E9 fuerza tan incre\u00EDble tienen?",stA:"\u0623\u062B\u0646\u0627\u0621 \u0627\u0644\u0631\u0643\u0636 \u0639\u0644\u0649 \u0627\u0644\u062D\u062C\u0627\u0631\u0629\u060C <span class='hl'>\u062A\u062A\u0637\u0627\u064A\u0631 \u0634\u0631\u0627\u0631\u0627\u062A \u0627\u0644\u0646\u0627\u0631 \u0641\u064A \u0627\u0644\u0638\u0644\u0627\u0645</span> \u0643\u0627\u0644\u0646\u062C\u0648\u0645. \u064A\u0627 \u0644\u0647\u0627 \u0645\u0646 \u0642\u0648\u0629!"},
+{n:3,ar:"\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u063A\u0650\u064A\u0631\u064E\u0627\u062A\u0650 \u0635\u064F\u0628\u0652\u062D\u064B\u0627",w:["\u0641\u064E\u0627\u0644\u0652\u0645\u064F\u063A\u0650\u064A\u0631\u064E\u0627\u062A\u0650","\u0635\u064F\u0628\u0652\u062D\u064B\u0627"],tr:"Fal-mugheraati subha",es:"\u00A1Atacan al amanecer!",am:"\u0627\u0644\u062A\u064A \u062A\u064F\u063A\u064A\u0631 \u0648\u0642\u062A \u0627\u0644\u0635\u0628\u0627\u062D",tE:"<span class='kw'>Atacaban al amanecer</span> cuando todo estaba en calma. <span class='eb'>\uD83C\uDF05\u2694\uFE0F</span>",tA:"<span class='kw'>\u062A\u0647\u062C\u0645 \u0641\u064A \u0627\u0644\u0635\u0628\u0627\u062D \u0627\u0644\u0628\u0627\u0643\u0631</span> \u0639\u0646\u062F\u0645\u0627 \u064A\u0643\u0648\u0646 \u0643\u0644 \u0634\u064A\u0621 \u0647\u0627\u062F\u0626\u0627\u064B. <span class='eb'>\uD83C\uDF05\u2694\uFE0F</span>",ic:"\u2694\uFE0F",sc:"El Amanecer",stE:"El sol empieza a asomarse. <span class='hl'>Es el momento perfecto</span>: cuando nadie se lo espera, los guerreros aparecen con toda su fuerza. El silencio del amanecer se rompe con el sonido de su valent\u00EDa.",stA:"\u0627\u0644\u0634\u0645\u0633 \u062A\u0628\u062F\u0623 \u0628\u0627\u0644\u0638\u0647\u0648\u0631. <span class='hl'>\u0625\u0646\u0647 \u0627\u0644\u0648\u0642\u062A \u0627\u0644\u0645\u062B\u0627\u0644\u064A</span>: \u0639\u0646\u062F\u0645\u0627 \u0644\u0627 \u064A\u062A\u0648\u0642\u0639 \u0623\u062D\u062F\u060C \u064A\u0638\u0647\u0631 \u0627\u0644\u0645\u062D\u0627\u0631\u0628\u0648\u0646."},
+{n:4,ar:"\u0641\u064E\u0623\u064E\u062B\u064E\u0631\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u0646\u064E\u0642\u0652\u0639\u064B\u0627",w:["\u0641\u064E\u0623\u064E\u062B\u064E\u0631\u0652\u0646\u064E","\u0628\u0650\u0647\u0650","\u0646\u064E\u0642\u0652\u0639\u064B\u0627"],tr:"Fa-atharna bihi naq'a",es:"\u00A1Levantan nubes de polvo!",am:"\u0641\u0623\u062B\u0627\u0631\u062A \u063A\u0628\u0627\u0631\u0627\u064B \u0643\u062B\u064A\u0641\u0627\u064B",tE:"Corren tan fuerte que <span class='kw'>levantan nubes de polvo</span> gigantes. <span class='eb'>\uD83C\uDF2B\uFE0F</span>",tA:"\u062A\u0631\u0643\u0636 \u0628\u0642\u0648\u0629 \u062D\u062A\u0649 <span class='kw'>\u062A\u064F\u062B\u064A\u0631 \u0633\u062D\u0628\u0627\u064B \u0645\u0646 \u0627\u0644\u063A\u0628\u0627\u0631</span>. <span class='eb'>\uD83C\uDF2B\uFE0F</span>",ic:"\uD83C\uDF2B\uFE0F",sc:"La Tormenta",stE:"Detr\u00E1s de ellos se levanta una <span class='hl'>enorme nube de polvo</span> que cubre todo el horizonte. Es como una tormenta en el desierto: tan poderosa que no puedes ver nada detr\u00E1s. \u00A1As\u00ED de fuertes son!",stA:"\u062E\u0644\u0641\u0647\u0645 \u062A\u0631\u062A\u0641\u0639 <span class='hl'>\u0633\u062D\u0627\u0628\u0629 \u063A\u0628\u0627\u0631 \u0636\u062E\u0645\u0629</span> \u062A\u063A\u0637\u064A \u0627\u0644\u0623\u0641\u0642 \u0643\u0644\u0647. \u0643\u0639\u0627\u0635\u0641\u0629 \u0641\u064A \u0627\u0644\u0635\u062D\u0631\u0627\u0621!"},
+{n:5,ar:"\u0641\u064E\u0648\u064E\u0633\u064E\u0637\u0652\u0646\u064E \u0628\u0650\u0647\u0650 \u062C\u064E\u0645\u0652\u0639\u064B\u0627",w:["\u0641\u064E\u0648\u064E\u0633\u064E\u0637\u0652\u0646\u064E","\u0628\u0650\u0647\u0650","\u062C\u064E\u0645\u0652\u0639\u064B\u0627"],tr:"Fawasatna bihi jam'a",es:"\u00A1Penetran entre los enemigos!",am:"\u0641\u062F\u062E\u0644\u062A \u0641\u064A \u0648\u0633\u0637 \u0627\u0644\u0623\u0639\u062F\u0627\u0621",tE:"Entran <span class='kw'>en medio de los enemigos</span> sin miedo alguno. <span class='eb'>\u26A1\uD83D\uDEE1\uFE0F</span>",tA:"\u062A\u062F\u062E\u0644 <span class='kw'>\u0641\u064A \u0648\u0633\u0637 \u0627\u0644\u0623\u0639\u062F\u0627\u0621</span> \u0628\u062F\u0648\u0646 \u062E\u0648\u0641. <span class='eb'>\u26A1\uD83D\uDEE1\uFE0F</span>",ic:"\uD83D\uDEE1\uFE0F",sc:"La Batalla",stE:"Y entonces, <span class='hl'>sin un segundo de duda, entran directos al centro</span> del grupo enemigo. No tienen miedo. No se detienen. Su valent\u00EDa es completa. Pero... \u00BFpor qu\u00E9 nos cuenta Allah todo esto? La respuesta est\u00E1 por llegar...",stA:"\u0648\u0639\u0646\u062F\u0647\u0627\u060C <span class='hl'>\u0628\u062F\u0648\u0646 \u062A\u0631\u062F\u062F\u060C \u062A\u062F\u062E\u0644 \u0641\u064A \u0642\u0644\u0628 \u0627\u0644\u0645\u0639\u0631\u0643\u0629</span>. \u0644\u0627 \u062E\u0648\u0641. \u0644\u0627 \u062A\u0648\u0642\u0641. \u0644\u0643\u0646... \u0644\u0645\u0627\u0630\u0627 \u064A\u062E\u0628\u0631\u0646\u0627 \u0627\u0644\u0644\u0647 \u0628\u0643\u0644 \u0647\u0630\u0627\u061F \u0627\u0644\u062C\u0648\u0627\u0628 \u0642\u0627\u062F\u0645..."},
+{n:6,ar:"\u0625\u0650\u0646\u0651\u064E \u0627\u0644\u0652\u0625\u0650\u0646\u0633\u064E\u0627\u0646\u064E \u0644\u0650\u0631\u064E\u0628\u0651\u0650\u0647\u0650 \u0644\u064E\u0643\u064E\u0646\u064F\u0648\u062F\u064C",w:["\u0625\u0650\u0646\u0651\u064E","\u0627\u0644\u0652\u0625\u0650\u0646\u0633\u064E\u0627\u0646\u064E","\u0644\u0650\u0631\u064E\u0628\u0651\u0650\u0647\u0650","\u0644\u064E\u0643\u064E\u0646\u064F\u0648\u062F\u064C"],tr:"Innal-insaana lirabbihi lakanood",es:"El ser humano es ingrato con su Se\u00F1or.",am:"\u0625\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u062C\u0627\u062D\u062F \u0644\u0646\u0639\u0645 \u0631\u0628\u0647",tE:"Aqu\u00ED est\u00E1 la lecci\u00F3n: <span class='kw'>el humano es desagradecido</span> con Allah. <span class='eb'>\uD83D\uDE14\uD83E\uDD32</span>",tA:"\u0647\u0646\u0627 \u0627\u0644\u062F\u0631\u0633: <span class='kw'>\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u062C\u0627\u062D\u062F</span> \u0644\u0646\u0639\u0645 \u0627\u0644\u0644\u0647. <span class='eb'>\uD83D\uDE14\uD83E\uDD32</span>",ic:"\uD83D\uDCA1",sc:"La Gran Lecci\u00F3n",stE:"\u00A1AQU\u00CD EST\u00C1! La raz\u00F3n de toda esa descripci\u00F3n incre\u00EDble. Allah nos dice: <span class='hl'>esos guerreros son fieles y valientes con sus l\u00EDderes... pero el ser humano, a pesar de todo lo que Allah le da, muchas veces NO le da las gracias.</span> \u00BFT\u00FA das gracias a Allah por tu comida, tu familia, que puedes respirar?",stA:"\u0647\u0646\u0627 \u0627\u0644\u0633\u0631! \u0627\u0644\u0633\u0628\u0628 \u0648\u0631\u0627\u0621 \u0643\u0644 \u0630\u0644\u0643 \u0627\u0644\u0648\u0635\u0641 \u0627\u0644\u0645\u0630\u0647\u0644. \u0627\u0644\u0644\u0647 \u064A\u0642\u0648\u0644 \u0644\u0646\u0627: <span class='hl'>\u0647\u0624\u0644\u0627\u0621 \u0627\u0644\u0645\u062D\u0627\u0631\u0628\u0648\u0646 \u0623\u0648\u0641\u064A\u0627\u0621 \u0644\u0642\u0627\u062F\u062A\u0647\u0645... \u0644\u0643\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0631\u063A\u0645 \u0643\u0644 \u0646\u0639\u0645 \u0627\u0644\u0644\u0647 \u0644\u0627 \u064A\u0634\u0643\u0631\u0647.</span>"},
+{n:7,ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0639\u064E\u0644\u064E\u0649\u0670 \u0630\u064E\u0670\u0644\u0650\u0643\u064E \u0644\u064E\u0634\u064E\u0647\u0650\u064A\u062F\u064C",w:["\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F","\u0639\u064E\u0644\u064E\u0649\u0670","\u0630\u064E\u0670\u0644\u0650\u0643\u064E","\u0644\u064E\u0634\u064E\u0647\u0650\u064A\u062F\u064C"],tr:"Wa innahu 'alaa dhaalika lashaheed",es:"\u00C9l mismo es testigo de eso.",am:"\u0648\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0646\u0641\u0633\u0647 \u064A\u0634\u0647\u062F \u0639\u0644\u0649 \u062C\u062D\u0648\u062F\u0647",tE:"T\u00FA <span class='kw'>sabes por dentro</span> que a veces eres desagradecido. <span class='eb'>\uD83D\uDCAD</span>",tA:"\u0623\u0646\u062A <span class='kw'>\u062A\u0639\u0631\u0641 \u0641\u064A \u062F\u0627\u062E\u0644\u0643</span> \u0623\u0646\u0643 \u0623\u062D\u064A\u0627\u0646\u0627\u064B \u062C\u0627\u062D\u062F. <span class='eb'>\uD83D\uDCAD</span>",ic:"\uD83D\uDCAD",sc:"El Espejo",stE:"Y aqu\u00ED viene algo que te va a hacer pensar: <span class='hl'>t\u00FA mismo lo sabes.</span> No puedes enga\u00F1arte. Cuando no dices 'Alhamdulillah' por la comida, cuando no agradeces a tus padres... tu coraz\u00F3n lo sabe. Es como un espejo que siempre dice la verdad.",stA:"\u0648\u0647\u0646\u0627 \u0634\u064A\u0621 \u0633\u064A\u062C\u0639\u0644\u0643 \u062A\u0641\u0643\u0631: <span class='hl'>\u0623\u0646\u062A \u0646\u0641\u0633\u0643 \u062A\u0639\u0631\u0641.</span> \u0644\u0627 \u062A\u0633\u062A\u0637\u064A\u0639 \u062E\u062F\u0627\u0639 \u0646\u0641\u0633\u0643. \u0642\u0644\u0628\u0643 \u0643\u0627\u0644\u0645\u0631\u0622\u0629 \u0627\u0644\u062A\u064A \u062A\u0642\u0648\u0644 \u0627\u0644\u062D\u0642\u064A\u0642\u0629 \u062F\u0627\u0626\u0645\u0627\u064B."},
+{n:8,ar:"\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F \u0644\u0650\u062D\u064F\u0628\u0651\u0650 \u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u0650 \u0644\u064E\u0634\u064E\u062F\u0650\u064A\u062F\u064C",w:["\u0648\u064E\u0625\u0650\u0646\u0651\u064E\u0647\u064F","\u0644\u0650\u062D\u064F\u0628\u0651\u0650","\u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u0650","\u0644\u064E\u0634\u064E\u062F\u0650\u064A\u062F\u064C"],tr:"Wa innahu lihubbil-khayri lashadeed",es:"Ama intensamente las riquezas.",am:"\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0634\u062F\u064A\u062F \u0627\u0644\u062D\u0628 \u0644\u0644\u0645\u0627\u0644",tE:"El humano <span class='kw'>ama demasiado las cosas materiales</span>. <span class='eb'>\uD83D\uDCB0</span>",tA:"\u0627\u0644\u0625\u0646\u0633\u0627\u0646 <span class='kw'>\u064A\u062D\u0628 \u0627\u0644\u0645\u0627\u0644 \u062D\u0628\u0627\u064B \u0634\u062F\u064A\u062F\u0627\u064B</span>. <span class='eb'>\uD83D\uDCB0</span>",ic:"\uD83D\uDCB0",sc:"La Trampa",stE:"\u00BFPor qu\u00E9 somos desagradecidos? Porque <span class='hl'>nos encanta tener m\u00E1s cosas</span>: m\u00E1s juguetes, m\u00E1s dinero, m\u00E1s, m\u00E1s, m\u00E1s. Y nos olvidamos de lo que ya tenemos. Es como una trampa: siempre quieres m\u00E1s y nunca est\u00E1s contento.",stA:"\u0644\u0645\u0627\u0630\u0627 \u0646\u062D\u0646 \u062C\u0627\u062D\u062F\u0648\u0646\u061F \u0644\u0623\u0646\u0646\u0627 <span class='hl'>\u0646\u062D\u0628 \u0627\u0644\u062D\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0645\u0632\u064A\u062F</span>: \u0623\u0644\u0639\u0627\u0628 \u0623\u0643\u062B\u0631\u060C \u0645\u0627\u0644 \u0623\u0643\u062B\u0631. \u0648\u0646\u0646\u0633\u0649 \u0645\u0627 \u0639\u0646\u062F\u0646\u0627. \u0625\u0646\u0647\u0627 \u0641\u062E."},
+{n:9,ar:"\u0623\u064E\u0641\u064E\u0644\u064E\u0627 \u064A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0625\u0650\u0630\u064E\u0627 \u0628\u064F\u0639\u0652\u062B\u0650\u0631\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0652\u0642\u064F\u0628\u064F\u0648\u0631\u0650",w:["\u0623\u064E\u0641\u064E\u0644\u064E\u0627","\u064A\u064E\u0639\u0652\u0644\u064E\u0645\u064F","\u0625\u0650\u0630\u064E\u0627","\u0628\u064F\u0639\u0652\u062B\u0650\u0631\u064E","\u0645\u064E\u0627","\u0641\u0650\u064A","\u0627\u0644\u0652\u0642\u064F\u0628\u064F\u0648\u0631\u0650"],tr:"Afalaa ya'lamu idhaa bu'thira maa fil-quboor",es:"Cuando se abran las tumbas...",am:"\u0645\u0627\u0630\u0627 \u0633\u064A\u062D\u062F\u062B \u0639\u0646\u062F\u0645\u0627 \u064A\u064F\u0628\u0639\u062B \u0627\u0644\u0645\u0648\u062A\u0649",tE:"\u00BFNo sabes que <span class='kw'>todos ser\u00E1n resucitados</span>? <span class='eb'>\u23F0</span>",tA:"\u0623\u0644\u0627 \u062A\u0639\u0644\u0645 \u0623\u0646 <span class='kw'>\u0627\u0644\u062C\u0645\u064A\u0639 \u0633\u064A\u064F\u0628\u0639\u062B\u0648\u0646</span>\u061F <span class='eb'>\u23F0</span>",ic:"\u23F0",sc:"El Despertar",stE:"Y ahora Allah nos avisa: <span class='hl'>\u00BFno sabes que llegar\u00E1 un D\u00EDa</span> en el que todos ser\u00E1n despertados? Es el D\u00EDa del Juicio. Ese d\u00EDa no podr\u00E1s esconderte ni mentir. Todo lo que hiciste, bueno o malo, estar\u00E1 ah\u00ED.",stA:"\u0648\u0627\u0644\u0622\u0646 \u0627\u0644\u0644\u0647 \u064A\u0646\u0628\u0647\u0646\u0627: <span class='hl'>\u0623\u0644\u0627 \u062A\u0639\u0644\u0645 \u0623\u0646 \u064A\u0648\u0645\u0627\u064B \u0633\u064A\u0623\u062A\u064A</span> \u064A\u064F\u0628\u0639\u062B \u0641\u064A\u0647 \u0627\u0644\u062C\u0645\u064A\u0639\u061F \u064A\u0648\u0645 \u0627\u0644\u0642\u064A\u0627\u0645\u0629. \u0644\u0627 \u0627\u062E\u062A\u0628\u0627\u0621 \u0648\u0644\u0627 \u0643\u0630\u0628."},
+{n:10,ar:"\u0648\u064E\u062D\u064F\u0635\u0651\u0650\u0644\u064E \u0645\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u0635\u0651\u064F\u062F\u064F\u0648\u0631\u0650",w:["\u0648\u064E\u062D\u064F\u0635\u0651\u0650\u0644\u064E","\u0645\u064E\u0627","\u0641\u0650\u064A","\u0627\u0644\u0635\u0651\u064F\u062F\u064F\u0648\u0631\u0650"],tr:"Wa hussila maa fis-sudoor",es:"Se revele lo de los corazones.",am:"\u0648\u0623\u064F\u0638\u0647\u0650\u0631 \u0645\u0627 \u0641\u064A \u0627\u0644\u0642\u0644\u0648\u0628",tE:"Allah <span class='kw'>mostrar\u00E1 todo lo de tu coraz\u00F3n</span>. <span class='eb'>\u2764\uFE0F\uD83D\uDD0D</span>",tA:"\u0627\u0644\u0644\u0647 <span class='kw'>\u0633\u064A\u064F\u0638\u0647\u0631 \u0643\u0644 \u0645\u0627 \u0641\u064A \u0642\u0644\u0628\u0643</span>. <span class='eb'>\u2764\uFE0F\uD83D\uDD0D</span>",ic:"\u2764\uFE0F",sc:"Los Secretos",stE:"Ese d\u00EDa, <span class='hl'>Allah abrir\u00E1 tu coraz\u00F3n y mostrar\u00E1 todo</span>: tus secretos, tus intenciones, si fuiste sincero o no. No hay truco que valga. Por eso es tan importante tener un coraz\u00F3n limpio AHORA.",stA:"\u0641\u064A \u0630\u0644\u0643 \u0627\u0644\u064A\u0648\u0645\u060C <span class='hl'>\u0627\u0644\u0644\u0647 \u0633\u064A\u0641\u062A\u062D \u0642\u0644\u0628\u0643 \u0648\u064A\u064F\u0638\u0647\u0631 \u0643\u0644 \u0634\u064A\u0621</span>: \u0623\u0633\u0631\u0627\u0631\u0643\u060C \u0646\u0648\u0627\u064A\u0627\u0643. \u0644\u0647\u0630\u0627 \u0646\u0638\u0651\u0641 \u0642\u0644\u0628\u0643 \u0627\u0644\u0622\u0646."},
+{n:11,ar:"\u0625\u0650\u0646\u0651\u064E \u0631\u064E\u0628\u0651\u064E\u0647\u064F\u0645 \u0628\u0650\u0647\u0650\u0645\u0652 \u064A\u064E\u0648\u0652\u0645\u064E\u0626\u0650\u0630\u064D \u0644\u0651\u064E\u062E\u064E\u0628\u0650\u064A\u0631\u064C",w:["\u0625\u0650\u0646\u0651\u064E","\u0631\u064E\u0628\u0651\u064E\u0647\u064F\u0645","\u0628\u0650\u0647\u0650\u0645\u0652","\u064A\u064E\u0648\u0652\u0645\u064E\u0626\u0650\u0630\u064D","\u0644\u0651\u064E\u062E\u064E\u0628\u0650\u064A\u0631\u064C"],tr:"Inna rabbahum bihim yawma-idhin lakhabeer",es:"Su Se\u00F1or sabe todo de ellos.",am:"\u0627\u0644\u0644\u0647 \u0639\u0627\u0644\u0645\u064C \u0628\u0643\u0644 \u0623\u0639\u0645\u0627\u0644\u0647\u0645",tE:"<span class='kw'>Allah sabe TODO</span>. Haz el bien y ten un coraz\u00F3n limpio. <span class='eb'>\uD83C\uDF1F</span>",tA:"<span class='kw'>\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621</span>. \u0627\u0641\u0639\u0644 \u0627\u0644\u062E\u064A\u0631 \u0648\u0646\u0638\u0651\u0641 \u0642\u0644\u0628\u0643. <span class='eb'>\uD83C\uDF1F</span>",ic:"\uD83C\uDF1F",sc:"El Final",stE:"Y la sura termina con la verdad m\u00E1s grande: <span class='hl'>Allah lo sabe absolutamente TODO</span>. No puedes esconder nada. Pero esto no es para asustarte \u2014 es para motivarte. Si sabes que Allah te ve, <span class='hl'>\u00BFno quieres que te vea haciendo cosas buenas?</span> S\u00E9 agradecido. S\u00E9 bueno. Ten un coraz\u00F3n limpio. \u00A1Esa es la misi\u00F3n!",stA:"\u0648\u0627\u0644\u0633\u0648\u0631\u0629 \u062A\u0646\u062A\u0647\u064A \u0628\u0623\u0639\u0638\u0645 \u062D\u0642\u064A\u0642\u0629: <span class='hl'>\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621</span>. \u0644\u0627 \u062A\u062E\u0641 - \u0628\u0644 \u0627\u062C\u0639\u0644 \u0647\u0630\u0627 \u062F\u0627\u0641\u0639\u0627\u064B \u0644\u0643. <span class='hl'>\u0625\u0630\u0627 \u0643\u0627\u0646 \u0627\u0644\u0644\u0647 \u064A\u0631\u0627\u0643\u060C \u0623\u0644\u0627 \u062A\u0631\u064A\u062F \u0623\u0646 \u064A\u0631\u0627\u0643 \u062A\u0641\u0639\u0644 \u0627\u0644\u062E\u064A\u0631\u061F</span>"}
 ];
 
-var RECS={
-  husary:{name:"Al-Husary",nameAr:"\u0627\u0644\u062D\u0635\u0631\u064A",url:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.husary/"+(6146+n)+".mp3"}},
-  minshawi:{name:"Al-Minshawi",nameAr:"\u0627\u0644\u0645\u0646\u0634\u0627\u0648\u064A",url:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.minshawi/"+(6146+n)+".mp3"}},
-  alafasy:{name:"Al-Afasy",nameAr:"\u0627\u0644\u0639\u0641\u0627\u0633\u064A",url:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.alafasy/"+(6146+n)+".mp3"}}
-};
+var RECS={husary:{nm:"Al-Husary",na:"\u0627\u0644\u062D\u0635\u0631\u064A",u:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.husary/"+(6146+n)+".mp3"}},minshawi:{nm:"Al-Minshawi",na:"\u0627\u0644\u0645\u0646\u0634\u0627\u0648\u064A",u:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.minshawi/"+(6146+n)+".mp3"}},alafasy:{nm:"Al-Afasy",na:"\u0627\u0644\u0639\u0641\u0627\u0633\u064A",u:function(n){return"https://cdn.islamic.network/quran/audio/128/ar.alafasy/"+(6146+n)+".mp3"}}};
 
-// Horse evolution stages
-var HORSE_STAGES=[
-  {emoji:"\uD83D\uDC34",name:"Buraq",mood:"\uD83C\uDF1F",moodEs:"\u00A1Listo para aprender!",moodAr:"!\u062C\u0627\u0647\u0632 \u0644\u0644\u062A\u0639\u0644\u0645",minXp:0},
-  {emoji:"\uD83D\uDC0E",name:"Buraq",mood:"\uD83D\uDD25",moodEs:"\u00A1Estoy calentando!",moodAr:"!\u0628\u062F\u0623\u062A \u0623\u062A\u062D\u0645\u0633",minXp:100},
-  {emoji:"\uD83C\uDFC7",name:"Buraq",mood:"\u26A1",moodEs:"\u00A1Galopo con fuerza!",moodAr:"!\u0623\u0631\u0643\u0636 \u0628\u0642\u0648\u0629",minXp:300},
-  {emoji:"\uD83E\uDD84",name:"Buraq",mood:"\u2728",moodEs:"\u00A1Soy m\u00E1gico!",moodAr:"!\u0623\u0646\u0627 \u0633\u062D\u0631\u064A",minXp:600},
-  {emoji:"\uD83D\uDC09",name:"Buraq Al-Hafiz",mood:"\uD83C\uDFC6",moodEs:"\u00A1Leyenda del Hifz!",moodAr:"!\u0623\u0633\u0637\u0648\u0631\u0629 \u0627\u0644\u062D\u0641\u0638",minXp:1000}
+// Star evolution (no living beings)
+var STARS=[
+  {ic:"\u2B50",nm:"Nur",mdE:"\u00A1Listo para brillar!",mdA:"\u062C\u0627\u0647\u0632 \u0644\u0644\u062A\u0623\u0644\u0642!",xp:0},
+  {ic:"\uD83C\uDF1F",nm:"Nur",mdE:"\u00A1Empiezo a brillar!",mdA:"\u0628\u062F\u0623\u062A \u0623\u062A\u0623\u0644\u0642!",xp:80},
+  {ic:"\u2728",nm:"Nur Al-Ilm",mdE:"\u00A1Luz del conocimiento!",mdA:"\u0646\u0648\u0631 \u0627\u0644\u0639\u0644\u0645!",xp:250},
+  {ic:"\uD83C\uDF19",nm:"Qamar",mdE:"\u00A1Brillo como la luna!",mdA:"\u0623\u062A\u0623\u0644\u0642 \u0643\u0627\u0644\u0642\u0645\u0631!",xp:500},
+  {ic:"\u2604\uFE0F",nm:"Shams Al-Hifz",mdE:"\u00A1Sol del Hifz!",mdA:"\u0634\u0645\u0633 \u0627\u0644\u062D\u0641\u0638!",xp:900}
 ];
 
-// =========== STATE ===========
-var lang='es', rec='husary', mastered=new Set(), xp=0, coins=0, audio=null, playingAyah=null;
-var isPlayAll=false, paIdx=0, repCount=3, repCur=0;
-var quizQs=[], qi=0, qScore=0, qDone=false;
-var advSteps={}; // {ayahNum: {listened:bool, understood:bool, quizzed:bool}}
+// SHOP: Power-ups (game advantage) + Secrets (cool facts to discover)
+var SHOP_POWERS=[
+  {id:"hint",ic:"\uD83D\uDD0D",nmE:"Pista M\u00E1gica",nmA:"\u062A\u0644\u0645\u064A\u062D \u0633\u062D\u0631\u064A",descE:"Revela la primera palabra en el quiz",descA:"\u064A\u0643\u0634\u0641 \u0623\u0648\u0644 \u0643\u0644\u0645\u0629 \u0641\u064A \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631",price:15,max:99},
+  {id:"retry",ic:"\uD83D\uDD04",nmE:"Segunda Oportunidad",nmA:"\u0641\u0631\u0635\u0629 \u062B\u0627\u0646\u064A\u0629",descE:"Si fallas, int\u00E9ntalo otra vez",descA:"\u0625\u0630\u0627 \u0623\u062E\u0637\u0623\u062A\u060C \u062D\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649",price:20,max:99},
+  {id:"double",ic:"\u00D72",nmE:"Doble XP",nmA:"XP \u0645\u0636\u0627\u0639\u0641",descE:"Tu siguiente acci\u00F3n da el doble",descA:"\u0625\u062C\u0631\u0627\u0624\u0643 \u0627\u0644\u062A\u0627\u0644\u064A \u064A\u0639\u0637\u064A \u0627\u0644\u0636\u0639\u0641",price:25,max:99},
+  {id:"skip",ic:"\u23E9",nmE:"Saltar Misi\u00F3n",nmA:"\u062A\u062E\u0637\u064A \u0645\u0647\u0645\u0629",descE:"Salta una misi\u00F3n dif\u00EDcil",descA:"\u062A\u062E\u0637\u064A \u0645\u0647\u0645\u0629 \u0635\u0639\u0628\u0629",price:40,max:99}
+];
 
-try{var s=localStorage.getItem('ad_m');if(s)mastered=new Set(JSON.parse(s));
-s=localStorage.getItem('ad_xp');if(s)xp=parseInt(s)||0;
-s=localStorage.getItem('ad_c');if(s)coins=parseInt(s)||0;
-s=localStorage.getItem('ad_l');if(s)lang=s;
-s=localStorage.getItem('ad_r');if(s&&RECS[s])rec=s;
-s=localStorage.getItem('ad_adv');if(s)advSteps=JSON.parse(s);
+var SHOP_SECRETS=[
+  {id:"s1",ic:"\uD83D\uDCDC",nmE:"\u00BFCu\u00E1ntas palabras?",nmA:"\u0643\u0645 \u0643\u0644\u0645\u0629\u061F",price:30,revE:"\uD83C\uDF1F Sura Al-Adiyat tiene exactamente <strong>40 palabras</strong> y <strong>100 letras</strong>. Y su n\u00FAmero en el Quran es el 100. \u00A1Coincidencia incre\u00EDble!",revA:"\uD83C\uDF1F \u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A \u0641\u064A\u0647\u0627 <strong>\u0664\u0660 \u0643\u0644\u0645\u0629</strong> \u0648<strong>\u0661\u0660\u0660 \u062D\u0631\u0641</strong>. \u0648\u0631\u0642\u0645\u0647\u0627 \u0641\u064A \u0627\u0644\u0642\u0631\u0622\u0646 \u0661\u0660\u0660. \u0645\u0635\u0627\u062F\u0641\u0629 \u0645\u0630\u0647\u0644\u0629!",bonus:"+20 XP bonus",bonusXp:20},
+  {id:"s2",ic:"\uD83D\uDDFA\uFE0F",nmE:"\u00BFD\u00F3nde se revel\u00F3?",nmA:"\u0623\u064A\u0646 \u0646\u0632\u0644\u062A\u061F",price:30,revE:"\uD83D\uDDFA\uFE0F Se revel\u00F3 en <strong>La Meca</strong>, antes de que el Profeta \uFDFA emigrara a Medina. Es una de las primeras suras que los musulmanes aprendieron.",revA:"\uD83D\uDDFA\uFE0F \u0646\u0632\u0644\u062A \u0641\u064A <strong>\u0645\u0643\u0629</strong> \u0642\u0628\u0644 \u0647\u062C\u0631\u0629 \u0627\u0644\u0646\u0628\u064A \uFDFA. \u0645\u0646 \u0623\u0648\u0627\u0626\u0644 \u0627\u0644\u0633\u0648\u0631 \u0627\u0644\u062A\u064A \u062A\u0639\u0644\u0645\u0647\u0627 \u0627\u0644\u0645\u0633\u0644\u0645\u0648\u0646.",bonus:"+20 XP bonus",bonusXp:20},
+  {id:"s3",ic:"\uD83D\uDD13",nmE:"El significado de 'Kanud'",nmA:"\u0645\u0639\u0646\u0649 '\u0643\u0646\u0648\u062F'",price:40,revE:"\uD83D\uDD13 La palabra <strong>'Kanud'</strong> (\u0643\u0646\u0648\u062F) es \u00FAnica \u2014 solo aparece UNA vez en todo el Quran. Significa 'el que cuenta las cosas malas que le pasan pero olvida las buenas'. \u00A1Desbloquea una nueva palabra para tu vocabulario!",revA:"\uD83D\uDD13 \u0643\u0644\u0645\u0629 <strong>'\u0643\u0646\u0648\u062F'</strong> \u0641\u0631\u064A\u062F\u0629 \u2014 \u062A\u0638\u0647\u0631 \u0645\u0631\u0629 \u0648\u0627\u062D\u062F\u0629 \u0641\u0642\u0637 \u0641\u064A \u0643\u0644 \u0627\u0644\u0642\u0631\u0622\u0646. \u0645\u0639\u0646\u0627\u0647\u0627: \u0627\u0644\u0630\u064A \u064A\u0639\u062F \u0627\u0644\u0645\u0635\u0627\u0626\u0628 \u0648\u064A\u0646\u0633\u0649 \u0627\u0644\u0646\u0639\u0645!",bonus:"+30 XP bonus",bonusXp:30},
+  {id:"s4",ic:"\uD83C\uDFC6",nmE:"Certificado de Hafiz",nmA:"\u0634\u0647\u0627\u062F\u0629 \u062D\u0627\u0641\u0638",price:100,revE:"\uD83C\uDFC6 <strong>\u00A1FELICIDADES!</strong> Has desbloqueado tu Certificado de Hafiz de Sura Al-Adiyat. Escribe tu nombre abajo para generarlo:",revA:"\uD83C\uDFC6 <strong>\u062A\u0647\u0627\u0646\u064A\u0646\u0627!</strong> \u0644\u0642\u062F \u0641\u062A\u062D\u062A \u0634\u0647\u0627\u062F\u0629 \u062D\u0627\u0641\u0638 \u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A. \u0627\u0643\u062A\u0628 \u0627\u0633\u0645\u0643:",bonus:"Certificado personalizado",bonusXp:50,isCert:true}
+];
+
+// STATE
+var L='es',R='husary',mast=new Set(),xp=0,co=0,au=null,paN=null;
+var isPA=false,paI=0,rC=3,rCu=0;
+var qQs=[],qi=0,qSc=0,qD=false;
+var adv={};// {num:{l:bool,u:bool,q:bool}}
+var inv={hint:0,retry:0,double:0,skip:0};// power-up inventory
+var bought=new Set();// bought secret ids
+var dblNext=false;// double xp active
+
+try{var s=localStorage.getItem('v3_m');if(s)mast=new Set(JSON.parse(s));
+s=localStorage.getItem('v3_x');if(s)xp=+s||0;
+s=localStorage.getItem('v3_c');if(s)co=+s||0;
+s=localStorage.getItem('v3_l');if(s)L=s;
+s=localStorage.getItem('v3_r');if(s&&RECS[s])R=s;
+s=localStorage.getItem('v3_a');if(s)adv=JSON.parse(s);
+s=localStorage.getItem('v3_i');if(s)inv=JSON.parse(s);
+s=localStorage.getItem('v3_b');if(s)bought=new Set(JSON.parse(s));
 }catch(e){}
+function sv(){try{localStorage.setItem('v3_m',JSON.stringify([...mast]));localStorage.setItem('v3_x',''+xp);localStorage.setItem('v3_c',''+co);localStorage.setItem('v3_l',L);localStorage.setItem('v3_r',R);localStorage.setItem('v3_a',JSON.stringify(adv));localStorage.setItem('v3_i',JSON.stringify(inv));localStorage.setItem('v3_b',JSON.stringify([...bought]));}catch(e){}}
+function T(e,a){return L==='es'?e:a}
 
-function save(){try{localStorage.setItem('ad_m',JSON.stringify(Array.from(mastered)));localStorage.setItem('ad_xp',''+xp);localStorage.setItem('ad_c',''+coins);localStorage.setItem('ad_l',lang);localStorage.setItem('ad_r',rec);localStorage.setItem('ad_adv',JSON.stringify(advSteps));}catch(e){}}
+// PARTICLES
+var cv,cx,pts=[];
+function initP(){cv=document.getElementById('ptc');cx=cv.getContext('2d');function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);requestAnimationFrame(drP);}
+function drP(){cx.clearRect(0,0,cv.width,cv.height);for(var i=pts.length-1;i>=0;i--){var p=pts[i];p.x+=p.vx;p.y+=p.vy;p.li-=p.dc;p.vy+=.08;if(p.li<=0){pts.splice(i,1);continue;}cx.globalAlpha=p.li;cx.fillStyle=p.co;cx.beginPath();if(p.sh){cx.save();cx.translate(p.x,p.y);var sp=5,or=p.sz,ir=p.sz/2,rot=Math.PI/2*3,st=Math.PI/sp;cx.moveTo(0,-or);for(var j=0;j<sp;j++){cx.lineTo(Math.cos(rot)*or,Math.sin(rot)*or);rot+=st;cx.lineTo(Math.cos(rot)*ir,Math.sin(rot)*ir);rot+=st;}cx.closePath();cx.fill();cx.restore();}else{cx.arc(p.x,p.y,p.sz,0,Math.PI*2);cx.fill();}}cx.globalAlpha=1;requestAnimationFrame(drP);}
+function burst(x,y,n,cols){for(var i=0;i<n;i++){pts.push({x:x,y:y,vx:(Math.random()-.5)*7,vy:(Math.random()-.5)*7-2,sz:Math.random()*3.5+1.5,co:cols[~~(Math.random()*cols.length)],li:1,dc:.012+Math.random()*.01,sh:Math.random()>.5});}}
+function rBurst(el){if(!el)return;var r=el.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,22,['#FFD700','#FF6B6B','#A855F7','#34D399','#FB923C','#F472B6']);}
 
-function T(e,a){return lang==='es'?e:a}
+function coinPop(amt,el){var p=document.createElement('div');p.className='cpop';p.textContent='+'+amt+' \uD83E\uDE99';if(el){var r=el.getBoundingClientRect();p.style.left=r.left+'px';p.style.top=r.top+'px';}else{p.style.left='50%';p.style.top='40%';}document.body.appendChild(p);setTimeout(function(){p.remove()},1200);}
 
-// =========== PARTICLES ===========
-var canvas,ctx,particles=[];
-function initParticles(){
-  canvas=document.getElementById('particles');
-  ctx=canvas.getContext('2d');
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-  resize();window.addEventListener('resize',resize);
-  requestAnimationFrame(drawParticles);
+function addXP(amt,el){
+  if(dblNext){amt*=2;dblNext=false;}
+  xp+=amt;co+=Math.max(1,~~(amt/3));
+  coinPop(Math.max(1,~~(amt/3)),el);
+  updStar();updXP();sv();
 }
-function drawParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(var i=particles.length-1;i>=0;i--){
-    var p=particles[i];
-    p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;p.vy+=0.1;
-    if(p.life<=0){particles.splice(i,1);continue;}
-    ctx.globalAlpha=p.life;
-    ctx.fillStyle=p.color;
-    ctx.beginPath();
-    if(p.shape==='star'){drawStar(ctx,p.x,p.y,5,p.size,p.size/2);}
-    else{ctx.arc(p.x,p.y,p.size,0,Math.PI*2);}
-    ctx.fill();
-  }
-  ctx.globalAlpha=1;
-  requestAnimationFrame(drawParticles);
-}
-function drawStar(c,cx,cy,spikes,oR,iR){
-  var rot=Math.PI/2*3,step=Math.PI/spikes;
-  c.moveTo(cx,cy-oR);
-  for(var i=0;i<spikes;i++){c.lineTo(cx+Math.cos(rot)*oR,cy+Math.sin(rot)*oR);rot+=step;c.lineTo(cx+Math.cos(rot)*iR,cy+Math.sin(rot)*iR);rot+=step;}
-  c.closePath();
-}
-function burst(x,y,count,colors){
-  for(var i=0;i<count;i++){
-    particles.push({x:x,y:y,vx:(Math.random()-.5)*8,vy:(Math.random()-.5)*8-3,size:Math.random()*4+2,color:colors[Math.floor(Math.random()*colors.length)],life:1,decay:0.015+Math.random()*0.01,shape:Math.random()>.5?'star':'circle'});
-  }
-}
-function rewardBurst(el){
-  if(!el)return;var r=el.getBoundingClientRect();
-  burst(r.left+r.width/2,r.top+r.height/2,25,['#FFD700','#FF6B6B','#A855F7','#34D399','#FB923C','#F472B6']);
-}
+function spendCo(amt){if(co<amt)return false;co-=amt;updXP();sv();return true;}
 
-// =========== COIN POPUP ===========
-function showCoinPopup(amount,el){
-  var popup=document.createElement('div');
-  popup.className='coin-popup';
-  popup.textContent='+'+amount+' \uD83E\uDE99';
-  if(el){var r=el.getBoundingClientRect();popup.style.left=r.left+'px';popup.style.top=r.top+'px';}
-  else{popup.style.left='50%';popup.style.top='40%';}
-  document.body.appendChild(popup);
-  setTimeout(function(){popup.remove()},1200);
-}
+// STAR
+function getSt(){for(var i=STARS.length-1;i>=0;i--)if(xp>=STARS[i].xp)return i;return 0;}
+function updStar(){var i=getSt(),s=STARS[i];document.getElementById('sico').textContent=s.ic;document.getElementById('snm').textContent=s.nm;document.getElementById('slv').textContent='Nv.'+(i+1);document.getElementById('smd').textContent=(L==='es'?s.mdE:s.mdA);}
+function glowStar(){document.getElementById('sbox').classList.add('gl');setTimeout(function(){document.getElementById('sbox').classList.remove('gl')},1000);}
 
-function addXP(amount,el){
-  xp+=amount;coins+=Math.floor(amount/2);
-  showCoinPopup(Math.floor(amount/2),el);
-  updateHorse();updateXPBar();save();
-}
+// XP
+function updXP(){var lv=~~(xp/100)+1,pc=xp%100;document.getElementById('xlv').textContent=T('Nivel ','Level ')+lv;document.getElementById('coN').textContent=co;document.getElementById('xfl').style.width=pc+'%';document.getElementById('xtx').textContent=pc+' / 100 XP';updPowers();}
+function updPowers(){var bar=document.getElementById('pwBar');var h='';for(var k in inv){if(inv[k]>0){var p=SHOP_POWERS.find(function(x){return x.id===k});h+='<div class="pw-badge">'+p.ic+' <span class="pw-ct">'+inv[k]+'</span></div>';}}bar.innerHTML=h;}
 
-// =========== HORSE ===========
-function getHorseStage(){
-  for(var i=HORSE_STAGES.length-1;i>=0;i--){if(xp>=HORSE_STAGES[i].minXp)return i;}
-  return 0;
-}
-function updateHorse(){
-  var stage=getHorseStage();var h=HORSE_STAGES[stage];
-  document.getElementById('horseEmoji').textContent=h.emoji;
-  document.getElementById('horseName').textContent=h.name;
-  document.getElementById('horseLvl').textContent='Nv.'+(stage+1);
-  document.getElementById('horseMood').textContent=h.mood+' '+(lang==='es'?h.moodEs:h.moodAr);
-}
-function gallopHorse(){document.getElementById('horseBox').classList.add('gallop');setTimeout(function(){document.getElementById('horseBox').classList.remove('gallop')},1000);}
+// LANG
+function setL(l){L=l;sv();document.getElementById('lE').classList.toggle('a',l==='es');document.getElementById('lA').classList.toggle('a',l==='ar');document.documentElement.dir=l==='ar'?'rtl':'ltr';document.querySelectorAll('[data-es]').forEach(function(e){e.textContent=l==='es'?e.dataset.es:e.dataset.ar;});renderAll();}
+function setR(k){R=k;sv();stopA();document.querySelectorAll('.rb').forEach(function(b){b.classList.toggle('a',b.dataset.r===k)});}
+function gUrl(n){return RECS[R].u(n);}
 
-// =========== XP BAR ===========
-function updateXPBar(){
-  var level=Math.floor(xp/100)+1;
-  var pct=(xp%100);
-  document.getElementById('xpLevel').textContent=T('Nivel ','Level ')+level;
-  document.getElementById('coinCount').textContent=coins;
-  document.getElementById('xpFill').style.width=pct+'%';
-  document.getElementById('xpText').textContent=(xp%100)+' / 100 XP';
-}
+// TABS
+function goTab(nm,btn){document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('a')});document.querySelectorAll('.tb').forEach(function(t){t.classList.remove('a')});document.getElementById('sec-'+nm).classList.add('a');if(btn)btn.classList.add('a');document.getElementById('pbar').style.display=nm==='listen'?'flex':'none';if(nm==='quiz')initQ();}
 
-// =========== LANG ===========
-function setLang(l){lang=l;save();
-  document.getElementById('lEs').classList.toggle('active',l==='es');
-  document.getElementById('lAr').classList.toggle('active',l==='ar');
-  document.documentElement.dir=l==='ar'?'rtl':'ltr';
-  document.querySelectorAll('[data-es]').forEach(function(e){e.textContent=l==='es'?e.dataset.es:e.dataset.ar;});
-  renderAll();
-}
+function renderAll(){renderAdv();renderList();renderUnd();renderShop();renderMeth();updStar();updXP();}
 
-function setRec(k){rec=k;save();stopAud();document.querySelectorAll('.rec-btn').forEach(function(b){b.classList.toggle('active',b.dataset.r===k)});}
-function getUrl(n){return RECS[rec].url(n);}
+// =========== ADVENTURE ===========
+function renderAdv(){
+  var c=document.getElementById('sec-adventure');
+  var h='';
+  A.forEach(function(a,idx){
+    var st=adv[a.n]||{l:0,u:0,q:0};
+    var dn=st.l&&st.u&&st.q;
+    var prevDn=idx===0||(function(){var p=adv[A[idx-1].n];return p&&p.l&&p.u&&p.q;})();
+    var cur=!dn&&prevDn;
+    var lk=!prevDn&&!dn;
+    var cls=dn?'dn':cur?'cu':'lk';
+    var stars=(st.l?1:0)+(st.u?1:0)+(st.q?1:0);
 
-// =========== TABS ===========
-function goTab(name,btn){
-  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
-  document.querySelectorAll('.tab-btn').forEach(function(t){t.classList.remove('active')});
-  document.getElementById('sec-'+name).classList.add('active');
-  if(btn)btn.classList.add('active');
-  document.getElementById('playBar').style.display=name==='listen'?'flex':'none';
-  if(name==='quiz')initQuiz();
-}
+    // Story card for current
+    if(cur){
+      h+='<div class="adv-story"><div class="adv-ch">'+a.ic+' '+T('Cap\u00EDtulo '+a.n+': '+a.sc,'\u0627\u0644\u0641\u0635\u0644 '+a.n+': '+a.sc)+'</div><div class="adv-nar '+(L==='ar'?'ar':'')+'">'+(L==='es'?a.stE:a.stA)+'</div></div>';
+    }
 
-// =========== RENDER ALL ===========
-function renderAll(){renderAdventure();renderListen();renderUnderstand();renderMethod();updateHorse();updateXPBar();}
-
-// =========== LISTEN ===========
-function renderListen(){
-  var c=document.getElementById('sec-listen');
-  var h='<div class="reciter-row">';
-  for(var k in RECS){h+='<button class="rec-btn '+(k===rec?'active':'')+'" data-r="'+k+'" onclick="setRec(\''+k+'\')">'+(lang==='es'?RECS[k].name:RECS[k].nameAr)+'</button>';}
-  h+='</div>';
-  AYAT.forEach(function(a){
-    var m=mastered.has(a.num);
-    var wordsHtml=a.words.map(function(w,i){return'<span class="word" id="w-'+a.num+'-'+i+'">'+w+'</span>';}).join(' ');
-    h+='<div class="ayah-card '+(m?'mastered':'')+'" id="ayah-'+a.num+'">'
-      +(m?'':'')
-      +'<div class="ayah-num">'+a.num+'</div>'
-      +'<div class="ayah-arabic" id="ar-'+a.num+'">'+wordsHtml+'</div>'
-      +'<div class="ayah-translit">'+a.translit+'</div>'
-      +'<div class="ayah-meaning '+(lang==='es'?'lang-es':'lang-ar')+'">'+(lang==='es'?a.es:a.arM)+'</div>'
-      +'<div class="ayah-btns">'
-      +'<button class="abtn abtn-play" onclick="playA('+a.num+')">▶ '+T('Escuchar','\u0627\u0633\u062A\u0645\u0639')+'</button>'
-      +'<button class="abtn abtn-karaoke" onclick="karaokePlay('+a.num+')">\uD83C\uDFA4 '+T('Karaoke','\u0643\u0627\u0631\u0627\u0648\u0643\u064A')+'</button>'
-      +'<button class="abtn abtn-slow" onclick="playA('+a.num+',0.6)">\uD83D\uDC22 '+T('Lento','\u0628\u0637\u064A\u0621')+'</button>'
-      +'<button class="abtn abtn-repeat" onclick="playRep('+a.num+')">\uD83D\uDD01 3x</button>'
-      +'<button class="abtn abtn-master '+(m?'done':'')+'" onclick="toggleMast('+a.num+')">'+(m?'\u2713 '+T('Hecha','\u062A\u0645'):'\u2B50 '+T('Memoric\u00E9','\u062D\u0641\u0638\u062A\u0647\u0627'))+'</button>'
+    h+='<div class="advn '+cls+'" onclick="'+(lk?'':'openAdv('+a.n+')')+'">'
+      +'<div class="advn-ic">'+a.ic+'</div>'
+      +'<div class="advn-info"><div class="advn-t">'+a.n+'. '+T(a.sc,a.sc)+'</div>'
+      +'<div class="advn-s">'+(lk?T('\uD83D\uDD12 Bloqueada','\uD83D\uDD12 \u0645\u0642\u0641\u0644\u0629'):dn?T('\u2705 Completada','\u2705 \u0645\u0643\u062A\u0645\u0644\u0629'):T('\u25B6 '+stars+'/3 misiones','\u25B6 '+stars+'/3 \u0645\u0647\u0627\u0645'))+'</div>'
+      +'<div class="advn-stars"><span class="'+(st.l?'on':'')+'">⭐</span><span class="'+(st.u?'on':'')+'">⭐</span><span class="'+(st.q?'on':'')+'">⭐</span></div>'
       +'</div></div>';
   });
   c.innerHTML=h;
 }
 
-// =========== KARAOKE ===========
-function karaokePlay(num){
-  var a=AYAT.find(function(x){return x.num===num});
-  if(!a)return;
-  stopAud();
-  audio=new Audio(getUrl(num));
-  playingAyah=num;
-  var card=document.getElementById('ayah-'+num);
-  if(card)card.classList.add('playing');
-
-  // Reset all words
-  a.words.forEach(function(_,i){
-    var w=document.getElementById('w-'+num+'-'+i);
-    if(w){w.classList.remove('active','done');}
-  });
-
-  audio.onplay=function(){
-    // Estimate word timing based on duration
-    audio.ontimeupdate=function(){
-      if(!audio)return;
-      var dur=audio.duration||3;
-      var progress=audio.currentTime/dur;
-      var totalWords=a.words.length;
-      var currentWord=Math.floor(progress*totalWords);
-      a.words.forEach(function(_,i){
-        var w=document.getElementById('w-'+num+'-'+i);
-        if(!w)return;
-        if(i<currentWord){w.classList.remove('active');w.classList.add('done');}
-        else if(i===currentWord){w.classList.add('active');w.classList.remove('done');}
-        else{w.classList.remove('active','done');}
-      });
-    };
-  };
-
-  audio.onended=function(){
-    playingAyah=null;
-    if(card)card.classList.remove('playing');
-    a.words.forEach(function(_,i){
-      var w=document.getElementById('w-'+num+'-'+i);
-      if(w){w.classList.remove('active');w.classList.add('done');}
-    });
-    addXP(15,card);
-    gallopHorse();
-    rewardBurst(card);
-    // Mark as listened in adventure
-    if(!advSteps[num])advSteps[num]={listened:false,understood:false,quizzed:false};
-    advSteps[num].listened=true;save();
-  };
-
-  audio.onerror=function(){tryFallback(num,1,card);};
-  audio.load();audio.play().catch(function(){});
+function openAdv(n){
+  var a=A.find(function(x){return x.n===n});if(!a)return;
+  var st=adv[n]||{l:0,u:0,q:0};
+  var m=document.getElementById('advM');
+  var b=document.getElementById('advB');
+  b.innerHTML='<button class="mdl-x" onclick="closeAdv()">\u2715</button>'
+    +'<div class="mdl-t">'+a.ic+' '+T('Estaci\u00F3n '+n,'\u0627\u0644\u0645\u062D\u0637\u0629 '+n)+'</div>'
+    +'<div class="mdl-st">'+T('Completa las 3 misiones \u2B50\u2B50\u2B50','\u0623\u0643\u0645\u0644 \u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u062B\u0644\u0627\u062B \u2B50\u2B50\u2B50')+'</div>'
+    +'<div class="mdl-ar">'+a.ar+'</div>'
+    +'<div class="msn '+(st.l?'d':'')+'" onclick="advList('+n+')"><div class="msn-ic">\uD83C\uDFA7</div><div><div class="msn-tx">'+T('Escucha esta ayah','\u0627\u0633\u062A\u0645\u0639 \u0644\u0647\u0630\u0647 \u0627\u0644\u0622\u064A\u0629')+'</div><div class="msn-rw">'+(st.l?'\u2705':'+10 XP')+'</div></div></div>'
+    +'<div class="msn '+(st.u?'d':'')+'" onclick="advUnd('+n+')"><div class="msn-ic">\uD83D\uDCA1</div><div><div class="msn-tx">'+T('Entiende el significado','\u0627\u0641\u0647\u0645 \u0627\u0644\u0645\u0639\u0646\u0649')+'</div><div class="msn-rw">'+(st.u?'\u2705':'+10 XP')+'</div></div></div>'
+    +'<div class="msn '+(st.q?'d':'')+'" onclick="advQuiz('+n+')"><div class="msn-ic">\uD83E\uDDE9</div><div><div class="msn-tx">'+T('Responde correctamente','\u0623\u062C\u0628 \u0628\u0634\u0643\u0644 \u0635\u062D\u064A\u062D')+'</div><div class="msn-rw">'+(st.q?'\u2705':'+20 XP')+'</div></div></div>'
+    +'<div class="mdl-area" id="advArea"></div>';
+  m.classList.add('sh');
 }
+function closeAdv(){document.getElementById('advM').classList.remove('sh');}
 
-// =========== AUDIO ===========
-function playA(num,rate){
-  if(!rate)rate=1;
-  stopAud();
-  audio=new Audio(getUrl(num));audio.playbackRate=rate;playingAyah=num;
-  var card=document.getElementById('ayah-'+num);
-  if(card)card.classList.add('playing');
-  audio.onended=function(){playingAyah=null;if(card)card.classList.remove('playing');addXP(5,card);gallopHorse();if(!advSteps[num])advSteps[num]={listened:false,understood:false,quizzed:false};advSteps[num].listened=true;save();};
-  audio.onerror=function(){tryFallback(num,rate,card);};
-  audio.load();audio.play().catch(function(){});
+function advList(n){
+  stopA();au=new Audio(gUrl(n));paN=n;
+  au.onended=function(){if(!adv[n])adv[n]={l:0,u:0,q:0};if(!adv[n].l){adv[n].l=1;addXP(10);glowStar();}sv();openAdv(n);renderAdv();};
+  au.onerror=function(){tryFB(n,1);};
+  au.load();au.play().catch(function(){});
 }
-function tryFallback(num,rate,card){
-  var keys=Object.keys(RECS).filter(function(k){return k!==rec;});var i=0;
-  function next(){if(i>=keys.length)return;var u=RECS[keys[i++]].url(num);if(audio){audio.pause();try{audio.src='';}catch(e){}}audio=new Audio(u);audio.playbackRate=rate||1;audio.onended=function(){playingAyah=null;if(card)card.classList.remove('playing');};audio.onerror=next;audio.load();audio.play().catch(next);}
-  next();
+function advUnd(n){
+  var a=A.find(function(x){return x.n===n});
+  if(!adv[n])adv[n]={l:0,u:0,q:0};
+  if(!adv[n].u){adv[n].u=1;addXP(10);glowStar();}sv();
+  document.getElementById('advArea').innerHTML='<div class="tc" style="margin-top:8px"><div class="tt '+(L==='es'?'es':'ar')+'">'+(L==='es'?a.tE:a.tA)+'</div></div>';
+  openAdv(n);renderAdv();
 }
-function playRep(num){var c=0;function once(){if(c>=3)return;stopAud();audio=new Audio(getUrl(num));audio.playbackRate=.85;playingAyah=num;var card=document.getElementById('ayah-'+num);if(card)card.classList.add('playing');audio.onended=function(){c++;if(c<3)setTimeout(once,1000);else{playingAyah=null;if(card)card.classList.remove('playing');addXP(10,card);gallopHorse();}};audio.load();audio.play().catch(function(){});}once();}
-function stopAud(){if(audio){audio.pause();try{audio.src='';}catch(e){}audio=null;}document.querySelectorAll('.ayah-card').forEach(function(c){c.classList.remove('playing')});playingAyah=null;}
-
-// Play all
-function togglePlayAll(){if(isPlayAll)stopPA();else startPA();}
-function startPA(){isPlayAll=true;paIdx=0;repCur=0;var b=document.getElementById('playAllBtn');b.classList.add('stop');b.innerHTML='\u23F9 '+T('Detener','\u0625\u064A\u0642\u0627\u0641');playNext();}
-function stopPA(){isPlayAll=false;stopAud();var b=document.getElementById('playAllBtn');b.classList.remove('stop');b.innerHTML='\u25B6 '+T('Escuchar todo','\u0627\u0633\u062A\u0645\u0639 \u0627\u0644\u0643\u0644');}
-function playNext(){if(!isPlayAll)return;if(paIdx>=AYAT.length){repCur++;if(repCur<repCount){paIdx=0;setTimeout(playNext,1500);return;}stopPA();return;}var a=AYAT[paIdx];stopAud();audio=new Audio(getUrl(a.num));playingAyah=a.num;var card=document.getElementById('ayah-'+a.num);if(card){card.classList.add('playing');card.scrollIntoView({behavior:'smooth',block:'center'});}audio.onended=function(){if(card)card.classList.remove('playing');paIdx++;if(isPlayAll)setTimeout(playNext,700);};audio.load();audio.play().catch(function(){});}
-function chgRep(d){repCount=Math.max(1,Math.min(10,repCount+d));document.getElementById('repN').textContent=repCount;}
-
-// =========== MASTERY ===========
-function toggleMast(num){
-  var el=document.getElementById('ayah-'+num);
-  if(mastered.has(num)){mastered.delete(num);}
-  else{mastered.add(num);addXP(30,el);rewardBurst(el);gallopHorse();}
-  save();renderListen();renderAdventure();updateProgress();
-  if(mastered.size===11)showCeleb(T('\uD83C\uDFC6 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\uD83C\uDFC6 !\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647'),T('\u00A1Has memorizado toda Surat Al-Adiyat!','!\u0644\u0642\u062F \u062D\u0641\u0638\u062A \u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A \u0643\u0627\u0645\u0644\u0629'),'\uD83C\uDFC6');
+function advQuiz(n){
+  var a=A.find(function(x){return x.n===n});
+  var co=a;var wr=shuf(A.filter(function(x){return x.n!==n})).slice(0,2);var ops=shuf([co].concat(wr));var ci=ops.indexOf(co);
+  var area=document.getElementById('advArea');
+  area.innerHTML='<div style="margin-top:10px;text-align:center"><div class="qtp">'+T('\u00BFQu\u00E9 significa?','\u0645\u0627 \u0627\u0644\u0645\u0639\u0646\u0649\u061F')+'</div><div class="mq-os">'+ops.map(function(o,i){return'<button class="mq-o mn '+(L==='es'?'es':'')+'" id="aq'+i+'" onclick="advAns('+n+','+i+','+ci+')">'+(L==='es'?o.es:o.am)+'</button>'}).join('')+'</div><div class="mq-fb" id="aqFb"></div></div>';
 }
-function updateProgress(){}
-
-// =========== ADVENTURE MODE ===========
-function renderAdventure(){
-  var c=document.getElementById('sec-adventure');
-  var html='<div class="adventure-map"><div style="text-align:center;margin-bottom:16px;"><span style="font-family:Lilita One;font-size:20px;color:var(--gold);">'+T('\uD83D\uDC0E El Viaje de Buraq','\uD83D\uDC0E \u0631\u062D\u0644\u0629 \u0628\u0631\u0627\u0642')+'</span><br><span style="font-size:12px;color:var(--dim);">'+T('Completa cada estaci\u00F3n para avanzar','\u0623\u0643\u0645\u0644 \u0643\u0644 \u0645\u062D\u0637\u0629 \u0644\u0644\u062A\u0642\u062F\u0645')+'</span></div><div class="desert-path">';
-
-  AYAT.forEach(function(a,idx){
-    var steps=advSteps[a.num]||{listened:false,understood:false,quizzed:false};
-    var done=steps.listened&&steps.understood&&steps.quizzed;
-    var prevDone=idx===0?true:(function(){var prev=advSteps[AYAT[idx-1].num];return prev&&prev.listened&&prev.understood&&prev.quizzed;})();
-    var isCurrent=!done&&prevDone;
-    var isLocked=!prevDone&&!done;
-    var cls=done?'completed':isCurrent?'current':'locked';
-    var starsCount=(steps.listened?1:0)+(steps.understood?1:0)+(steps.quizzed?1:0);
-
-    html+='<div class="path-segment"><div style="text-align:center;">'
-      +'<div class="adventure-stop '+cls+'" onclick="'+(isLocked?'':'openAdvStop('+a.num+')')+'" data-num="'+a.num+'">'+a.icon+'</div>'
-      +'<div class="adventure-stop-label">'+a.num+'. '+(lang==='es'?a.scene:a.scene)+'</div>'
-      +'<div class="stop-stars">'
-      +'<span class="stop-star '+(steps.listened?'earned':'')+'">⭐</span>'
-      +'<span class="stop-star '+(steps.understood?'earned':'')+'">⭐</span>'
-      +'<span class="stop-star '+(steps.quizzed?'earned':'')+'">⭐</span>'
-      +'</div></div></div>';
-    if(idx<AYAT.length-1){html+='<div class="path-line '+(done?'completed':'')+'"></div>';}
-  });
-
-  html+='</div></div>';
-  c.innerHTML=html;
-}
-
-function openAdvStop(num){
-  var a=AYAT.find(function(x){return x.num===num});if(!a)return;
-  var steps=advSteps[num]||{listened:false,understood:false,quizzed:false};
-  var m=document.getElementById('advModal');
-  var content=document.getElementById('advModalContent');
-
-  content.innerHTML='<button class="adv-close" onclick="closeAdv()">\u2715</button>'
-    +'<div class="adv-modal-title">'+a.icon+' '+T('Estaci\u00F3n '+a.num+': '+a.scene,'\u0627\u0644\u0645\u062D\u0637\u0629 '+a.num)+'</div>'
-    +'<div class="adv-modal-sub">'+T('Completa las 3 misiones para ganar \u2B50\u2B50\u2B50','\u0623\u0643\u0645\u0644 \u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u0633\u062A\u0629 \u0644\u0644\u0641\u0648\u0632 \u2B50\u2B50\u2B50')+'</div>'
-    +'<div class="adv-arabic">'+a.ar+'</div>'
-    +'<div class="adv-steps">'
-    // Mission 1: Listen
-    +'<div class="adv-step '+(steps.listened?'done':'')+'" onclick="advListen('+num+')">'
-    +'<div class="adv-step-icon">\uD83C\uDFA7</div>'
-    +'<div><div class="adv-step-text">'+T('Escucha esta ayah con atenci\u00F3n','\u0627\u0633\u062A\u0645\u0639 \u0644\u0647\u0630\u0647 \u0627\u0644\u0622\u064A\u0629 \u0628\u0627\u0646\u062A\u0628\u0627\u0647')+'</div>'
-    +'<div class="adv-step-reward">'+(steps.listened?'\u2705 '+T('Completada','\u0645\u0643\u062A\u0645\u0644\u0629'):'+10 XP')+'</div></div></div>'
-    // Mission 2: Understand
-    +'<div class="adv-step '+(steps.understood?'done':'')+'" onclick="advUnderstand('+num+')">'
-    +'<div class="adv-step-icon">\uD83D\uDCA1</div>'
-    +'<div><div class="adv-step-text">'+T('Lee y entiende el significado','\u0627\u0642\u0631\u0623 \u0648\u0627\u0641\u0647\u0645 \u0627\u0644\u0645\u0639\u0646\u0649')+'</div>'
-    +'<div class="adv-step-reward">'+(steps.understood?'\u2705 '+T('Completada','\u0645\u0643\u062A\u0645\u0644\u0629'):'+10 XP')+'</div></div></div>'
-    // Mission 3: Quiz
-    +'<div class="adv-step '+(steps.quizzed?'done':'')+'" onclick="advQuiz('+num+')">'
-    +'<div class="adv-step-icon">\uD83E\uDDE9</div>'
-    +'<div><div class="adv-step-text">'+T('Responde correctamente','\u0623\u062C\u0628 \u0628\u0634\u0643\u0644 \u0635\u062D\u064A\u062D')+'</div>'
-    +'<div class="adv-step-reward">'+(steps.quizzed?'\u2705 '+T('Completada','\u0645\u0643\u062A\u0645\u0644\u0629'):'+20 XP')+'</div></div></div>'
-    +'</div>'
-    +'<div id="advQuizArea"></div>';
-
-  m.classList.add('show');
-}
-function closeAdv(){document.getElementById('advModal').classList.remove('show');}
-
-function advListen(num){
-  stopAud();
-  audio=new Audio(getUrl(num));playingAyah=num;
-  audio.onended=function(){
-    if(!advSteps[num])advSteps[num]={listened:false,understood:false,quizzed:false};
-    if(!advSteps[num].listened){advSteps[num].listened=true;addXP(10);gallopHorse();}
-    save();openAdvStop(num);renderAdventure();
-  };
-  audio.load();audio.play().catch(function(){});
-}
-
-function advUnderstand(num){
-  var a=AYAT.find(function(x){return x.num===num});
-  if(!advSteps[num])advSteps[num]={listened:false,understood:false,quizzed:false};
-  if(!advSteps[num].understood){advSteps[num].understood=true;addXP(10);gallopHorse();}
-  save();
-  // Show tafsir in modal
-  var area=document.getElementById('advQuizArea');
-  area.innerHTML='<div class="tafsir-card" style="margin-top:12px;"><div class="tafsir-text '+(lang==='es'?'lang-es':'lang-ar')+'">'+(lang==='es'?a.tEs:a.tAr)+'</div></div>';
-  openAdvStop(num);renderAdventure();
-}
-
-function advQuiz(num){
-  var a=AYAT.find(function(x){return x.num===num});
-  var area=document.getElementById('advQuizArea');
-  // Simple quiz: what does this ayah mean?
-  var correct=a;
-  var wrongs=shuffle(AYAT.filter(function(x){return x.num!==num})).slice(0,2);
-  var opts=shuffle([correct].concat(wrongs));
-  var correctIdx=opts.indexOf(correct);
-
-  area.innerHTML='<div style="margin-top:16px;text-align:center;">'
-    +'<div class="quiz-type">'+T('\u00BFQu\u00E9 significa?','\u0645\u0627 \u0627\u0644\u0645\u0639\u0646\u0649\u061F')+'</div>'
-    +'<div class="quiz-opts">'+opts.map(function(o,i){
-      return '<button class="quiz-opt mean '+(lang==='es'?'lang-es':'')+'" id="aq-'+i+'" onclick="advAnswer('+num+','+i+','+correctIdx+')">'+(lang==='es'?o.es:o.arM)+'</button>';
-    }).join('')+'</div>'
-    +'<div class="quiz-fb" id="aqFb"></div></div>';
-}
-
-function advAnswer(num,sel,corr){
+function advAns(n,s,c){
   var fb=document.getElementById('aqFb');
-  document.querySelectorAll('#advQuizArea .quiz-opt').forEach(function(o){o.classList.add('off');});
-  document.getElementById('aq-'+corr).classList.add('correct');
-  if(sel===corr){
-    document.getElementById('aq-'+sel).classList.add('correct');
-    fb.className='quiz-fb show ok';fb.textContent=T('\u2705 \u00A1Correcto! \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647','\u2705 !\u0635\u062D\u064A\u062D! \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647');
-    if(!advSteps[num])advSteps[num]={listened:false,understood:false,quizzed:false};
-    if(!advSteps[num].quizzed){advSteps[num].quizzed=true;addXP(20);gallopHorse();rewardBurst(document.getElementById('aq-'+sel));}
-    save();
-    // Check if all 3 done
-    var s=advSteps[num];
-    if(s.listened&&s.understood&&s.quizzed){
-      setTimeout(function(){closeAdv();renderAdventure();
-        showCeleb(T('\u2B50 \u00A1Estaci\u00F3n '+num+' completada!','\u2B50 !\u0627\u0644\u0645\u062D\u0637\u0629 '+num+' \u0645\u0643\u062A\u0645\u0644\u0629'),T('\u00A1Buraq est\u00E1 orgulloso! Sigue al siguiente.','\u0628\u0631\u0627\u0642 \u0641\u062E\u0648\u0631! \u0648\u0627\u0635\u0644 \u0644\u0644\u062A\u0627\u0644\u064A\u0629.'),'\uD83D\uDC0E');
-      },800);
-    }
-  } else {
-    document.getElementById('aq-'+sel).classList.add('wrong');
-    fb.className='quiz-fb show no';fb.textContent=T('\u274C Intenta de nuevo','\u274C \u062D\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649');
-    setTimeout(function(){advQuiz(num);},1500);
+  document.querySelectorAll('#advArea .mq-o').forEach(function(o){o.classList.add('off')});
+  document.getElementById('aq'+c).classList.add('ok');
+  if(s===c){
+    fb.className='mq-fb sh g';fb.textContent=T('\u2705 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\u2705 !\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647');
+    if(!adv[n])adv[n]={l:0,u:0,q:0};
+    if(!adv[n].q){adv[n].q=1;addXP(20);glowStar();rBurst(document.getElementById('aq'+s));}sv();
+    var st=adv[n];
+    if(st.l&&st.u&&st.q){setTimeout(function(){closeAdv();renderAdv();showClb(T('\u2B50 \u00A1Cap\u00EDtulo '+n+' completado!','\u2B50 !\u0627\u0644\u0641\u0635\u0644 '+n+' \u0645\u0643\u062A\u0645\u0644'),T('Tu estrella Nur brilla m\u00E1s fuerte. \u00A1Sigue avanzando!','\u0646\u062C\u0645\u062A\u0643 \u0646\u0648\u0631 \u062A\u062A\u0623\u0644\u0642 \u0623\u0643\u062B\u0631. \u0648\u0627\u0635\u0644!'),'\u2B50');},700);}
+  }else{
+    document.getElementById('aq'+s).classList.add('no');
+    fb.className='mq-fb sh b';fb.textContent=T('\u274C Int\u00E9ntalo de nuevo','\u274C \u062D\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062E\u0631\u0649');
+    setTimeout(function(){advQuiz(n)},1200);
   }
 }
 
-// =========== UNDERSTAND ===========
-function renderUnderstand(){
-  var c=document.getElementById('sec-understand');
-  var h='<div class="meth-card" style="border:1px solid var(--gold-dark);"><h3 style="color:var(--gold);font-size:15px;margin-bottom:5px;">'+T('\uD83D\uDCA1 \u00BFDe qu\u00E9 habla esta sura?','\uD83D\uDCA1 \u0639\u0646 \u0645\u0627\u0630\u0627 \u062A\u062A\u062D\u062F\u062B \u0647\u0630\u0647 \u0627\u0644\u0633\u0648\u0631\u0629\u061F')+'</h3><p style="font-size:13px;line-height:1.7;color:var(--text);'+(lang==='ar'?'font-family:Baloo Bhaijaan 2;':'')+'">'+T('Allah habla de <strong style="color:var(--gold)">caballos de guerra fuertes</strong> para ense\u00F1arnos que <strong style="color:var(--teal)">debemos ser agradecidos</strong> y recordar que <strong style="color:var(--green)">Allah lo sabe todo</strong>.','\u0627\u0644\u0644\u0647 \u064A\u062A\u062D\u062F\u062B \u0639\u0646 <strong style="color:var(--gold)">\u062E\u064A\u0648\u0644 \u062D\u0631\u0628 \u0642\u0648\u064A\u0629</strong> \u0644\u064A\u0639\u0644\u0645\u0646\u0627 \u0623\u0646 <strong style="color:var(--teal)">\u0646\u0643\u0648\u0646 \u0634\u0627\u0643\u0631\u064A\u0646</strong> \u0648\u0623\u0646 <strong style="color:var(--green)">\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621</strong>.')+'</p></div>';
-  AYAT.forEach(function(a){
-    h+='<div class="tafsir-card"><div class="tafsir-ayah">'+a.ar+'</div><div class="tafsir-text '+(lang==='es'?'lang-es':'lang-ar')+'">'+(lang==='es'?a.tEs:a.tAr)+'</div>'
-    +'<button class="ai-btn" onclick="toggleAI('+a.num+')">\uD83E\uDD16 '+T('Preg\u00FAntale a la IA','\u0627\u0633\u0623\u0644 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A')+'</button>'
-    +'<div class="ai-box" id="aib-'+a.num+'"><div class="ai-row"><input class="ai-input" id="aii-'+a.num+'" placeholder="'+T('\u00BFPor qu\u00E9...?','\u0644\u0645\u0627\u0630\u0627...?')+'" onkeydown="if(event.key===\'Enter\')askAI('+a.num+')"><button class="ai-send" onclick="askAI('+a.num+')">\u27A4</button></div><div class="ai-resp" id="air-'+a.num+'"></div></div>'
-    +'</div>';
+// =========== LISTEN ===========
+function renderList(){
+  var c=document.getElementById('sec-listen');
+  var h='<div class="rr">';for(var k in RECS)h+='<button class="rb '+(k===R?'a':'')+'" data-r="'+k+'" onclick="setR(\''+k+'\')">'+(L==='es'?RECS[k].nm:RECS[k].na)+'</button>';h+='</div>';
+  A.forEach(function(a){
+    var m=mast.has(a.n);
+    var wh=a.w.map(function(w,i){return'<span class="w" id="w'+a.n+'-'+i+'">'+w+'</span>'}).join(' ');
+    h+='<div class="ac '+(m?'ma':'')+'" id="ay'+a.n+'"><div class="an">'+a.n+'</div><div class="aar" id="ar'+a.n+'">'+wh+'</div><div class="atr">'+a.tr+'</div><div class="amn '+(L==='es'?'es':'ar')+'">'+(L==='es'?a.es:a.am)+'</div><div class="abs">'
+    +'<button class="ab ab1" onclick="playAy('+a.n+')">▶ '+T('Escuchar','\u0627\u0633\u062A\u0645\u0639')+'</button>'
+    +'<button class="ab ab2" onclick="karaoke('+a.n+')">\uD83C\uDFA4 '+T('Karaoke','\u0643\u0627\u0631\u0627\u0648\u0643\u064A')+'</button>'
+    +'<button class="ab ab3" onclick="playAy('+a.n+',0.6)">\uD83D\uDC22 '+T('Lento','\u0628\u0637\u064A\u0621')+'</button>'
+    +'<button class="ab ab4" onclick="playRep('+a.n+')">\uD83D\uDD01 3x</button>'
+    +'<button class="ab ab5 '+(m?'d':'')+'" onclick="togM('+a.n+')">'+(m?'\u2713 '+T('Hecha','\u062A\u0645'):'\u2B50 '+T('Memoric\u00E9','\u062D\u0641\u0638\u062A\u0647\u0627'))+'</button>'
+    +'</div></div>';
   });
   c.innerHTML=h;
 }
-function toggleAI(n){var b=document.getElementById('aib-'+n);b.classList.toggle('show');if(b.classList.contains('show'))document.getElementById('aii-'+n).focus();}
+
+// KARAOKE
+function karaoke(n){
+  var a=A.find(function(x){return x.n===n});if(!a)return;
+  stopA();au=new Audio(gUrl(n));paN=n;
+  var card=document.getElementById('ay'+n);if(card)card.classList.add('pl');
+  a.w.forEach(function(_,i){var w=document.getElementById('w'+n+'-'+i);if(w){w.classList.remove('hi','dn');}});
+  au.onplay=function(){au.ontimeupdate=function(){if(!au)return;var d=au.duration||3,pr=au.currentTime/d,tw=a.w.length,cw=~~(pr*tw);a.w.forEach(function(_,i){var w=document.getElementById('w'+n+'-'+i);if(!w)return;if(i<cw){w.classList.remove('hi');w.classList.add('dn');}else if(i===cw){w.classList.add('hi');w.classList.remove('dn');}else{w.classList.remove('hi','dn');}});};};
+  au.onended=function(){paN=null;if(card)card.classList.remove('pl');a.w.forEach(function(_,i){var w=document.getElementById('w'+n+'-'+i);if(w){w.classList.remove('hi');w.classList.add('dn');}});addXP(12,card);glowStar();rBurst(card);if(!adv[n])adv[n]={l:0,u:0,q:0};adv[n].l=1;sv();};
+  au.onerror=function(){tryFB(n,1,card);};
+  au.load();au.play().catch(function(){});
+}
+
+// AUDIO
+function playAy(n,rt){if(!rt)rt=1;stopA();au=new Audio(gUrl(n));au.playbackRate=rt;paN=n;var cd=document.getElementById('ay'+n);if(cd)cd.classList.add('pl');au.onended=function(){paN=null;if(cd)cd.classList.remove('pl');addXP(5,cd);glowStar();if(!adv[n])adv[n]={l:0,u:0,q:0};adv[n].l=1;sv();};au.onerror=function(){tryFB(n,rt,cd);};au.load();au.play().catch(function(){});}
+function tryFB(n,rt,cd){var ks=Object.keys(RECS).filter(function(k){return k!==R});var i=0;function nx(){if(i>=ks.length)return;var u=RECS[ks[i++]].u(n);if(au){au.pause();try{au.src='';}catch(e){}}au=new Audio(u);au.playbackRate=rt||1;au.onended=function(){paN=null;if(cd)cd.classList.remove('pl');};au.onerror=nx;au.load();au.play().catch(nx);}nx();}
+function playRep(n){var c=0;function once(){if(c>=3)return;stopA();au=new Audio(gUrl(n));au.playbackRate=.85;paN=n;var cd=document.getElementById('ay'+n);if(cd)cd.classList.add('pl');au.onended=function(){c++;if(c<3)setTimeout(once,1000);else{paN=null;if(cd)cd.classList.remove('pl');addXP(8,cd);glowStar();}};au.load();au.play().catch(function(){});}once();}
+function stopA(){if(au){au.pause();try{au.src='';}catch(e){}au=null;}document.querySelectorAll('.ac').forEach(function(c){c.classList.remove('pl')});paN=null;}
+
+// PLAY ALL
+function tPA(){if(isPA)stopPA();else startPA();}
+function startPA(){isPA=true;paI=0;rCu=0;var b=document.getElementById('paB');b.classList.add('stp');b.innerHTML='\u23F9 '+T('Stop','\u0625\u064A\u0642\u0627\u0641');playNx();}
+function stopPA(){isPA=false;stopA();var b=document.getElementById('paB');b.classList.remove('stp');b.innerHTML='\u25B6 '+T('Todo','\u0627\u0644\u0643\u0644');}
+function playNx(){if(!isPA)return;if(paI>=A.length){rCu++;if(rCu<rC){paI=0;setTimeout(playNx,1200);return;}stopPA();return;}var a=A[paI];stopA();au=new Audio(gUrl(a.n));paN=a.n;var cd=document.getElementById('ay'+a.n);if(cd){cd.classList.add('pl');cd.scrollIntoView({behavior:'smooth',block:'center'});}au.onended=function(){if(cd)cd.classList.remove('pl');paI++;if(isPA)setTimeout(playNx,600);};au.load();au.play().catch(function(){});}
+function chgR(d){rC=Math.max(1,Math.min(10,rC+d));document.getElementById('rN').textContent=rC;}
+
+// MASTERY
+function togM(n){var el=document.getElementById('ay'+n);if(mast.has(n)){mast.delete(n);}else{mast.add(n);addXP(25,el);rBurst(el);glowStar();}sv();renderList();renderAdv();if(mast.size===11)showClb(T('\uD83C\uDFC6 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\uD83C\uDFC6 !\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647'),T('\u00A1Toda la sura memorizada!','\u062D\u0641\u0638\u062A \u0627\u0644\u0633\u0648\u0631\u0629 \u0643\u0627\u0645\u0644\u0629!'),'\uD83C\uDFC6');}
+
+// =========== UNDERSTAND ===========
+function renderUnd(){
+  var c=document.getElementById('sec-understand');
+  var h='<div class="tc" style="border:1px solid var(--goldd)"><h3 style="color:var(--gold);font-size:13px;margin-bottom:3px">'+T('\uD83D\uDCA1 \u00BFDe qu\u00E9 habla esta sura?','\uD83D\uDCA1 \u0639\u0646 \u0645\u0627\u0630\u0627 \u062A\u062A\u062D\u062F\u062B\u061F')+'</h3><p style="font-size:11px;line-height:1.6;'+(L==='ar'?'font-family:Baloo Bhaijaan 2;':'')+'">'+T('Allah describe guerreros valientes y fieles para ense\u00F1arnos que <strong style="color:var(--gold)">debemos ser agradecidos</strong> y recordar que <strong style="color:var(--teal)">Allah lo sabe todo</strong>.','\u0627\u0644\u0644\u0647 \u064A\u0635\u0641 \u0645\u062D\u0627\u0631\u0628\u064A\u0646 \u0623\u0648\u0641\u064A\u0627\u0621 \u0644\u064A\u0639\u0644\u0645\u0646\u0627 \u0623\u0646 <strong style="color:var(--gold)">\u0646\u0643\u0648\u0646 \u0634\u0627\u0643\u0631\u064A\u0646</strong> \u0648\u0623\u0646 <strong style="color:var(--teal)">\u0627\u0644\u0644\u0647 \u064A\u0639\u0644\u0645 \u0643\u0644 \u0634\u064A\u0621</strong>.')+'</p></div>';
+  A.forEach(function(a){
+    h+='<div class="tc"><div class="ta">'+a.ar+'</div><div class="tt '+(L==='es'?'es':'ar')+'">'+(L==='es'?a.tE:a.tA)+'</div>'
+    +'<button class="aib" onclick="togAI('+a.n+')">\uD83E\uDD16 '+T('Pregunta a la IA','\u0627\u0633\u0623\u0644 \u0627\u0644\u0630\u0643\u0627\u0621')+'</button>'
+    +'<div class="aibx" id="aib'+a.n+'"><div class="airow"><input class="aiin" id="aii'+a.n+'" placeholder="'+T('\u00BFPor qu\u00E9...?','\u0644\u0645\u0627\u0630\u0627\u061F')+'" onkeydown="if(event.key===\'Enter\')askAI('+a.n+')"><button class="aigo" onclick="askAI('+a.n+')">\u27A4</button></div><div class="aiout" id="aio'+a.n+'"></div></div></div>';
+  });
+  c.innerHTML=h;
+}
+function togAI(n){var b=document.getElementById('aib'+n);b.classList.toggle('sh');if(b.classList.contains('sh'))document.getElementById('aii'+n).focus();}
 async function askAI(n){
-  var inp=document.getElementById('aii-'+n),resp=document.getElementById('air-'+n),q=inp.value.trim();if(!q)return;
-  var a=AYAT.find(function(x){return x.num===n});
-  resp.className='ai-resp show';resp.innerHTML='<div style="display:flex;align-items:center;gap:6px"><div class="spinner"></div>'+T('Pensando...','\u062C\u0627\u0631\u064D \u0627\u0644\u062A\u0641\u0643\u064A\u0631...')+'</div>';
-  try{
-    var sys=lang==='es'?'Eres un maestro de Quran para ni\u00F1os de 8 a\u00F1os. Espa\u00F1ol simple, emojis, m\u00E1x 4 frases. Ayah: "'+a.ar+'" = "'+a.es+'". Sura Al-Adiyat.':'معلم قرآن لأطفال ٨ سنوات. عربي بسيط، إيموجي، أقصى ٤ جمل. الآية: "'+a.ar+'" = "'+a.arM+'". سورة العاديات.';
-    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:q}]})});
-    var d=await r.json();var t=(d.content||[]).map(function(c){return c.text||''}).join('')||T('Sin respuesta.','\u0644\u0627 \u0625\u062C\u0627\u0628\u0629.');
-    resp.innerHTML=t;addXP(5);
-  }catch(e){resp.innerHTML=T('\u26A0\uFE0F Error de conexi\u00F3n.','\u26A0\uFE0F \u062E\u0637\u0623 \u0641\u064A \u0627\u0644\u0627\u062A\u0635\u0627\u0644.');}
+  var inp=document.getElementById('aii'+n),out=document.getElementById('aio'+n),q=inp.value.trim();if(!q)return;
+  var a=A.find(function(x){return x.n===n});
+  out.className='aiout sh';out.innerHTML='<div style="display:flex;align-items:center;gap:4px"><div class="sp"></div>'+T('Pensando...','\u062C\u0627\u0631\u064D \u0627\u0644\u062A\u0641\u0643\u064A\u0631...')+'</div>';
+  try{var sys=L==='es'?'Maestro Quran para ni\u00F1os 8 a\u00F1os. Espa\u00F1ol simple, emojis, max 4 frases. Ayah: "'+a.ar+'" = "'+a.es+'". Sura 100.':'\u0645\u0639\u0644\u0645 \u0642\u0631\u0622\u0646 \u0644\u0623\u0637\u0641\u0627\u0644 \u0668 \u0633\u0646\u0648\u0627\u062A. \u0639\u0631\u0628\u064A \u0628\u0633\u064A\u0637\u060C \u0625\u064A\u0645\u0648\u062C\u064A\u060C \u0664 \u062C\u0645\u0644. \u0627\u0644\u0622\u064A\u0629: "'+a.ar+'" = "'+a.am+'". \u0633\u0648\u0631\u0629 \u0661\u0660\u0660.';
+  var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:q}]})});
+  var d=await r.json();out.innerHTML=(d.content||[]).map(function(c){return c.text||''}).join('')||'...';}catch(e){out.innerHTML=T('\u26A0\uFE0F Error','\u26A0\uFE0F \u062E\u0637\u0623');}
+}
+
+// =========== SHOP ===========
+function renderShop(){
+  var c=document.getElementById('sec-shop');
+  var h='<div class="shop-intro"><h3>🏪 '+T('Tesoros y Poderes','\u0643\u0646\u0648\u0632 \u0648\u0642\u0648\u0649')+'</h3><p>'+T('Gasta tus monedas en poderes que te ayudan en la aventura, o descubre secretos incre\u00EDbles sobre la sura.','\u0623\u0646\u0641\u0642 \u0639\u0645\u0644\u0627\u062A\u0643 \u0639\u0644\u0649 \u0642\u0648\u0649 \u062A\u0633\u0627\u0639\u062F\u0643 \u0641\u064A \u0627\u0644\u0645\u063A\u0627\u0645\u0631\u0629\u060C \u0623\u0648 \u0627\u0643\u062A\u0634\u0641 \u0623\u0633\u0631\u0627\u0631\u0627\u064B \u0645\u0630\u0647\u0644\u0629.')+'</p><div style="margin-top:6px;font-size:13px;color:var(--gold);font-weight:700">🪙 '+co+'</div></div>';
+
+  h+='<div class="shop-cat">\u26A1 '+T('Poderes (te ayudan en el juego)','\u0642\u0648\u0649 (\u062A\u0633\u0627\u0639\u062F\u0643 \u0641\u064A \u0627\u0644\u0644\u0639\u0628\u0629)')+'</div><div class="shop-grid">';
+  SHOP_POWERS.forEach(function(p){
+    var canBuy=co>=p.price;
+    h+='<div class="si '+(canBuy?'':'cant')+'" onclick="buyPow(\''+p.id+'\','+p.price+')">'
+      +'<div class="si-ic">'+p.ic+'</div>'
+      +'<div class="si-nm">'+(L==='es'?p.nmE:p.nmA)+'</div>'
+      +'<div class="si-desc">'+(L==='es'?p.descE:p.descA)+'</div>'
+      +'<div class="si-pr">🪙 '+p.price+'</div>'
+      +(inv[p.id]>0?'<div class="si-qty">x'+inv[p.id]+' '+T('tienes','عندك')+'</div>':'')
+      +'</div>';
+  });
+  h+='</div>';
+
+  h+='<div class="shop-cat">\uD83D\uDD13 '+T('Secretos de la Sura (descubre algo nuevo)','\u0623\u0633\u0631\u0627\u0631 \u0627\u0644\u0633\u0648\u0631\u0629 (\u0627\u0643\u062A\u0634\u0641 \u0634\u064A\u0626\u0627\u064B \u062C\u062F\u064A\u062F\u0627\u064B)')+'</div><div class="shop-grid">';
+  SHOP_SECRETS.forEach(function(s){
+    var got=bought.has(s.id);
+    var canBuy=co>=s.price&&!got;
+    h+='<div class="si '+(got?'got':canBuy?'':'cant')+'" onclick="'+(got?'showSecret(\''+s.id+'\')':'buySecret(\''+s.id+'\','+s.price+')')+'">'
+      +'<div class="si-ic">'+s.ic+'</div>'
+      +'<div class="si-nm">'+(L==='es'?s.nmE:s.nmA)+'</div>'
+      +'<div class="si-pr">'+(got?'\u2705 '+T('Descubierto','\u0645\u0643\u062A\u0634\u0641'):'🪙 '+s.price)+'</div>'
+      +'</div>';
+  });
+  h+='</div>';
+  c.innerHTML=h;
+}
+
+function buyPow(id,price){
+  if(!spendCo(price))return;
+  inv[id]=(inv[id]||0)+1;sv();renderShop();
+  showTreasure(SHOP_POWERS.find(function(p){return p.id===id}).ic,T('\u00A1Poder comprado!','\u062A\u0645 \u0634\u0631\u0627\u0621 \u0627\u0644\u0642\u0648\u0629!'),T('Ahora tienes x'+inv[id]+'. \u00DAsalo en la aventura o en el quiz.','\u0627\u0644\u0622\u0646 \u0639\u0646\u062F\u0643 x'+inv[id]+'. \u0627\u0633\u062A\u062E\u062F\u0645\u0647\u0627 \u0641\u064A \u0627\u0644\u0645\u063A\u0627\u0645\u0631\u0629 \u0623\u0648 \u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631.'));
+}
+
+function buySecret(id,price){
+  if(!spendCo(price))return;
+  bought.add(id);sv();
+  var s=SHOP_SECRETS.find(function(x){return x.id===id});
+  if(s.bonusXp)addXP(s.bonusXp);
+  renderShop();
+  showSecret(id);
+}
+
+function showSecret(id){
+  var s=SHOP_SECRETS.find(function(x){return x.id===id});
+  if(s.isCert){showCertDialog(s);return;}
+  showTreasure(s.ic,T(s.nmE,s.nmA),'<div class="'+(L==='ar'?'tpop-desc ar':'tpop-desc')+'">'+(L==='es'?s.revE:s.revA)+'</div>');
+}
+
+function showTreasure(ic,title,body){
+  var tp=document.getElementById('tpop');
+  document.getElementById('tpopB').innerHTML='<div class="tpop-ic">'+ic+'</div><div class="tpop-t">'+title+'</div><div>'+body+'</div><button class="tpop-btn" onclick="closeTreas()" style="margin-top:12px">'+T('\u00A1Genial!','\u0631\u0627\u0626\u0639!')+'</button>';
+  tp.classList.add('sh');
+  burst(innerWidth/2,innerHeight/2,40,['#FFD700','#A855F7','#34D399','#FB923C','#F472B6']);
+}
+function closeTreas(){document.getElementById('tpop').classList.remove('sh');}
+
+function showCertDialog(s){
+  var tp=document.getElementById('tpop');
+  document.getElementById('tpopB').innerHTML='<div class="tpop-ic">\uD83C\uDFC6</div><div class="tpop-t">'+T('Certificado de Hafiz','\u0634\u0647\u0627\u062F\u0629 \u062D\u0627\u0641\u0638')+'</div><div class="tpop-desc">'+T('Escribe tu nombre para generar tu certificado personalizado:','\u0627\u0643\u062A\u0628 \u0627\u0633\u0645\u0643 \u0644\u0625\u0646\u0634\u0627\u0621 \u0634\u0647\u0627\u062F\u062A\u0643:')+'</div><input id="certName" class="aiin" style="width:100%;margin:8px 0;font-size:14px;padding:10px;text-align:center" placeholder="'+T('Tu nombre','\u0627\u0633\u0645\u0643')+'"><button class="tpop-btn" onclick="genCert()">'+T('\u00A1Generar!','\u0623\u0646\u0634\u0626!')+'</button>';
+  tp.classList.add('sh');
+}
+
+function genCert(){
+  var name=document.getElementById('certName').value.trim()||T('Estudiante','\u0637\u0627\u0644\u0628');
+  var today=new Date().toLocaleDateString(L==='es'?'es-ES':'ar-SA');
+  document.getElementById('tpopB').innerHTML='<div style="background:linear-gradient(135deg,#1A1040,#2D1B69);border-radius:14px;padding:24px;border:3px solid var(--gold);text-align:center">'
+    +'<div style="font-size:36px;margin-bottom:8px">\uD83C\uDFC6</div>'
+    +'<div style="font-family:Lilita One;font-size:18px;color:var(--gold);margin-bottom:4px">'+T('CERTIFICADO DE HAFIZ','\u0634\u0647\u0627\u062F\u0629 \u062D\u0627\u0641\u0638')+'</div>'
+    +'<div style="font-size:11px;color:var(--dim);margin-bottom:12px">'+T('Sura Al-Adiyat (100)','\u0633\u0648\u0631\u0629 \u0627\u0644\u0639\u0627\u062F\u064A\u0627\u062A (\u0661\u0660\u0660)')+'</div>'
+    +'<div style="font-family:Amiri,serif;font-size:22px;color:var(--goldl);margin:12px 0">'+name+'</div>'
+    +'<div style="font-size:11px;color:var(--teal);margin-bottom:8px">'+T('Ha completado la memorizaci\u00F3n y comprensi\u00F3n','\u0623\u062A\u0645 \u062D\u0641\u0638 \u0648\u0641\u0647\u0645')+'</div>'
+    +'<div style="font-size:10px;color:var(--dim)">'+today+'</div>'
+    +'</div><button class="tpop-btn" onclick="closeTreas()" style="margin-top:12px">'+T('\u2764\uFE0F \u00A1M\u00E1shaAllah!','\u2764\uFE0F \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!')+'</button>';
+  burst(innerWidth/2,innerHeight/3,50,['#FFD700','#FF6B6B','#A855F7','#34D399','#FB923C','#F472B6','#64CFFF']);
 }
 
 // =========== QUIZ ===========
-function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
-function initQuiz(){
-  quizQs=[];
-  for(var i=0;i<AYAT.length-1;i++){var co=AYAT[i+1];var wr=shuffle(AYAT.filter(function(_,x){return x!==i+1})).slice(0,2);var ops=shuffle([co].concat(wr));quizQs.push({type:'next',q:T('\u00BFQu\u00E9 sigue?','\u0645\u0627 \u0627\u0644\u062A\u0627\u0644\u064A\u061F'),prompt:AYAT[i].ar,cNum:co.num,ops:ops.map(function(o){return{t:o.ar,n:o.num}})});}
-  for(var i=0;i<AYAT.length;i++){var co=AYAT[i];var wr=shuffle(AYAT.filter(function(_,x){return x!==i})).slice(0,2);var ops=shuffle([co].concat(wr));quizQs.push({type:'mean',q:T('\u00BFQu\u00E9 significa?','\u0645\u0627 \u0627\u0644\u0645\u0639\u0646\u0649\u061F'),prompt:AYAT[i].ar,cNum:co.num,ops:ops.map(function(o){return{t:lang==='es'?o.es:o.arM,n:o.num}})});}
-  quizQs=shuffle(quizQs).slice(0,8);qi=0;qScore=0;qDone=false;renderQ();
+function shuf(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=~~(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function initQ(){
+  qQs=[];
+  for(var i=0;i<A.length-1;i++){var co=A[i+1];var wr=shuf(A.filter(function(_,x){return x!==i+1})).slice(0,2);var ops=shuf([co].concat(wr));qQs.push({tp:'next',q:T('\u00BFQu\u00E9 sigue?','\u0645\u0627 \u0627\u0644\u062A\u0627\u0644\u064A\u061F'),pr:A[i].ar,cn:co.n,ops:ops.map(function(o){return{t:o.ar,n:o.n}})});}
+  for(var i=0;i<A.length;i++){var co=A[i];var wr=shuf(A.filter(function(_,x){return x!==i})).slice(0,2);var ops=shuf([co].concat(wr));qQs.push({tp:'mean',q:T('\u00BFSignificado?','\u0627\u0644\u0645\u0639\u0646\u0649\u061F'),pr:A[i].ar,cn:co.n,ops:ops.map(function(o){return{t:L==='es'?o.es:o.am,n:o.n}})});}
+  qQs=shuf(qQs).slice(0,8);qi=0;qSc=0;qD=false;renQ();
 }
-function renderQ(){
-  var c=document.getElementById('quizBox');
-  if(qi>=quizQs.length){var pct=Math.round(qScore/quizQs.length*100);
-    c.innerHTML='<div class="quiz-result"><h3>'+T('\u00A1Resultado!','!\u0627\u0644\u0646\u062A\u064A\u062C\u0629')+'</h3><div class="big">'+pct+'%</div><p style="color:var(--dim)">'+qScore+'/'+quizQs.length+'</p><p style="color:var(--dim);margin-top:8px;font-size:13px">'+(pct>=80?T('\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!'):T('Sigue practicando!','\u0648\u0627\u0635\u0644!'))+'</p></div><button class="quiz-next" onclick="initQuiz()" style="margin-top:12px">\uD83D\uDD01 '+T('Otra vez','\u0645\u0631\u0629 \u0623\u062E\u0631\u0649')+'</button>';return;}
-  var q=quizQs[qi];qDone=false;var isMean=q.type==='mean';
-  c.innerHTML='<div class="quiz-info">'+T('Pregunta','\u0633\u0624\u0627\u0644')+' '+(qi+1)+'/'+quizQs.length+'</div>'
-    +'<div class="quiz-type">'+(q.type==='next'?T('Completa','\u0623\u0643\u0645\u0644'):T('Significado','\u0627\u0644\u0645\u0639\u0646\u0649'))+'</div>'
-    +'<div class="quiz-q">'+q.q+'</div>'
-    +'<div class="quiz-prompt">'+q.prompt+'</div>'
-    +'<div class="quiz-opts">'+q.ops.map(function(o,i){return'<button class="quiz-opt '+(isMean?'mean':'')+(isMean&&lang==='es'?' lang-es':'')+'" id="qo-'+i+'" onclick="qAns('+i+','+q.ops.map(function(x){return x.n}).indexOf(q.cNum)+')">'+o.t+'</button>'}).join('')+'</div>'
-    +'<div class="quiz-fb" id="qFb"></div>'
-    +'<button class="quiz-next" id="qNext" disabled onclick="qi++;renderQ()">'+T('Siguiente \u2192','\u2190 \u0627\u0644\u062A\u0627\u0644\u064A')+'</button>';
+function renQ(){
+  var c=document.getElementById('qbox');
+  if(qi>=qQs.length){var pc=Math.round(qSc/qQs.length*100);c.innerHTML='<div class="qr"><h3>'+T('\u00A1Resultado!','\u0627\u0644\u0646\u062A\u064A\u062C\u0629!')+'</h3><div class="big">'+pc+'%</div><p style="color:var(--dim);font-size:11px">'+qSc+'/'+qQs.length+'</p></div><button class="qnx" onclick="initQ()" style="margin-top:8px">\uD83D\uDD01</button>';return;}
+  var q=qQs[qi];qD=false;var isMn=q.tp==='mean';
+  c.innerHTML='<div class="qi">'+T('Pregunta','\u0633\u0624\u0627\u0644')+' '+(qi+1)+'/'+qQs.length+'</div><div class="qtp">'+(q.tp==='next'?T('Completa','\u0623\u0643\u0645\u0644'):T('Significado','\u0645\u0639\u0646\u0649'))+'</div><div class="qq">'+q.q+'</div><div class="qpr">'+q.pr+'</div><div class="qos">'+q.ops.map(function(o,i){return'<button class="qo '+(isMn?'mn':'')+(isMn&&L==='es'?' es':'')+'" id="qo'+i+'" onclick="qAn('+i+','+q.ops.map(function(x){return x.n}).indexOf(q.cn)+')">'+o.t+'</button>'}).join('')+'</div><div class="qfb" id="qFb"></div><button class="qnx" id="qNx" disabled onclick="qi++;renQ()">'+T('\u2192','\u2190')+'</button>';
 }
-function qAns(s,c){
-  if(qDone)return;qDone=true;var fb=document.getElementById('qFb');
-  document.querySelectorAll('#quizBox .quiz-opt').forEach(function(o){o.classList.add('off')});
-  document.getElementById('qo-'+c).classList.add('correct');
-  if(s===c){qScore++;fb.className='quiz-fb show ok';fb.textContent=T('\u2705 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\u2705 !\u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647');addXP(15,document.getElementById('qo-'+s));rewardBurst(document.getElementById('qo-'+s));gallopHorse();}
-  else{document.getElementById('qo-'+s).classList.add('wrong');fb.className='quiz-fb show no';fb.textContent=T('\u274C Mira la correcta','\u274C \u0627\u0646\u0638\u0631 \u0627\u0644\u0635\u062D\u064A\u062D\u0629');}
-  document.getElementById('qNext').disabled=false;
-}
+function qAn(s,c){if(qD)return;qD=true;var fb=document.getElementById('qFb');document.querySelectorAll('#qbox .qo').forEach(function(o){o.classList.add('off')});document.getElementById('qo'+c).classList.add('ok');if(s===c){qSc++;fb.className='qfb sh g';fb.textContent=T('\u2705 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!','\u2705 \u0645\u0627 \u0634\u0627\u0621 \u0627\u0644\u0644\u0647!');addXP(12,document.getElementById('qo'+s));rBurst(document.getElementById('qo'+s));glowStar();}else{document.getElementById('qo'+s).classList.add('no');fb.className='qfb sh b';fb.textContent=T('\u274C','\u274C');}document.getElementById('qNx').disabled=false;}
 
-// =========== METHOD ===========
-function renderMethod(){
-  var steps=lang==='es'?[
-    {i:'\uD83C\uDFA7',t:'Paso 1: Escucha (5 min)',d:'Escucha toda la sura 3 veces. Solo escucha.'},
-    {i:'\uD83D\uDD01',t:'Paso 2: Ayah por ayah (15 min)',d:'Escucha cada ayah 5 veces, luego rep\u00EDtela.'},
-    {i:'\uD83C\uDFA4',t:'Paso 3: Modo Karaoke',d:'Usa el karaoke para seguir cada palabra.'},
-    {i:'\uD83D\uDCA1',t:'Paso 4: Entiende',d:'Lee el significado. Entender = memorizar 3x m\u00E1s r\u00E1pido.'},
-    {i:'\uD83E\uDDE9',t:'Paso 5: Quiz',d:'Prueba tu memoria con el quiz.'},
-    {i:'\uD83D\uDCC5',t:'Paso 6: Repasa',d:'1x al d\u00EDa por 7 d\u00EDas, luego 1x por semana.'}
+// METHOD
+function renderMeth(){
+  var st=L==='es'?[
+    {i:'\uD83C\uDFA7',t:'Escucha (5 min)',d:'Escucha toda la sura 3 veces.'},
+    {i:'\uD83D\uDD01',t:'Ayah por ayah (15 min)',d:'Escucha cada una 5 veces, luego rep\u00EDtela.'},
+    {i:'\uD83C\uDFA4',t:'Karaoke',d:'Sigue cada palabra con el modo karaoke.'},
+    {i:'\uD83D\uDCA1',t:'Entiende',d:'Lee el significado. Entender = memorizar 3x m\u00E1s r\u00E1pido.'},
+    {i:'\uD83E\uDDE9',t:'Quiz',d:'Prueba tu memoria.'},
+    {i:'\uD83D\uDCC5',t:'Repasa',d:'1x/d\u00EDa \u00D7 7 d\u00EDas, luego 1x/semana.'}
   ]:[
-    {i:'\uD83C\uDFA7',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0661: \u0627\u0633\u062A\u0645\u0639 (\u0665 \u062F\u0642\u0627\u0626\u0642)',d:'\u0627\u0633\u062A\u0645\u0639 \u0644\u0643\u0644 \u0627\u0644\u0633\u0648\u0631\u0629 \u0663 \u0645\u0631\u0627\u062A.'},
-    {i:'\uD83D\uDD01',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0662: \u0622\u064A\u0629 \u0628\u0622\u064A\u0629 (\u0661\u0665 \u062F\u0642\u064A\u0642\u0629)',d:'\u0627\u0633\u062A\u0645\u0639 \u0665 \u0645\u0631\u0627\u062A \u062B\u0645 \u0643\u0631\u0631.'},
-    {i:'\uD83C\uDFA4',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0663: \u0643\u0627\u0631\u0627\u0648\u0643\u064A',d:'\u0627\u0633\u062A\u062E\u062F\u0645 \u0627\u0644\u0643\u0627\u0631\u0627\u0648\u0643\u064A \u0644\u0645\u062A\u0627\u0628\u0639\u0629 \u0643\u0644 \u0643\u0644\u0645\u0629.'},
-    {i:'\uD83D\uDCA1',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0664: \u0627\u0641\u0647\u0645',d:'\u0627\u0642\u0631\u0623 \u0627\u0644\u0645\u0639\u0646\u0649. \u0627\u0644\u0641\u0647\u0645 = \u062D\u0641\u0638 \u0623\u0633\u0631\u0639 \u0663 \u0645\u0631\u0627\u062A.'},
-    {i:'\uD83E\uDDE9',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0665: \u0627\u062E\u062A\u0628\u0627\u0631',d:'\u0627\u062E\u062A\u0628\u0631 \u0630\u0627\u0643\u0631\u062A\u0643.'},
-    {i:'\uD83D\uDCC5',t:'\u0627\u0644\u062E\u0637\u0648\u0629 \u0666: \u0631\u0627\u062C\u0639',d:'\u0645\u0631\u0629/\u064A\u0648\u0645 \u0644\u0645\u062F\u0629 \u0667 \u0623\u064A\u0627\u0645\u060C \u062B\u0645 \u0645\u0631\u0629/\u0623\u0633\u0628\u0648\u0639.'}
+    {i:'\uD83C\uDFA7',t:'\u0627\u0633\u062A\u0645\u0639 (\u0665 \u062F\u0642\u0627\u0626\u0642)',d:'\u0627\u0633\u062A\u0645\u0639 \u0644\u0644\u0633\u0648\u0631\u0629 \u0663 \u0645\u0631\u0627\u062A.'},
+    {i:'\uD83D\uDD01',t:'\u0622\u064A\u0629 \u0628\u0622\u064A\u0629 (\u0661\u0665 \u062F\u0642\u064A\u0642\u0629)',d:'\u0627\u0633\u062A\u0645\u0639 \u0665 \u0645\u0631\u0627\u062A \u062B\u0645 \u0643\u0631\u0631.'},
+    {i:'\uD83C\uDFA4',t:'\u0643\u0627\u0631\u0627\u0648\u0643\u064A',d:'\u062A\u0627\u0628\u0639 \u0643\u0644 \u0643\u0644\u0645\u0629.'},
+    {i:'\uD83D\uDCA1',t:'\u0627\u0641\u0647\u0645',d:'\u0627\u0644\u0641\u0647\u0645 = \u062D\u0641\u0638 \u0623\u0633\u0631\u0639 \u0663\u00D7.'},
+    {i:'\uD83E\uDDE9',t:'\u0627\u062E\u062A\u0628\u0627\u0631',d:'\u0627\u062E\u062A\u0628\u0631 \u0630\u0627\u0643\u0631\u062A\u0643.'},
+    {i:'\uD83D\uDCC5',t:'\u0631\u0627\u062C\u0639',d:'\u0645\u0631\u0629/\u064A\u0648\u0645 \u00D7 \u0667 \u0623\u064A\u0627\u0645\u060C \u062B\u0645 \u0645\u0631\u0629/\u0623\u0633\u0628\u0648\u0639.'}
   ];
-  document.getElementById('sec-method').innerHTML='<div class="meth-card"><h3 style="color:var(--gold);font-size:16px;text-align:center;margin-bottom:12px;">'+T('\uD83D\uDCD6 M\u00E9todo Hifz','\uD83D\uDCD6 \u0645\u0646\u0647\u062C \u0627\u0644\u062D\u0641\u0638')+'</h3>'+steps.map(function(s){return'<div class="meth-step"><div class="meth-icon">'+s.i+'</div><div class="meth-body"><h4>'+s.t+'</h4><p>'+s.d+'</p></div></div>'}).join('')+'</div>';
+  document.getElementById('sec-method').innerHTML='<div class="mcd"><h3 style="color:var(--gold);font-size:14px;text-align:center;margin-bottom:8px">'+T('\uD83D\uDCD6 M\u00E9todo Hifz','\uD83D\uDCD6 \u0645\u0646\u0647\u062C \u0627\u0644\u062D\u0641\u0638')+'</h3>'+st.map(function(s){return'<div class="mst"><div class="mic">'+s.i+'</div><div class="mbd"><h4>'+s.t+'</h4><p>'+s.d+'</p></div></div>'}).join('')+'</div>';
 }
 
-// =========== CELEBRATION ===========
-function showCeleb(title,text,icon){
-  document.getElementById('celebIcon').textContent=icon||'\uD83C\uDFC6';
-  document.getElementById('celebTitle').textContent=title;
-  document.getElementById('celebText').textContent=text;
-  document.getElementById('celeb').classList.add('show');
-  burst(window.innerWidth/2,window.innerHeight/2,60,['\u0023FFD700','\u0023FF6B6B','\u0023A855F7','\u002334D399','\u0023FB923C','\u0023F472B6','\u002364CFFF']);
-}
-function closeCeleb(){document.getElementById('celeb').classList.remove('show');}
+// CELEBRATION
+function showClb(t,tx,ic){document.getElementById('clbi').innerHTML='<div class="clbic">'+(ic||'\uD83C\uDFC6')+'</div><h2>'+t+'</h2><p>'+tx+'</p><button class="clbbtn" onclick="closeClb()">'+T('\u2728 \u00A1Seguir!','\u2728 \u0648\u0627\u0635\u0644!')+'</button>';document.getElementById('clb').classList.add('sh');burst(innerWidth/2,innerHeight/2,50,['#FFD700','#FF6B6B','#A855F7','#34D399','#FB923C','#F472B6','#64CFFF']);}
+function closeClb(){document.getElementById('clb').classList.remove('sh');}
 
-// =========== INIT ===========
-function init(){
-  initParticles();
-  setLang(lang);
-}
+// INIT
+function init(){initP();setL(L);}
 init();
 </script>
 </body>
